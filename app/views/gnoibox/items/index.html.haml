@@ -1,0 +1,27 @@
+%h1 #{@box.label}一覧
+
+%table
+  %tr
+    %th URL
+    %th 日付
+    %th タイトル
+    %th 説明
+    %th キーワード
+    %th
+    %th
+    %th
+
+  - @items.each do |item|
+    %tr
+      %td= item.url
+      %td=l item.published_at
+      %td= item.title
+      %td= item.description
+      %td= item.keywords
+      %td= link_to 'Show', gnoibox_box_item_path(@box, item)
+      %td= link_to 'Edit', edit_gnoibox_box_item_path(@box, item)
+      %td= link_to 'Destroy', gnoibox_box_item_path(@box, item), :method => :delete, :data => { :confirm => '削除してもよろしいですか?' }
+
+%br
+
+= link_to "新規#{@box.label}作成", new_gnoibox_box_item_path(@box)

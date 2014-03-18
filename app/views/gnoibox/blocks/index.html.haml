@@ -1,0 +1,12 @@
+%h1 Block一覧
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @blocks.each do |block|
+    %tr
+      %td=block.label
+      %td= link_to 'Edit', edit_gnoibox_block_path(block)

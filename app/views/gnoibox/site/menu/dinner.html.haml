@@ -1,0 +1,414 @@
+.breadcrumbs
+  .container_12
+    .grid_12
+      %ul.reset
+        %li
+          %a.no-deco(href="/") HOME
+        %li
+          =image_tag "arw.png", class: "arw"
+        %li
+          ディナーメニュー
+        .clear
+
+.menutab-wrap
+  .container_12
+    .grid_12
+      .grid_4.alpha
+        .menutab
+          %a(href="/tmp/menu-lunch.html")
+            =image_tag "title-lunch.png", class: "title-lunch", alt: "dejeuner ランチ"
+      .grid_4
+        .menutab.active
+          =image_tag "title-diner.png", class: "title-diner", alt: "diner ディナー"
+      .grid_4.omega
+        .menutab
+          %a.no-deco(href="/tmp/menu-drink.html")
+            =image_tag "title-drink.png", class: "title-drink", alt: "drink ドリンク"
+      .clear
+
+%section.tab-detail
+  .container_12
+    .grid_12
+      .bb.bb-menu.bb-diner
+        %h1.bg-w75
+          =image_tag "title-diner-noborder.png", class: "title-diner-noborder align-center", alt: "diner ディナー"
+
+%section.tile-section.menu-detail-recom
+  .container_12
+    %h2.red-img-title
+      =image_tag "title-recommendation.png", class: "title-recommendation align-center", alt: "recommendation 旬のおすすめ"
+    %ul.recom-list.reset
+      %li.grid_3.bg-w75
+        .recom-list-img-wrap
+          =image_tag "xmasDinner.jpg", class: "recom-list-img"
+        .title
+          %strong.font-m クリスマス限定特別コース
+        %p
+          お一人様￥5000、はっきり言ってお得な内容です！オードブル盛り合わせ スープ オマール海老のカ…
+        %a.no-deco.link-more(href="/tmp/recom-detail-dish1")
+          詳細を見る
+          =image_tag "icon-arw.png", class: "icon-arw"
+      %li.grid_3.bg-w75
+        .recom-list-img-wrap
+          =image_tag "rabbit.jpg", class: "recom-list-img"
+        .title
+          %strong.font-m ウサギのバロティーヌ【要予約】
+        %p
+          裏メニューの☆ウサギのバロティーヌ☆です！日本ではあまり馴染みがないですが、鶏肉みたいで美味し…
+        %a.no-deco.link-more(href="/tmp/recom-detail-dish2")
+          詳細を見る
+          =image_tag "icon-arw.png", class: "icon-arw"
+      %li.grid_3.bg-w75
+        .recom-list-img-wrap
+          =image_tag "montblanc.jpg", class: "recom-list-img"
+        .title
+          %strong.font-m ガトーマロンのモンブラン
+        %p
+          これは美味いです‼土台になっているガトーマロンとモンブランクリームの相性がヤバイです‼いらした…
+        %a.no-deco.link-more(href="/tmp/recom-detail-dish3")
+          詳細を見る
+          =image_tag "icon-arw.png", class: "icon-arw"
+      .clear
+    %a.btn.btn-red.no-deco.pull-right(href="/tmp/recom-list")
+      %span.arw 過去のおすすめを見る
+    .clear
+
+%section
+  .container_12
+    .grid_12
+      .menu-detail-wrap
+        %h2.red-img-title
+          =image_tag "title-entree-noborder.png", class: "title-entree-noborder align-center", alt: "Entrée 前菜"
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              キャロットラペ　Carottes rapées
+            %br
+            %span.menu-description 細切りにした人参にオレンジとレーズンを合わせました
+          .pull-right
+            %span.font-m.price 600yen
+          .clear
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              オリーブマリネ　Olives marinées
+            %br
+            %span.menu-description イタリア産グリーンオリーブにエクストラバージンオイルと玉ねぎでマリネしました
+          .pull-right
+            %span.font-m.price 600yen
+          .clear
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              豚のリエット　Rillettes de porc
+            %br
+            %span.menu-description 豚のばら肉を低温の油で火を通しペースト状にしました
+          .pull-right
+            %span.font-m.price 700yen
+          .clear
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              ラタトゥイユ　Ratatouille
+            %br
+            %span.menu-description パプリカ、ナス、ズッキーニをトマトで煮込みました
+          .pull-right
+            %span.font-m.price 600yen
+          .clear
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              色々野菜のピクルス  Légumes au vinaigre
+            %br
+            %span.menu-description 旬の野菜をシークワサー、白ワインビネガーでマリネしました
+          .pull-right
+            %span.font-m.price 600yen
+          .clear
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              秋刀魚のマリネとジャガイモのガトー仕立て Gâteau de Sanma et de Pomme de terre
+            %br
+            %span.menu-description 秋刀魚のマリネ、ジャガイモのサラダを型に詰めた冷製のサラダ
+          .pull-right
+            %span.font-m.price 1000yen
+          .clear
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              フレンチフライ  Frites
+            %br
+            %span.menu-description メガクランチポテトのフリットです
+          .pull-right
+            %span.font-m.price 500yen
+          .clear
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title(style="color:red;") 前菜の盛り合わせ  Assortiment d’entrées
+            %br
+            %span.menu-description スタッフがご説明します
+          .pull-right
+            %span.font-m.price 1800yen
+          .clear
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              海老ときのこのマリネ  Crevettes et champignons marinés
+            %br
+            %span.menu-description バナメイ海老、キノコ、ブロッコリーをピリ辛オイルでマリネしました
+          .pull-right
+            %span.font-m.price 700yen
+          .clear
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              白身魚のエスカベーシュ  Poisson blanc à l’escabéche
+            %br
+            %span.menu-description その日に入荷した鮮魚をフライにしビネガーでマリネしました
+          .pull-right
+            %span.font-m.price 950yen
+          .clear
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              サラダタブレ   Taboulé
+            %br
+            %span.menu-description 世界最小パスタ(クスクス)と、ミニ野菜をドレッシングで和えたサラダ
+          .pull-right
+            %span.font-m.price 700yen
+          .clear
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              パテドカンパーニュ  Pâté de campagne
+            %br
+            %span.menu-description 豚の肩ロース、ネック、白レバーをミンチにし、型に詰め焼き上げました
+          .pull-right
+            %span.font-m.price 950yen
+          .clear
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title(style="color;red;") 酵素豚ロースの自家製ハム  Jambon fait maison
+            %br
+            %span.menu-description 飼料に酵素を入れて健康に育った豚のハムです
+          .pull-right
+            %span.font-m.price 1000yen
+          .clear
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              たっぷりキノコのグリーンサラダ  Salade verte aux champignons
+            %br
+            %span.menu-description 季節のキノコとグリーンリーフを玉ねぎベースのさっぱりドレッシングで
+          .pull-right
+            %span.font-m.price 1200yen
+          .clear
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              ★フォアグラソテーとフライドエッグの取り合わせ　Duo de Foie gras poêlé et œuf frit, sauce truffe
+            %br
+            %span.menu-description フランス産鴨のフォアグラとフライエッグにトリュフのソースを合わせて
+          .pull-right
+            %span.font-m.price 1600yen
+          .clear
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              ★キッシュロレーヌ  Quiche Lorraine
+            %br
+            %span.menu-description 玉ねぎ、ベーコン、グリュイエールチーズをタルト生地に流して焼き上げました
+          .pull-right
+            %span.font-m.price 980yen
+          .clear
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title(style="color:red;") ★そば粉のブルターニュ風ガレット  Galette de sarrasin
+            %br
+            %span.menu-description ブリュターニュ地方の名物料理、そば粉を使ったクレープです。卵、ハム、グリュイエールチーズを包んでいます
+          .pull-right
+            %span.font-m.price 1000yen
+          .clear
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              ★魚介類のリゾット  Risotto
+            %br
+            %span.menu-description 本日入荷の魚介とその出汁で仕上げたリゾット
+          .pull-right
+            %span.font-m.price 1600yen
+          .clear
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              バゲット  Baguette
+          .pull-right
+            %span.font-m.price 200yen
+          .clear
+
+        %p.attention.pull-right ★印の商品はお時間頂きます。
+        .clear
+
+      .menu-detail-wrap
+        %h2.red-img-title
+          =image_tag "title-soupe-noborder.png", class: "title-soupe-noborder align-center", alt: "Soupe スープ"
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              本日のスープ Soupe du jour
+          .pull-right
+            %span.font-m.price 800yen
+          .clear
+
+      .menu-detail-wrap
+        %h2.red-img-title
+          =image_tag "title-PoissonetViande-noborder.png", class: "title-PoissonetViande-noborder align-center", alt: "Poisson et viande 魚・肉"
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              本日の鮮魚　Poisson du jour
+            %br
+            %span.menu-description スタッフがご説明いたします
+          .pull-right
+            %span.font-m.price 1600yen
+          .clear
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              ★大山鶏骨付きモモ肉のフリカッセ　バターライス添え Fricassée de cuisse de Poulet “Daisen”　avec Riz au Beurre
+            %br
+            %span.menu-description 骨付き鶏モモ肉を、出し汁、ワイン、クリームで煮込みました
+          .pull-right
+            %span.font-m.price 1700yen
+          .clear
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              ★フランス産鴨のコンフィ　Cuisse de canard confit
+            %br
+            %span.menu-description フランス産の肉厚モモ肉のコンフィーをパリッと焼き上げました
+          .pull-right
+            %span.font-m.price 1700yen
+          .clear
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              ★鹿児島産黒豚肩ロースのグリエ  Porc Noir grillé
+            %br
+            %span.menu-description 黒いダイヤモンドと称された鹿児島黒豚のグリエ。噛むほどに強い旨みを感じます
+          .pull-right
+            %span.font-m.price 1800yen
+          .clear
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              ★フォアグラを詰めた仔羊のロースト Crépinette de selle d’Agneau rôtie farcie au Foie gras
+            %br
+            %span.menu-description オーストラリア産の仔羊ロース肉を開きフォアグラを詰めました
+          .pull-right
+            %span.font-m.price 2000yen
+          .clear
+
+      .menu-detail-wrap
+        %h2.red-img-title
+          =image_tag "title-frite-noborder.png", class: "title-frite-noborder align-center", alt: "Entrecôte Frites 北海道大沼産和牛サーロインのステーキフリット"
+        .menu-detail-unit
+          .pull-left
+            %span.menu-description ※当店のおすすめ、和牛のステーキをお好きなグラムでお選び下さい
+          .pull-right
+            %span.font-m.price
+              ・200g　　　2,000yen
+              %br
+              ・400g　　　3,800yen
+              %br
+              ・600g　　　5,500yen
+          .clear
+
+      .menu-detail-wrap
+        %h2.red-img-title
+          =image_tag "title-fromages-noborder.png", class: "title-fromages-noborder align-center", alt: "Fromages チーズ"
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              おまかせチーズの盛り合わせ　Assortiment de Fromages
+          .pull-right
+            %span.font-m.price 2000yen
+          .clear
+
+      .menu-detail-wrap
+        %h2.red-img-title
+          =image_tag "title-dessert-noborder.png", class: "title-dessert-noborder align-center", alt: "Dessert デザート"
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              ガトーマロン　Gâteau au Marron
+            %br
+            %span.menu-description フランス産の栗のペーストを練り込んだしっとりした焼き菓子です
+          .pull-right
+            %span.font-m.price 700yen
+          .clear
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              抹茶のブリュレ  Créme brulée au “Matcha ”
+            %br
+            %span.menu-description 抹茶の香るクレームブリュレ
+          .pull-right
+            %span.font-m.price 700yen
+          .clear
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              オレンジ風味のババ(お酒が入ってます)  BABA à l’orange
+            %br
+            %span.menu-description ラム酒とシロップに生地を漬け込み、オレンジのマーマレードを合わせました
+          .pull-right
+            %span.font-m.price 700yen
+          .clear
+
+      .menu-detail-wrap
+        %h2.red-img-title
+          =image_tag "title-menus-noborder.png", class: "title-menus-noborder align-center", alt: "Menus コースメニュー"
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              Menu A
+            %br
+            %span.menu-description 前菜（一皿）・スープ・メイン（一皿）・プチデザート
+          .pull-right
+            %span.font-m.price 3900yen
+          .clear
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              Menu B
+            %br
+            %span.menu-description 前菜（二皿）・スープ・メイン（一皿）・デザート
+          .pull-right
+            %span.font-m.price 4500yen
+          .clear
+        .menu-detail-unit
+          .pull-left
+            %strong.font-m.menu-title
+              Menu C
+            %br
+            %span.menu-description 前菜（一皿）・スープ・メイン（魚＆肉）・デザート
+          .pull-right
+            %span.font-m.price 5500yen
+          .clear
+
+  .container_12
+    .grid_4
+      %a.btn.btn-red.no-deco(href="/tmp/menu-lunch")
+        %span.arw ランチメニューはこちら
+    .grid_4
+      %a.btn.btn-red.no-deco(href="/tmp/menu-diner")
+        %span.arw ディナーメニューはこちら
+    .grid_4
+      %a.btn.btn-red.no-deco(href="/tmp/menu-drink")
+        %span.arw ドリンクメニューはこちら
+
+  =image_tag "img-pontneuf.png", class: "img-pontneuf"
+
+  %a.totop.no-deco(href="#")
+    %strong.font-m このページのトップへ

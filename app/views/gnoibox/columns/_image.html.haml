@@ -1,0 +1,5 @@
+=image_tag col.url
+=f.file_field "#{col.name}"
+削除する
+=f.check_box "remove_#{col.name}".to_sym
+=f.hidden_field "#{col.name}_cache" if f.object.send("#{col.name}_cache")

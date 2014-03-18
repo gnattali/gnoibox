@@ -1,0 +1,146 @@
+.bb.bb-top
+  .bg-catch.bg-w75
+    =image_tag "catch.png", class: "catch", alt: "1000本以上のワイン 素材を活かしたフレンチ ポンヌフ"
+
+%section.tile-section
+  =image_tag "img-grape.png", class: "img-grape"
+  .container_12
+    .grid_12
+      / =image_tag "bar-info.png", class: "bar-info"
+      #info
+        %table.info-table
+          %tbody
+            %tr
+              %th
+                %span.info-title お知らせ
+              %td
+                .info-contents=Gnoibox::BlockCollection.load(:information).headline
+        .clear
+      .grid_6.alpha
+        %h2.red-img-title
+          =image_tag "title-news.png", class: "title-news align-center", alt: "news 最新情報"
+
+        .fb-like-box(data-href="https://www.facebook.com/BistroPontNeufcst" data-width="460px" data-height="693px" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="true" data-show-border="true")
+      .grid_6.omega
+        %h2.red-img-title
+          =image_tag "title-recommendation.png", class: "title-recommendation align-center", alt: "recommendation 旬のおすすめ"
+        %ul.reset.recom-menulist
+          %li.bg-w75
+            %a.no-deco(href="/tmp/recom-detail-wine1")
+              .pull-left.leftbox
+                =image_tag "RoseBrut.jpg"
+              .pull-left.rightbox
+                .title
+                  %strong.font-m Champagne Pannier Rose Brut
+                %p
+                  淡いラズベリーピンク、生き生きした泡立ちに、華やかな香り。熟成期間の長さに由来する、まろや…
+                .link-more
+                  詳細を見る
+                  =image_tag "icon-arw.png", class: "icon-arw"
+              .clear
+          %li.bg-w75
+            %a.no-deco(href="/tmp/recom-detail-dish1")
+              .pull-left.leftbox
+                =image_tag "xmasDinner.jpg"
+              .pull-left.rightbox
+                .title
+                  %strong.font-m クリスマス限定特別コース
+                %p
+                  お一人様￥5000、はっきり言ってお得な内容です！オードブル盛り合わせ スープ オマール海老のカ…
+                .link-more
+                  詳細を見る
+                  =image_tag "icon-arw.png", class: "icon-arw"
+              .clear
+          %li.bg-w75
+            %a.no-deco(href="/tmp/recom-detail-dish2")
+              .pull-left.leftbox
+                =image_tag "rabbit.jpg"
+              .pull-left.rightbox
+                .title
+                  %strong.font-m ウサギのバロティーヌ【要予約】
+                %p
+                  裏メニューの☆ウサギのバロティーヌ☆です！日本ではあまり馴染みがないですが、鶏肉みたいで美味し…
+                .link-more
+                  詳細を見る
+                  =image_tag "icon-arw.png", class: "icon-arw"
+              .clear
+          %li.bg-w75
+            %a.no-deco(href="/tmp/recom-detail-dish3")
+              .pull-left.leftbox
+                =image_tag "montblanc.jpg"
+              .pull-left.rightbox
+                .title
+                  %strong.font-m ガトーマロンのモンブラン
+                %p
+                  これは美味いです‼土台になっているガトーマロンとモンブランクリームの相性がヤバイです‼いらした…
+                .link-more
+                  詳細を見る
+                  =image_tag "icon-arw.png", class: "icon-arw"
+              .clear
+        %a.btn.btn-red(href="/tmp/recom-list")
+          %span.arw おすすめメニューをもっと見る
+
+      .clear
+  =image_tag "img-wineandgrape.png", class: "img-wineandgrape"
+
+%section
+  .container_12
+    .grid_12
+      %h2.red-img-title
+        =image_tag "title-menu.png", class: "title-menu align-center", alt: "menu メニュー"
+
+      .menu.menu-lunch
+        .menu-detail.bg-w75.pull-left
+          %h3
+            =image_tag "title-lunch.png", class: "title-lunch", alt: "dejeuner ランチ"
+          %p
+            ボリュームたっぷりのランチをご用意！
+            %br
+            ポンヌフ自慢のお料理をリーズナブルなお値段で、
+            %br
+            1,050円から召し上がっていただけます
+            %br
+            (土日祝日のランチは1,575円より)。
+          %a.btn.btn-red.no-deco(href="/tmp/menu-lunch")
+            %span.arw 詳細なランチメニューを見る
+        .clear
+
+      .menu.menu-diner
+        .menu-detail.bg-w75.pull-right
+          %h3
+            =image_tag "title-diner.png", class: "title-diner", alt: "diner ディナー"
+          %p
+            季節毎の新鮮な素材を最大限に活かし、
+            %br
+            ポンヌフのシェフが腕をふるって皆様にご提供します。
+            %br
+            最新の情報は
+            %a(href="https://www.facebook.com/BistroPontNeufcst" target="_blank")Facebookページ
+            からも
+            %br
+            ご覧いただけます。
+          %a.btn.btn-red.no-deco(href="/tmp/menu-diner")
+            %span.arw 詳細なディナーメニューを見る
+        .clear
+
+      .menu.menu-drink
+        .menu-detail.bg-w75.pull-left
+          %h3
+            =image_tag "title-drink.png", class: "title-drink", alt: "drink ドリンク"
+          %p
+            1000本以上のワインを中心に、
+            %br
+            クレマン・シャンパーニュ、ビール、カクテル、
+            %br
+            ソフトドリンク等、
+            %br
+            厳選されたお飲物をご用意してお待ちしております。        
+            %a(href="https://www.facebook.com/BistroPontNeufcst" target="_blank")
+          
+          %a.btn.btn-red.no-deco(href="/tmp/menu-drink")
+            %span.arw 詳細なドリンクメニューを見る
+          .clear
+  =image_tag "img-pontneuf.png", class: "img-pontneuf"
+
+  %a.totop.no-deco(href="#")
+    %strong.font-m このページのトップへ

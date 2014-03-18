@@ -1,0 +1,18 @@
+= form_for @block, as: :block, url: gnoibox_block_path(@block) do |f|
+  - if @block.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@block.errors.count, "error")} prohibited this admin_block from being saved:"
+      %ul
+        - @block.errors.full_messages.each do |msg|
+          %li= msg
+
+  =f.fields_for :content, @block.content do |content_f|
+    -@block.content.cols.each do |col|
+      .field
+        =content_f.label col.label
+        =render partial: "gnoibox/columns/#{col.partial_name}", locals: {f: content_f, col: col, item: @block}
+
+  %br
+
+  .actions
+    = f.submit 'Save'

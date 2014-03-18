@@ -1,0 +1,22 @@
+%p#notice= notice
+
+%p
+  %b URL:
+  = @item.url
+%p
+  %b 日付:
+  = @item.published_at
+%p
+  %b View file:
+  = @item.view_file
+%p
+  %b タイトル:
+  = @item.title
+%p
+  %b 説明:
+  = @item.description
+%p
+  %b キーボード:
+  = @item.keywords
+
+= link_to 'Edit', edit_gnoibox_box_item_path(@box, @item)

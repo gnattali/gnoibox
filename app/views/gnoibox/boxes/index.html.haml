@@ -1,0 +1,13 @@
+%h1 Box一覧
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @boxes.each do |box|
+    %tr
+      %td=box.label
+      %td=link_to 'アイテム編集', gnoibox_box_items_path(box)
+

@@ -1,0 +1,163 @@
+-# -content_for :body_class, 'page'
+-content_for :title, 'ランチメニュー'
+-content_for :description, 'ランチメニュー'
+-content_for :og_type, "article"
+-# -content_for :og_image, box.main_image.url
+-content_for :keywords, box.keywords
+
+-items.each do |item|
+  =item.content.description
+
+.breadcrumbs
+  .container_12
+    .grid_12
+      %ul.reset
+        %li
+          %a.no-deco(href="/") HOME
+        %li
+          =image_tag "arw.png", class: "arw"
+        %li
+          ランチメニュー
+        .clear
+
+.menutab-wrap
+  .container_12
+    .grid_12
+      .grid_4.alpha
+        .menutab.active
+          =image_tag "title-lunch.png", class: "title-lunch", alt: "dejeuner ランチ"
+      .grid_4
+        .menutab
+          %a.no-deco(href="/tmp/menu-diner.html")
+            =image_tag "title-diner.png", class: "title-diner", alt: "diner ディナー"
+      .grid_4.omega
+        .menutab
+          %a.no-deco(href="/tmp/menu-drink.html")
+            =image_tag "title-drink.png", class: "title-drink", alt: "drink ドリンク"
+      .clear
+
+%section.tab-detail
+  .container_12
+    .grid_12
+      .bb.bb-menu.bb-lunch
+        %h1.bg-w75
+          =image_tag "title-lunch-noborder.png", class: "title-lunch-noborder align-center", alt: "dejeuner ランチ"
+
+      -@page.items.each do |item|
+        .menu-detail-wrap
+          .grid_5.alpha
+            %h3.title
+              =item.title
+              =item.content.price.text_with_unit
+          .grid_7.omega
+            !=item.content.description
+          .clear
+
+
+      .menu-detail-wrap
+        .grid_5.alpha
+          %h3.title
+            Déjeuner A （ランチA） 1,050yen
+        .grid_7.omega
+          %p
+            %strong Entrée（1品お選び下さい）
+          %p
+            サラダ　or　赤ピーマンのポタージュ
+          %p 　
+          %p
+            %strong Plat（1品お選び下さい）
+          %p
+            鱈の蒸し焼き 大葉ソース
+          %p
+            牛ホホ肉の赤ワイン煮
+          %p
+            大山鶏モモ肉のソテー ディアブル風
+          %p 　
+          %p
+            パン（ライスご希望の方はスタッフにお申し付け下さい）
+          %p
+            コーヒーor紅茶付き
+        .clear
+      .menu-detail-wrap
+        .grid_5.alpha
+          %h3.title
+            Déjeuner B （ランチB） 1,890yen
+        .grid_7.omega
+          %p
+            %strong Entrée（1品お選び下さい）
+          %p
+            サラダ　or　赤ピーマンのポタージュ
+          %p 　
+          %p
+            %strong Plat
+          %p
+            ステーキフリット（北海道大沼産サーロイン）
+          %p 　
+          %p
+            パン（ライスご希望の方はスタッフにお申し付け下さい）
+          %p
+            コーヒーor紅茶付き
+        .clear
+      .menu-detail-wrap
+        .grid_5.alpha
+          %h3.title
+            Déjeuner Special （スペシャルランチ） 2,630yen
+        .grid_7.omega
+          %p
+            前菜盛り合わせ
+          %p
+            赤ピーマンのポタージュ
+          %p
+            黒毛和牛 イチボのグリエ or 本日の鮮魚料理
+          %p
+            デザート盛り合わせ
+          %p 　
+          %p
+            ※パン・コーヒーor紅茶付き
+        .clear
+      .menu-detail-wrap
+        .grid_5.alpha
+          %h3.title
+            Déjeuner Sandwich （サンドウィッチランチ） 1,050yen
+        .grid_7.omega
+          %p
+            %strong 和牛サーロインサンド（限定10食）
+          %p
+            サラダ・プチデザート・コーヒーor紅茶付き
+        .clear
+      .menu-detail-wrap
+        .grid_5.alpha
+          %h3.title
+            Dessert （デザート） 315yen
+        .grid_7.omega
+          %p
+            本日の特製デザート　
+          %p
+            %strong "ガトーショコラ"
+          %p
+            %strong むーす
+        .clear
+      .menu-detail-wrap
+        .grid_5.alpha
+          %h3.title
+            Verre de vin （グラスワイン） 500yen
+        .grid_7.omega
+          %p
+            Sparkling（スパークリング）　／　Blanc（白）　／　Rouge（赤）
+        .clear
+
+  .container_12
+    .grid_4
+      %a.btn.btn-red.no-deco(href="/tmp/menu-lunch")
+        %span.arw ランチメニューはこちら
+    .grid_4
+      %a.btn.btn-red.no-deco(href="/tmp/menu-diner")
+        %span.arw ディナーメニューはこちら
+    .grid_4
+      %a.btn.btn-red.no-deco(href="/tmp/menu-drink")
+        %span.arw ドリンクメニューはこちら
+
+  =image_tag "img-pontneuf.png", class: "img-pontneuf"
+
+  %a.totop.no-deco(href="#")
+    %strong.font-m このページのトップへ

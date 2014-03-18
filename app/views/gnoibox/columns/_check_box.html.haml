@@ -1,0 +1,3 @@
+-col.options.each do |option|
+  =check_box_tag "item[content][#{col.name}][]", option.key, Array(col.value).include?(option.key.to_s)
+  =f.label option.label
