@@ -26,8 +26,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'mini_magick', '>= 3.6.0'
   s.add_dependency 'carrierwave', '>= 0.9.0'
   s.add_dependency 'fog', '>= 1.18.0'
-  s.add_dependency 'draper', '>= 1.3.0'
-  s.add_dependency 'acts_as_list', '>= 0.3.0'
+  # s.add_dependency 'draper', '>= 1.3.0'
+  # s.add_dependency 'acts_as_list', '>= 0.3.0'
 
   s.add_development_dependency "sqlite3"
 end
