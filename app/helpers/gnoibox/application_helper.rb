@@ -1,9 +1,5 @@
 module Gnoibox
   module ApplicationHelper
-    def gnb
-      Facade
-    end
-
 
     def content_for_title
       content_for(:title).presence || Gnoibox::Site.title
@@ -27,6 +23,10 @@ module Gnoibox
 
     def body_class
       content_for(:body_class).presence || ''
+    end
+
+    def gnb
+      Facade
     end
 
     class Facade
