@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
 
-  mount Gnoibox::Engine => "/gnoibox"
+  mount Gnoibox::Engine => "/"
 end
