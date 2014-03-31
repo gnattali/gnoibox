@@ -31,8 +31,14 @@ module Gnoibox
 
     class Facade
       class << self
+        def boxes
+          Gnoibox::BoxCollection::all
+        end
         def box(key)
           Gnoibox::BoxCollection::find(key)
+        end
+        def blocks
+          Gnoibox::BlockCollection::all
         end
         def block(key)
           Gnoibox::BlockCollection::load(key)
