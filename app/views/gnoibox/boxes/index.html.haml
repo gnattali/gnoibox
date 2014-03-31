@@ -1,13 +1,23 @@
-%h1 Box一覧
+#pad-wrapper
+  .table-products.section
+    .row.head
+      .col-md-12
+        %h4 コンテンツ一覧
 
-%table
-  %tr
-    %th
-    %th
-    %th
-
-  - @boxes.each do |box|
-    %tr
-      %td=box.label
-      %td=link_to 'アイテム編集', gnoibox_box_items_path(box)
-
+    .row
+      %table.table.table-hover
+        %thead
+          %tr
+            %th.col-md-3
+              name
+            %th.col-md-6
+              action
+        %tbody
+          -gnb.boxes.each do |box|
+            %tr
+              %td=box.label
+              %td
+                %ul.actions
+                  %li
+                    %i.table-edit
+                    =link_to 'アイテム編集', gnoibox_box_items_path(box)

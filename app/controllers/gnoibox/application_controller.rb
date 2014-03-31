@@ -5,5 +5,5 @@ class Gnoibox::ApplicationController < ActionController::Base
 
   before_action :authenticate_gnoibox_gnoibox_author!
 
-  # layout 'admin'
+  # layout 'gnoibox/application'
 end
