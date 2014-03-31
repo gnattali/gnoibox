@@ -45,27 +45,18 @@
     
     #sidebar-nav
       %ul#dashboard-menu
-        %li.active
-          .pointer
-            .arrow
-            .arrow_border
+        %li{class: ("active" if current_page?('/gnoibox')) }
+          =render partial: 'active_arrow', locals: {url: '/gnoibox'}
           =link_to gnoibox_root_path do
             %i.icon-homek
             %span Home
-        %li
+        %li{class: ("active" if current_page?({controller: 'boxes'})) }
+          =render partial: 'active_arrow', locals: {url: {controller: 'boxes'}}
           =link_to gnoibox_boxes_path do
             %i.icon-sitemap
-            %span 固定ページ
-        %li
-          %a.dropdown-toggle(href="#")
-            %i.icon-edit
             %span コンテンツ
-            %i.icon-chevron-down
-          %ul.submenu
-            -gnb.boxes.each do |box|
-              %li
-                =link_to box.label, gnoibox_box_path(box)
-        %li
+        %li{class: ("active" if current_page?({controller: 'blocks'})) }
+          =render partial: 'active_arrow', locals: {url: '/gnoibox/blocks'}
           =link_to gnoibox_blocks_path do
             %i.icon-leaf
             %span サイトパーツ

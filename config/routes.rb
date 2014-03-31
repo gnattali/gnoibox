@@ -9,7 +9,7 @@ Gnoibox::Engine.routes.draw do
     end
     resources :blocks
 
-    root 'boxes#index'
+    root 'dashboard#index'
   end
 
   get ':first(/:second(/:third))' => 'site#index', as: :gn

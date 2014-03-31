@@ -1,12 +1,20 @@
-%h1 Block一覧
+#pad-wrapper
+  .table-wrapper.section
+    .row.head
+      .col-md-12
+        %h4 サイトパーツ一覧
 
-%table
-  %tr
-    %th
-    %th
-    %th
-
-  - @blocks.each do |block|
-    %tr
-      %td=block.label
-      %td= link_to 'Edit', edit_gnoibox_block_path(block)
+    .row
+      %table.table.table-hover
+        %thead
+          %tr
+            %th.col-md-3
+              name
+            %th.col-md-6
+              action
+        %tbody
+          -gnb.blocks.each do |block|
+            %tr
+              %td=block.label
+              %td
+                =link_to '編集', edit_gnoibox_block_path(block)
