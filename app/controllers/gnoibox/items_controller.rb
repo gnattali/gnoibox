@@ -16,7 +16,7 @@ class Gnoibox::ItemsController < Gnoibox::ApplicationController
   def create
     @item = @box.new_item(item_params)
     if @item.save
-      redirect_to gnoibox_box_item_url(@box, @item), notice: '保存されました'
+      redirect_to gnoibox_box_items_url(@box), notice: '保存されました'
     else
       render action: 'new'
     end
@@ -27,7 +27,7 @@ class Gnoibox::ItemsController < Gnoibox::ApplicationController
 
   def update
     if @item.update(item_params)
-      redirect_to gnoibox_box_item_url(@box, @item), notice: '保存されました'
+      redirect_to gnoibox_box_items_url(@box), notice: '保存されました'
     else
       render action: 'edit'
     end
