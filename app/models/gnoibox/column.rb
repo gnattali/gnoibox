@@ -18,6 +18,13 @@ module Gnoibox
     end
     alias_method :text, :to_s
 
+    def present?
+      @value.to_s.present?
+    end
+    def presence
+      @value.to_s.presence
+    end
+
     def to_i
       @value.to_i
     end
