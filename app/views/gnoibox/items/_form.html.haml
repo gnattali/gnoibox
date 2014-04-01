@@ -17,23 +17,31 @@
         = f.label :title, 'タイトル'
         .col-md-7
           = f.text_field :title, class: "form-control"
-      .field-box
-        = f.label :description, '説明'
-        .col-md-7
-          = f.text_area :description, class: "form-control"
-      .field-box
-        = f.label :keywords, 'キーワード'
-        .col-md-7
-          = f.text_field :keywords, class: "form-control"
-      .field-box
-        =f.label :main_image, 'メイン画像'
-        .col-md-7
-          =f.file_field :main_image
-          =f.hidden_field :main_image_cache
-      .field-box
-        = f.label :published_at, '日付'
-        .col-md-7
-          = f.datetime_select :published_at, class: "form-control"
+      -unless @box.omit_cols.include?(:description)
+        .field-box
+          = f.label :description, '説明'
+          .col-md-7
+            = f.text_area :description, class: "form-control"
+      -unless @box.omit_cols.include?(:keywords)
+        .field-box
+          = f.label :keywords, 'キーワード'
+          .col-md-7
+            = f.text_field :keywords, class: "form-control"
+      -unless @box.omit_cols.include?(:main_image)
+        .field-box
+          =f.label :main_image, 'メイン画像'
+          .col-md-7
+            =f.file_field :main_image
+            =f.hidden_field :main_image_cache
+            -if @item.main_image?
+              =image_tag @item.main_image_url(:thumb), width: 200
+              画像を削除する
+              =f.check_box :remove_main_image
+      -unless @box.omit_cols.include?(:published_at)
+        .field-box
+          = f.label :published_at, '日付'
+          .col-md-7
+            = f.datetime_select :published_at, class: "form-control"
 
       %br
 

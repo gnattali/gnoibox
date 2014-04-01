@@ -32,7 +32,7 @@ module Gnoibox
     class Facade
       class << self
         def boxes
-          Gnoibox::BoxCollection::all
+          @boxes ||= Gnoibox::BoxCollection::all.sort_by(&:position)
         end
         def box(key)
           Gnoibox::BoxCollection::find(key)

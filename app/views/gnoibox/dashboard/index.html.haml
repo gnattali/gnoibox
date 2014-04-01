@@ -13,7 +13,7 @@
             %th.col-md-6
               action
         %tbody
-          -([gnb.box(:root)] + gnb.boxes.reject{|b| b.key==:root}).each do |box|
+          -gnb.boxes.each do |box|
             %tr
               %td=box.label
               %td

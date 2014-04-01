@@ -14,6 +14,12 @@ module Gnoibox
       def set_collection_view(v) @collection_view=v end
       def set_description(v) @description=v end
       def set_keywords(v) @keywords=v end
+      def set_position(v) @position=v end
+      def position() @position ||= 999 end
+      def set_list_cols(cols) @list_cols = cols end
+      def list_cols() @list_cols ||= [] end
+      def set_omit_cols(cols) @omit_cols = cols end
+      def omit_cols() @omit_cols ||= [] end
 
       def set_item_class(v) @item_class=v end
       def item_class
@@ -21,6 +27,9 @@ module Gnoibox
       end
       def item_cols
         @item_cols ||= item_class.col_classes
+      end
+      def item_col(name)
+        item_cols.detect{|col| col.name==name }
       end
 
       def to_param() @key end
