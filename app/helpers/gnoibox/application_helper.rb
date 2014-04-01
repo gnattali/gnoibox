@@ -31,6 +31,9 @@ module Gnoibox
 
     class Facade
       class << self
+        def axis(key)
+          Gnoibox::AxisCollection::find(key)
+        end
         def boxes
           @boxes ||= Gnoibox::BoxCollection::all.sort_by(&:position)
         end

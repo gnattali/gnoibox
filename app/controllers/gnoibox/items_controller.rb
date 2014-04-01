@@ -3,7 +3,7 @@ class Gnoibox::ItemsController < Gnoibox::ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def index
-    @items = @box.items.page(params[:page])
+    @items = @box.items.page(params[:page]).per(1000)
   end
 
   def show
@@ -44,7 +44,7 @@ class Gnoibox::ItemsController < Gnoibox::ApplicationController
     end
 
     def set_item
-      @item = @box.find_item(params[:id])
+      @item = @box.item_class.find(params[:id])
     end
 
     def item_params

@@ -20,16 +20,21 @@ module Gnoibox
         @type ||= :equal
       end
 
-      def options
-        @options ||= []
-      end
-
-      def option(key, label, settings={})
+      def set_option(key, label, settings={})
         options << Option.new(key, label, settings)
       end
 
+      def options
+        @options ||= []
+      end
       def option_keys
         options.map(&:key)
+      end
+      def option_hash
+        @option_hash ||= options.index_by(&:key)
+      end
+      def option(key)
+        option_hash[key.to_sym]
       end
 
       def tag_for(v)

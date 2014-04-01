@@ -38,8 +38,9 @@ module Gnoibox
         item_class.new args.merge({box_key: key})
       end
 
-      def find_item(id)
-        id=~/\D/ ? item_class.find_by(url: id) : item_class.find(id)
+      def find_item(key)
+        item_class.find_by(url: key)
+        # key=~/\D/ ? item_class.find_by(url: key) : item_class.find(key)
       end
 
       def items

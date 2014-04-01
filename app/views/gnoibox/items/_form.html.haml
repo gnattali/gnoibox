@@ -4,15 +4,15 @@
     =form_for @item, as: :item, url: (@item.persisted? ? gnoibox_box_item_path(@box.key, @item) : gnoibox_box_items_path(@box.key) ) do |f|
       - if @item.errors.any?
         #error_explanation
-          %h2= "#{pluralize(@item.errors.count, "error")} prohibited this admin_item from being saved:"
-          %ul
-            - @item.errors.full_messages.each do |msg|
-              %li= msg
+          - @item.errors.full_messages.each do |msg|
+            %span.alert-msg
+              %i.icon-remove-sign
+              = msg
 
       .field-box
         = f.label :url, 'URL'
         .col-md-7
-          = f.text_field :url, class: "form-control"
+          =f.text_field :url, class: "form-control"
       .field-box
         = f.label :title, 'タイトル'
         .col-md-7

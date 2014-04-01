@@ -59,7 +59,7 @@ module Gnoibox
         content_class.col_classes
       end
 
-      def col(name, type, label, settings={})
+      def set_col(name, type, label, settings={})
         c_class = content_class
         content_class.col_classes << Class.new(column_class(type)) do
           self.name = name
@@ -69,15 +69,6 @@ module Gnoibox
           self.setup(settings)
           self.set_delegator(c_class)
         end
-
-        # content_class.class_exec do
-        #   define_method name do
-        #     col_hash[name]
-        #   end
-        #   define_method "#{name}=" do |v|
-        #     col_hash[name].set_value(v)
-        #   end
-        # end
       end
 
       private

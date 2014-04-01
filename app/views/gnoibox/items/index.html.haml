@@ -32,7 +32,7 @@
                 %td=(l(item.published_at) if item.published_at)
               %td=item.title
               -@box.list_cols.each do |col|
-                %td=item.content.send(col)
+                %td=item.content.send(col).text
                 
               -# %td
               -#   = link_to '表示', gnoibox_box_item_path(@box, item)

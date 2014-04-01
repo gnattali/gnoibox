@@ -9,6 +9,6 @@ module Gnoibox
   class Item::Root < Item
     # set_view_file_options ['about', 'access']
 
-    col :body, :rich_text, '本文'
+    set_col :body, :rich_text, '本文'
   end
 end
