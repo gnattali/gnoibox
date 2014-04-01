@@ -12,5 +12,5 @@ Gnoibox::Engine.routes.draw do
     root 'dashboard#index'
   end
 
-  get ':first(/:second(/:third))' => 'site#index', as: :gn
+  get ':first(/:second(/:third))' => 'site#index', as: :gnb
 end
