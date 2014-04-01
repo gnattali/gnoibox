@@ -8,6 +8,8 @@ module Gnoibox
 
     def to_param() self.class.key end
 
+    def label() self.class.label end
+
     class << self
       attr_reader :key, :label
       def set_key(key, label)

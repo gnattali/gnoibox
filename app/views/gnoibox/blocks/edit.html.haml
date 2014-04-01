@@ -1,7 +1,6 @@
-%h1 block編集
+#pad-wrapper.form-page
+  .row.head
+    .col-md-12
+      %h4 #{@block.label}
 
-= render 'form'
-
-= link_to 'Show', gnoibox_block_path(@block)
-\|
-= link_to 'Back', gnoibox_blocks_path
+  = render 'form'
