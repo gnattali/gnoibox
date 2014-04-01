@@ -13,10 +13,11 @@
         = f.label :url, 'URL'
         .col-md-7
           =f.text_field :url, class: "form-control"
-      .field-box
-        = f.label :title, 'タイトル'
-        .col-md-7
-          = f.text_field :title, class: "form-control"
+      -unless @box.omit_cols.include?(:title)
+        .field-box
+          = f.label :title, 'タイトル'
+          .col-md-7
+            = f.text_field :title, class: "form-control"
       -unless @box.omit_cols.include?(:description)
         .field-box
           = f.label :description, '説明'

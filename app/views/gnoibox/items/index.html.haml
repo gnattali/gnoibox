@@ -15,8 +15,9 @@
             -unless @box.omit_cols.include?(:published_at)
               %th.col-md-2
                 日付
-            %th.col-md-2
-              タイトル
+            -unless @box.omit_cols.include?(:title)
+              %th.col-md-2
+                タイトル
             -@box.list_cols.each do |col_name|
               %th=@box.item_col(col_name).label
               
@@ -30,7 +31,8 @@
               %td=item.url
               -unless @box.omit_cols.include?(:published_at)
                 %td=(l(item.published_at) if item.published_at)
-              %td=item.title
+              -unless @box.omit_cols.include?(:title)
+                %td=item.title
               -@box.list_cols.each do |col|
                 %td=item.content.send(col).text
                 

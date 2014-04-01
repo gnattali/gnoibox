@@ -23,7 +23,7 @@ module Gnoibox
     end
 
     def text
-      option_hash[value.to_sym]
+      value.present? ? option_hash[value.to_sym] : ""
     end
 
 
