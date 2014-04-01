@@ -16,5 +16,6 @@
  *= require scss/elements
  *= require scss/icons
  *= require scss/form-showcase
+ *= require scss/signin
  *= require redactor-9.2.0
  */

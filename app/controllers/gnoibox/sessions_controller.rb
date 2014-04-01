@@ -1,3 +1,3 @@
 class Gnoibox::SessionsController < ::Devise::SessionsController
-  layout 'gnoibox/application'
+  layout 'gnoibox/session'
 end

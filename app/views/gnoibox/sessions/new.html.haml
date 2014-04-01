@@ -1,0 +1,23 @@
+.login-wrapper
+  .box
+    .content-wrap
+      = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+        = f.input_field :email, :required => false, :autofocus => true, type: :text, class: 'form-control', placeholder: 'メールアドレス', pattern: '.*'
+        = f.input_field :password, :required => false, class: 'form-control', placeholder: 'パスワード'
+        .remember
+          = f.input_field :remember_me, :as => :boolean
+          %label(for="remember-me") ログイン状態を保存
+
+        = f.button :submit, "ログイン"
+
+        -# <input class="form-control" type="text" placeholder="E-mail address">
+        -# <input class="form-control" type="password" placeholder="Your password">
+        -# <a href="#" class="forgot">Forgot password?</a>
+        -# <div class="remember">
+        -#     <input id="remember-me" type="checkbox">
+        -#     <label for="remember-me">Remember me</label>
+        -# </div>
+        -# <a class="btn-glow primary login" href="index.html">Log in</a>
+
+  .no-account
+    -# =link_to "パスワードを忘れた場合はこちら", new_password_path(resource_name)
