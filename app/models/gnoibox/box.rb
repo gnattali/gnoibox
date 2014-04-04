@@ -20,6 +20,10 @@ module Gnoibox
       def list_cols() @list_cols ||= [] end
       def set_omit_cols(cols) @omit_cols = cols end
       def omit_cols() @omit_cols ||= [] end
+      def set_order_key(v) @order_key=v end
+      def order_key() @order_key ||= :published_at end
+      def set_order_direction(v) @order_direction=v end
+      def order_direction() @order_direction ||= :desc end
 
       def set_item_class(v) @item_class=v end
       def item_class
@@ -61,6 +65,13 @@ module Gnoibox
 
       def collection_view(url_parser)
         @collection_view
+      end
+
+      def reset_order_values
+        items.find_each do |item|
+          item.cache_order_value
+          item.save
+        end
       end
 
     end

@@ -20,7 +20,15 @@ module Gnoibox
         set_tag_list_on(col.axis.key, col.tag_list) if col.axis
       end
     end
+    
+    def box
+      @box ||= self.class.box
+    end
 
+    def cache_order_value
+      self.order_value = respond_to?(box.order_key) ? send(box.order_key).to_s : content.send(box.order_key).to_s
+    end
+    
     class << self
       attr_reader :view_file_options
 
@@ -36,7 +44,7 @@ module Gnoibox
       def box
         @box ||= self.name.sub('Item::', 'Box::').constantize
       end
-
+      
     end
 
   end

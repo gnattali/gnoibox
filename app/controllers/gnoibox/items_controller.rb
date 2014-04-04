@@ -3,7 +3,7 @@ class Gnoibox::ItemsController < Gnoibox::ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def index
-    @items = @box.items.page(params[:page]).per(1000)
+    @items = @box.items.order(order_value: @box.order_direction).page(params[:page]).per(1000)
   end
 
   def show
