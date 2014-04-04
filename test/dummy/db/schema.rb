@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140325033951) do
+ActiveRecord::Schema.define(version: 20140404075641) do
 
   create_table "gnoibox_authors", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20140325033951) do
     t.string   "main_image"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "order_value"
   end
 
   create_table "taggings", force: true do |t|

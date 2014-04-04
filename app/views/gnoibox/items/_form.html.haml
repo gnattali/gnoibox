@@ -38,11 +38,10 @@
               =image_tag @item.main_image_url(:thumb), width: 200
               画像を削除する
               =f.check_box :remove_main_image
-      -unless @box.omit_cols.include?(:published_at)
-        .field-box
-          = f.label :published_at, '日付'
-          .col-md-7
-            = f.datetime_select :published_at, class: "form-control"
+      .field-box(style="#{'display:none' if @box.omit_cols.include?(:published_at)}")
+        = f.label :published_at, '日付'
+        .col-md-7
+          = f.datetime_select :published_at, class: "form-control"
 
       %br
 
