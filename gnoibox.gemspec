@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'haml-rails', '>= 0.4'
   s.add_dependency 'kaminari', '>= 0.14.1'
-  s.add_dependency 'acts-as-taggable-on', '>= 3.0.0'
+  s.add_dependency 'acts-as-taggable-on', '>= 3.1.1'
   s.add_dependency 'devise', '>= 3.2.0'
   s.add_dependency 'simple_form', '>= 3.0.0'
   s.add_dependency 'mini_magick', '>= 3.6.0'
