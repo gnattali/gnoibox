@@ -2,7 +2,7 @@ module Gnoibox
   class Column
     attr_reader :value
     def initialize(value=nil)
-      @value = value
+      set_value value
     end
 
     def set_value(v)
@@ -17,6 +17,10 @@ module Gnoibox
       @value.to_s
     end
     alias_method :text, :to_s
+
+    def to_order_value
+      @value.to_s
+    end
 
     def present?
       @value.to_s.present?
@@ -89,10 +93,27 @@ module Gnoibox
     end
 
     class Boolean < Column
+      # def set_value(v)
+      #   @value = (v=='true' ? true : false)
+      # end
+
+      def to_order_value
+        @value ? 1 : 0
+      end
+
     end
 
     class Number < Column
       include ActionView::Helpers::NumberHelper
+
+      def set_value(v)
+        @value = v.to_i
+      end
+
+      def to_order_value
+        "%050d" % @value
+      end
+
       def text
         number_with_delimiter(value).to_s
       end
@@ -114,13 +135,13 @@ module Gnoibox
           self.class_exec(settings) do |settings|
             mount_uploader :image, (settings[:uploader] || Gnoibox::MainImageUploader)
             def read_uploader(column)
-              pp 'read_uploader'
-              pp value
+              # pp 'read_uploader'
+              # pp value
               value
             end
             def write_uploader(column, identifier)
-              pp 'write_uploader'
-              pp identifier
+              # pp 'write_uploader'
+              # pp identifier
               set_value identifier
             end
           end
@@ -161,6 +182,9 @@ module Gnoibox
     end
 
     class Date < Column
+      def set_value(v)
+        @value = v.to_date
+      end
     end
 
     class Address < Column

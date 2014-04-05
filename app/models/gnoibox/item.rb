@@ -25,8 +25,20 @@ module Gnoibox
       @box ||= self.class.box
     end
 
+    def order_value_from(attr)
+      v = send(attr)
+      v.is_a?(Integer) ? ("%050d" % v) : v.to_s
+    end
+
     def cache_order_value
-      self.order_value = respond_to?(box.order_key) ? send(box.order_key).to_s : content.send(box.order_key).to_s
+      self.order_value = respond_to?(box.order_key) ? order_value_from(box.order_key) : content.try(box.order_key).try(:to_order_value)
+    end
+
+    def update(args)
+      assign_attributes(args)
+      cache_order_value
+      save
+      self
     end
     
     class << self

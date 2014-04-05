@@ -41,6 +41,17 @@ module Gnoibox
       def new_item(args={})
         item_class.new args.merge({box_key: key})
       end
+      
+      def create_item(args)
+        item = new_item(args)
+        item.cache_order_value
+        item.save
+        item
+      end
+      
+      def find_item_by_id(id)
+        item_class.find(id)
+      end
 
       def find_item(key)
         item_class.find_by(url: key)
@@ -51,8 +62,12 @@ module Gnoibox
         item_class.where(box_key: key)
       end
 
+      def ordered_items
+        items.order(order_value: order_direction)
+      end
+
       def tagged_with(tags)
-        item_class.where(box_key: key).tagged_with(tags)
+        items.tagged_with(tags).order(order_value: order_direction)
       end
 
       #can be overridden

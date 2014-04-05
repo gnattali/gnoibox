@@ -3,7 +3,7 @@ class Gnoibox::ItemsController < Gnoibox::ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def index
-    @items = @box.items.order(order_value: @box.order_direction).page(params[:page]).per(1000)
+    @items = @box.ordered_items.page(params[:page]).per(1000)
   end
 
   def show
@@ -14,8 +14,7 @@ class Gnoibox::ItemsController < Gnoibox::ApplicationController
   end
 
   def create
-    @item = @box.new_item(item_params)
-    if @item.save
+    if @item = @box.create_item(item_params)
       redirect_to gnoibox_box_items_url(@box), notice: '保存されました'
     else
       render action: 'new'
@@ -44,7 +43,7 @@ class Gnoibox::ItemsController < Gnoibox::ApplicationController
     end
 
     def set_item
-      @item = @box.item_class.find(params[:id])
+      @item = @box.find_item_by_id(params[:id])
     end
 
     def item_params
