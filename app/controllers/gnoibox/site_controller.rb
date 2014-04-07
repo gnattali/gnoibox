@@ -3,6 +3,10 @@ class Gnoibox::SiteController < ApplicationController
     @page = Gnoibox::UrlParser.new(params)
     render @page.view_file
   end
+  
+  def create_inquiry
+    
+  end
 
 private
   helper_method :box, :items, :item, :tags, :resource_type
