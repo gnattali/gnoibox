@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140405153310) do
+ActiveRecord::Schema.define(version: 20140407085513) do
 
   create_table "gnoibox_authors", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -40,6 +40,17 @@ ActiveRecord::Schema.define(version: 20140405153310) do
 
   add_index "gnoibox_blocks", ["key"], name: "index_gnoibox_blocks_on_key"
 
+  create_table "gnoibox_inquiries", force: true do |t|
+    t.string   "form_key"
+    t.string   "email"
+    t.text     "content"
+    t.string   "status"
+    t.datetime "checked_at"
+    t.string   "box_key"
+    t.integer  "gnoibox_item_id"
+    t.integer  "gnoibox_user_id"
+  end
+
   create_table "gnoibox_items", force: true do |t|
     t.string   "box_key"
     t.string   "url"
@@ -53,7 +64,30 @@ ActiveRecord::Schema.define(version: 20140405153310) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "order_value"
+    t.integer  "gnoibox_author_id"
   end
+
+  add_index "gnoibox_items", ["box_key"], name: "index_gnoibox_items_on_box_key"
+  add_index "gnoibox_items", ["url"], name: "index_gnoibox_items_on_url"
+
+  create_table "gnoibox_users", force: true do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "signed_up_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "gnoibox_users", ["email"], name: "index_gnoibox_users_on_email", unique: true
+  add_index "gnoibox_users", ["reset_password_token"], name: "index_gnoibox_users_on_reset_password_token", unique: true
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
