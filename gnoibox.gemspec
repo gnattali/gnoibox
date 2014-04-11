@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Youhei Furukawa"]
   s.email       = ["gnattali@gmail.com"]
   s.homepage    = "http://www.infoathletes.com"
-  s.summary     = "CMS with multi dimensional search"
-  s.description = "CMS with multi dimensional search"
+  s.summary     = "CMS with faceted search"
+  s.description = "CMS with faceted search"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
