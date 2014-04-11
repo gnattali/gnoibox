@@ -3,6 +3,8 @@ module Gnoibox
     isolate_namespace Gnoibox
 
     initializer "assets.path" do |app|
+      app.config.assets.precompile += %w( glyphicons-halflings-regular.eot glyphicons-halflings-regular.woff glyphicons-halflings-regular.ttf redactor-font.eot )
+
       app.config.assets.paths << root.join("vendors", "detail-admin", "js")
       app.config.assets.paths << root.join("vendors", "detail-admin", "css")
       app.config.assets.paths << root.join("vendors", "detail-admin", "img")

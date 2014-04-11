@@ -1,3 +1,7 @@
+//= depend_on_asset "select-bg.png"
+//= depend_on_asset "jquery-ui/slider-handler.png"
+//= depend_on_asset "jquery-ui/slider-handler2.png"
+
 /* THIS ARE ALL NEW EXTRA ELEMENTS BESIDE TWITTER BOOTSTRAP */
 
 
@@ -381,12 +385,12 @@
   position: relative;
   overflow: hidden;
   background: #ffffff;
-  background: image-url("select-bg.pngselect-bg.png"), -moz-linear-gradient(top,  #ffffff 0%, #f0f1f2 100%);
-  background: image-url("select-bg.pngselect-bg.png"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#f0f1f2));
-  background: image-url("select-bg.pngselect-bg.png"), -webkit-linear-gradient(top,  #ffffff 0%,#f0f1f2 100%);
-  background: image-url("select-bg.pngselect-bg.png"), -o-linear-gradient(top,  #ffffff 0%,#f0f1f2 100%);
-  background: image-url("select-bg.pngselect-bg.png"), -ms-linear-gradient(top,  #ffffff 0%,#f0f1f2 100%);
-  background: image-url("select-bg.pngselect-bg.png"), linear-gradient(to bottom,  #ffffff 0%,#f0f1f2 100%);
+  background: image-url("select-bg.png"), -moz-linear-gradient(top,  #ffffff 0%, #f0f1f2 100%);
+  background: image-url("select-bg.png"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#f0f1f2));
+  background: image-url("select-bg.png"), -webkit-linear-gradient(top,  #ffffff 0%,#f0f1f2 100%);
+  background: image-url("select-bg.png"), -o-linear-gradient(top,  #ffffff 0%,#f0f1f2 100%);
+  background: image-url("select-bg.png"), -ms-linear-gradient(top,  #ffffff 0%,#f0f1f2 100%);
+  background: image-url("select-bg.png"), linear-gradient(to bottom,  #ffffff 0%,#f0f1f2 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f0f1f2',GradientType=0 );
 
   display: inline-block;
@@ -423,7 +427,7 @@
 .ui-state-default, 
 .ui-widget-content .ui-state-default, 
 .ui-widget-header .ui-state-default {
-  background: image-url("select-bg.pngjquery-ui/slider-handler.png") no-repeat;
+  background: image-url("jquery-ui/slider-handler.png") no-repeat;
   border: none;
   width: 16px;
   height: 17px;
@@ -431,7 +435,7 @@
   outline: 0;
 }
 .ui-slider.vertical-handler .ui-state-default {
-  background: image-url("select-bg.pngjquery-ui/slider-handler2.png") no-repeat;
+  background: image-url("jquery-ui/slider-handler2.png") no-repeat;
   width: 11px;
   height: 21px;
   top: -8px;
