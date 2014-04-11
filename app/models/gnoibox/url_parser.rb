@@ -25,7 +25,7 @@ module Gnoibox
     end
 
     def view_file
-      @item.try(:view_file) || @box.send("#{resource_type}_view", self)
+      @view_file ||= (@item.try(:view_file) || @box.send("#{resource_type}_view", self))
     end
 
   private
@@ -80,8 +80,11 @@ module Gnoibox
       @resource_type = :member
       @box = Gnoibox::BoxCollection.find(:root)
       @item = @box.find_item(@first)
+      unless @item
+        @view_file = @first
+        @item = @box.new_item
+      end
     end
-
 
   end
 end
