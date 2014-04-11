@@ -5,8 +5,8 @@ module Gnoibox
     self.table_name= :gnoibox_inquiries
 
     def set_content
-      set_tags_from_content
-      # write_attribute :content, content.to_json
+      # set_tags_from_content
+      write_attribute :content, content.to_json
       super
     end
 
