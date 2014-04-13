@@ -1,27 +1,27 @@
 module Gnoibox
   module ApplicationHelper
 
-    def content_for_title
+    def gnb_title
       content_for(:title).presence || Gnoibox::Site.title
     end
 
-    def content_for_description
+    def gnb_description
       content_for(:description).presence || Gnoibox::Site.description
     end
 
-    def content_for_keywords
+    def gnb_keywords
       content_for(:keywords).presence || Gnoibox::Site.keywords
     end
 
-    def content_for_og_image
+    def gnb_og_image
       content_for(:og_image).presence || "http://#{request.host_with_port}/#{Gnoibox::Site.default_image}"
     end
 
-    def content_for_og_type
+    def gnb_og_type
       content_for(:og_type).presence || 'website'
     end
 
-    def body_class
+    def gnb_body_class
       content_for(:body_class).presence || ''
     end
 
