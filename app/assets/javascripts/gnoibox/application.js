@@ -15,3 +15,5 @@
 //= require bootstrap
 //= require jquery-ui-1.10.2.custom.min
 //= require theme
+//= require redactor-9.2.0
+//= require gnoibox/admin
