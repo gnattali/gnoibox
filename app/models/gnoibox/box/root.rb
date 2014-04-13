@@ -4,6 +4,10 @@ module Gnoibox
     set_key :root, '固定ページ'
     set_collection_view 'top'
     set_member_view 'page'
+
+    def self.member_view(url_parser)
+      url_parser.params[:first]
+    end
   end
 
   class Item::Root < Item

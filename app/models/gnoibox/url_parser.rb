@@ -13,7 +13,7 @@ module Gnoibox
       (BOX_KEYS + AXIS_OPTION_KEYS + UrlParser.existing_tags).map(&:to_s).uniq
     end
 
-    attr_reader :box, :item, :items, :tags, :resource_type
+    attr_reader :box, :item, :items, :tags, :resource_type, :params
 
     def initialize(params)
       @first = params[:first].try(:to_sym)

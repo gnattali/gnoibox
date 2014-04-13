@@ -1,7 +1,7 @@
 module Gnoibox
   class Box
     class << self
-      attr_reader :key, :label, :layout, :member_view, :collection_view, :description, :keywords
+      attr_reader :key, :label, :layout, :description, :keywords
 
       def set_key(key, label)
         Gnoibox::BoxCollection.add self
