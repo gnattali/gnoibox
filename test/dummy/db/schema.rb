@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140407085513) do
+ActiveRecord::Schema.define(version: 20140414134234) do
 
   create_table "gnoibox_authors", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -26,6 +26,11 @@ ActiveRecord::Schema.define(version: 20140407085513) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
+    t.string   "image"
+    t.string   "google_plus_id"
+    t.text     "description"
+    t.text     "content"
   end
 
   add_index "gnoibox_authors", ["email"], name: "index_gnoibox_authors_on_email", unique: true
@@ -49,6 +54,8 @@ ActiveRecord::Schema.define(version: 20140407085513) do
     t.string   "box_key"
     t.integer  "gnoibox_item_id"
     t.integer  "gnoibox_user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "gnoibox_items", force: true do |t|
