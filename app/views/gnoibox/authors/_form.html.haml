@@ -1,0 +1,54 @@
+.row.form-wrapper
+  .col-md-12
+
+    =form_for @author, as: :author, url: gnoibox_author_path(@author) do |f|
+      - if @author.errors.any?
+        #error_explanation
+          %ul
+            - @author.errors.full_messages.each do |msg|
+              %li= msg
+
+      .field-box
+        = f.label :name, '名前'
+        .col-md-7
+          =f.text_field :name, class: "form-control"
+
+      .field-box
+        = f.label :email, 'メールアドレス'
+        .col-md-7
+          =f.text_field :email, class: "form-control"
+
+      .field-box
+        = f.label :google_plus_id, 'Google+ ID'
+        .col-md-7
+          = f.text_field :google_plus_id, class: "form-control"
+
+      .field-box
+        = f.label :description, '説明'
+        .col-md-7
+          = f.text_area :description, class: "form-control"
+
+      .field-box
+        =f.label :image, 'プロフィール画像'
+        .col-md-7
+          =f.file_field :image
+          =f.hidden_field :image_cache
+          -if @author.image?
+            =image_tag @author.image_url(:thumb), width: 200
+            画像を削除する
+            =f.check_box :remove_image
+
+      %br
+
+
+      =f.fields_for :content, @author.content do |content_f|
+        -@author.content.cols.each do |col|
+          .field-box
+            =content_f.label col.label
+            .col-md-7
+              =render partial: "gnoibox/columns/#{col.partial_name}", locals: {f: content_f, col: col, item: @author}
+
+      %br
+
+      .actions
+        = f.submit 'Save', class: 'btn-flat'

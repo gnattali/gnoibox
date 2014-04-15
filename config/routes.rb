@@ -4,6 +4,7 @@ Gnoibox::Engine.routes.draw do
   namespace :gnoibox, module: false do
     # devise_for :gnoibox_author, class_name: "Gnoibox::Author", module: :devise
     devise_for :gnoibox_author, class_name: 'Gnoibox::Author'
+    resources :authors
     resources :boxes do
       resources :items
     end

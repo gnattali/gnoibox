@@ -1,0 +1,20 @@
+#pad-wrapper
+  .table-wrapper.section
+    .row.head
+      .col-md-12
+        %h4 著者一覧
+
+    .row
+      %table.table.table-hover
+        %thead
+          %tr
+            %th.col-md-3
+
+            %th.col-md-6
+              
+        %tbody
+          -@authors.each do |author|
+            %tr
+              %td=author.label
+              %td
+                =link_to '編集', edit_gnoibox_author_path(author)
