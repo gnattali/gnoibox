@@ -60,6 +60,11 @@
           =link_to gnoibox_blocks_path do
             %i.icon-leaf
             %span サイトパーツ
+        %li{class: ("active" if current_page?({controller: 'authors'})) }
+          =render partial: 'active_arrow', locals: {url: '/gnoibox/authors'}
+          =link_to gnoibox_authors_path do
+            %i.icon-leaf
+            %span ライター
     
     .content
       = yield
