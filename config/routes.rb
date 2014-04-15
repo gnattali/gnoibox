@@ -10,7 +10,11 @@ Gnoibox::Engine.routes.draw do
     end
     resources :blocks
 
-    get 's3' => 's3#url'
+    resources :s3 do
+      collection do
+        get 'put_url'
+      end
+    end
 
     root 'dashboard#index'
   end
