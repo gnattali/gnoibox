@@ -10,9 +10,7 @@ class Gnoibox::S3Controller < Gnoibox::ApplicationController
   end
 
   def index
-    render json: Gnoibox::S3.uploaded_files.map do |f|
-      {thumb: f.key, image: f.key}
-    end
+    render json: Gnoibox::S3.uploaded_files.map{|f| {thumb: f.public_url, image: f.public_url}}
   end
 
   def show
