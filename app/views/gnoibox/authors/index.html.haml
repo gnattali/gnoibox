@@ -15,6 +15,6 @@
         %tbody
           -@authors.each do |author|
             %tr
-              %td=author.label
+              %td=author.name
               %td
                 =link_to '編集', edit_gnoibox_author_path(author)
