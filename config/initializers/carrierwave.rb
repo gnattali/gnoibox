@@ -10,12 +10,12 @@
 
 CarrierWave.configure do |config|
   config.fog_credentials = {
-    :aws_access_key_id => Gnoibox::S3::ACCESS_KEY_ID,
-    :aws_secret_access_key => Gnoibox::S3::SECRET_ACCESS_KEY,
+    :aws_access_key_id => Gnoibox::S3.access_key_id,
+    :aws_secret_access_key => Gnoibox::S3.secret_access_key,
     :provider => 'AWS',
-    :region => Gnoibox::S3::REGION
+    :region => Gnoibox::S3.region
   }
-  config.fog_directory = Gnoibox::S3::BUCKET
+  config.fog_directory = Gnoibox::S3.bucket
   config.fog_public = true
 end
 
