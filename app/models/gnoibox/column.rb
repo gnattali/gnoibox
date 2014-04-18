@@ -188,6 +188,12 @@ module Gnoibox
     end
 
     class Address < Column
+      def axis
+        self.class.settings[:axis] || Gnoibox::Axis::Address
+      end
+    end
+    
+    class Station < Column
     end
   end
 end

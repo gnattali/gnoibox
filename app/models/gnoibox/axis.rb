@@ -44,7 +44,7 @@ module Gnoibox
         when :below then nil
         when :above then nil
         when :month then nil
-        when :prefecture then nil
+        when :prefecture then Gnoibox::Axis::Prefecture.detect_tag_for(v)
         when :city then nil
         when :rail then nil
         when :station then nil
