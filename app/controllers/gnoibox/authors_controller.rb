@@ -1,8 +1,20 @@
 class Gnoibox::AuthorsController < Gnoibox::ApplicationController
-  before_action :set_author, only: [:show, :edit, :update]
+  before_action :set_author, only: [:show, :edit, :update, :destroy]
 
   def index
     @authors = Gnoibox::Author.all
+  end
+
+  def new
+    @author = Gnoibox::AuthorProfile.new
+  end
+  
+  def create
+    if @author = Gnoibox::AuthorProfile.create(author_params)
+      redirect_to gnoibox_authors_path
+    else
+      render 'new'
+    end
   end
 
   def show
@@ -13,22 +25,30 @@ class Gnoibox::AuthorsController < Gnoibox::ApplicationController
 
   def update
     respond_to do |format|
-      if @block.update(block_params)
-        format.html { redirect_to gnoibox_blocks_path, notice: '保存されました' }
+      if @author.update(author_params)
+        format.html { redirect_to gnoibox_authors_path, notice: '保存されました' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @block.errors, status: :unprocessable_entity }
+        format.json { render json: @author.errors, status: :unprocessable_entity }
       end
     end
   end
 
+  def destroy
+    @author.destroy
+    redirect_to gnoibox_authors_url
+  end
+
   private
     def set_author
-      @author = Gnoibox::Author.find(params[:id])
+      @author = Gnoibox::AuthorProfile.find(params[:id])
     end
 
     def author_params
-      params[:author].permit!
+      para = params[:author].permit!
+      para.delete('password') if para[:password].blank?
+      para.delete('password_confirmation') if para[:password_confirmation].blank?
+      para
     end
 end

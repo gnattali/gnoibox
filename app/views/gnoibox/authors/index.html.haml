@@ -1,16 +1,19 @@
 #pad-wrapper
   .table-wrapper.section
     .row.head
-      .col-md-12
+      .col-md-10
         %h4 著者一覧
+      .col-md-2
+        = link_to "新規ライター作成", new_gnoibox_author_path, class: "btn-flat"
 
     .row
       %table.table.table-hover
         %thead
           %tr
-            %th.col-md-3
+            %th.col-md-7
 
-            %th.col-md-6
+            %th.col-md-1
+            %th.col-md-1
               
         %tbody
           -@authors.each do |author|
@@ -18,3 +21,6 @@
               %td=author.name
               %td
                 =link_to '編集', edit_gnoibox_author_path(author)
+              %td
+                -if Gnoibox::Author.count > 1
+                  =link_to '削除', gnoibox_author_path(author), method: :delete, data: {confirm: '削除してもよろしいですか？'}

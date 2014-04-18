@@ -1,7 +1,7 @@
 .row.form-wrapper
   .col-md-12
 
-    =form_for @author, as: :author, url: gnoibox_author_path(@author) do |f|
+    =form_for @author, as: :author, url: (@author.id ? gnoibox_author_path(@author) : gnoibox_authors_path) do |f|
       - if @author.errors.any?
         #error_explanation
           %ul
@@ -37,6 +37,16 @@
             =image_tag @author.image_url(:thumb), width: 200
             画像を削除する
             =f.check_box :remove_image
+
+      .field-box
+        = f.label :password, 'パスワード'
+        .col-md-7
+          =f.password_field :password, class: "form-control"
+      .field-box
+        = f.label :password_confirmation, 'パスワード(確認)'
+        .col-md-7
+          =f.password_field :password_confirmation, class: "form-control"
+
 
       %br
 
