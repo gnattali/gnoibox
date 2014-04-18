@@ -9,6 +9,8 @@ module Gnoibox
     acts_as_taggable
     mount_uploader :main_image, MainImageUploader
 
+    belongs_to :author_profile, foreign_key: :gnoibox_author_id
+
     def set_content
       set_tags_from_content
       # write_attribute :content, content.to_json
@@ -17,7 +19,7 @@ module Gnoibox
 
     def set_tags_from_content
       content.cols.each do |col|
-        set_tag_list_on(col.axis.key, col.tag_list) if col.axis
+        set_tag_list_on(col.name, col.tag_list) if col.axis
       end
     end
     
