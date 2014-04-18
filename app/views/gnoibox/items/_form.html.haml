@@ -43,6 +43,14 @@
         .col-md-7
           = f.datetime_select :published_at, class: "form-control"
 
+      -if Gnoibox::Author.count > 1
+        .field-box
+          = f.label :gnoibox_author_id, 'ライター'
+          .col-md-7
+            =f.select :gnoibox_author_id, Gnoibox::Author.all.map{|a| [a.name, a.id]}
+      -else
+        =f.hidden_field :gnoibox_author_id, value: Gnoibox::Author.first.id
+
       %br
 
       -if @item.class.view_file_options
