@@ -130,6 +130,26 @@ module Gnoibox
     class Image < Column
       extend CarrierWave::Mount
 
+      def set_value(v)
+        return unless v
+
+        if v.is_a? String
+          @value = v
+        else
+          self.image = v
+          self.image.store!
+          @value = image.file.filename
+        end
+      end
+
+      def id
+        name
+      end
+
+      def url
+        image.url
+      end
+
       class << self
         def setup(settings)
           self.class_exec(settings) do |settings|
@@ -148,14 +168,16 @@ module Gnoibox
         end
 
         def set_delegator(content_class)
+          super(content_class)
+
           content_class.class_exec(name) do |name|
-            define_method name do
-              col_hash[name]
-            end
-            define_method "#{name}=" do |v|
-              col_hash[name].image = v
-              col_hash[name].image.store!
-            end
+            # define_method name do
+            #   col_hash[name]
+            # end
+            # define_method "#{name}=" do |v|
+            #   col_hash[name].image = v
+            #   col_hash[name].image.store!
+            # end
             define_method "remove_#{name}" do
               col_hash[name].send "remove_image"
             end
@@ -169,13 +191,6 @@ module Gnoibox
         end
       end
 
-      def id
-        name
-      end
-
-      def url
-        image.url
-      end
     end
 
     class Medium < Column
