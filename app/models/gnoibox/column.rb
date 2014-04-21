@@ -131,9 +131,7 @@ module Gnoibox
       extend CarrierWave::Mount
 
       def set_value(v)
-        return unless v
-
-        if v.is_a? String
+        if v.is_a?(String) || !v
           @value = v
         else
           self.image = v
@@ -182,6 +180,10 @@ module Gnoibox
               col_hash[name].send "remove_image"
             end
             define_method "remove_#{name}=" do |v|
+              if v=="1"
+                col_hash[name].send "remove_image!"
+                col_hash[name].send "set_value", nil
+              end
               col_hash[name].send "remove_image=", v
             end
             define_method "#{name}_cache" do
