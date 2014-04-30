@@ -22,17 +22,11 @@ module Gnoibox
       end
 
       def_delegators :configuration, :access_key_id, :secret_access_key, :region, :bucket, :upload_dir
-      # def access_key_id() ACCESS_KEY_ID end
-      # def secret_access_key() SECRET_ACCESS_KEY end
-      # def region() REGION end
-      # def bucket() BUCKET end
-      # 
-      # def upload_dir() 'redactor' end
 
       def put_url(name, type)
         expires = DateTime.now.to_i + (60 * 5)
         amzHeaders = "x-amz-acl:public-read"
-        upload_path = "#{bucket}/#{upload_dir}/#{name}"
+        upload_path = "#{bucket}/#{upload_dir}/#{Date.current.strftime("%Y-%m")}/#{name}"
         stringToSign = "PUT\n\n#{type}\n#{expires}\n#{amzHeaders}\n/#{upload_path}";
         digest = OpenSSL::Digest::Digest.new('sha1')
         hmac = OpenSSL::HMAC.digest(digest, secret_access_key, stringToSign)
@@ -52,6 +46,11 @@ module Gnoibox
       
       def uploaded_files
         connection.directories.get(bucket, prefix: upload_dir).files
+      end
+      
+      def file_hash
+        # uploaded_files.map{|f| {thumb: f.public_url, image: f.public_url, folder: f.key.split("/")[1]}}
+        uploaded_files.map{|f| {thumb: f.public_url, image: f.public_url}}[0..10]
       end
 
       
