@@ -25,7 +25,7 @@ module Gnoibox
     end
 
     def view_file
-      @view_file ||= (@item.try(:view_file) || @box.send("#{resource_type}_view", self))
+      @view_file ||= (@item.try(:view_file).presence || @box.send("#{resource_type}_view", self))
     end
 
   private
