@@ -55,7 +55,7 @@
 
       -if @item.class.view_file_options
         .field-box
-          = f.label :view_file
+          = f.label :view_file, 'ビューファイル'
           .col-md-7
             = f.select :view_file, @item.class.view_file_options, class: "form-control"
 
