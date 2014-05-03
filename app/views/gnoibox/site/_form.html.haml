@@ -1,0 +1,7 @@
+=form_for inquiry, as: :inquiry, url: "" do |f|
+  =f.fields_for :content, inquiry.content do |content_f|
+    -inquiry.content.cols.each do |col|
+      .title=col.label
+      =render partial: "gnoibox/columns/#{col.partial_name}", locals: {f: content_f, col: col, item: inquiry}
+
+  =f.submit '送信'

@@ -24,6 +24,8 @@ module Gnoibox
 
       def content_class
         @content_class ||= Class.new do
+          include ActiveModel::Validations
+
           attr_reader :cols
           def initialize(attributes)
             @cols = self.class.col_classes.map do |col_class|
@@ -48,6 +50,10 @@ module Gnoibox
           end
 
           class << self
+            def name
+              'Content'
+            end
+            
             def col_classes
               @col_classes ||= []
             end
@@ -68,6 +74,7 @@ module Gnoibox
           self.settings = settings
           self.setup(settings)
           self.set_delegator(c_class)
+          self.set_validator(c_class)
         end
       end
 

@@ -66,7 +66,13 @@ module Gnoibox
           end
         end
       end
-
+      
+      def set_validator(content_class)
+        return unless settings[:validates]
+        content_class.class_exec(name, settings) do|name, settings|
+          validates name, settings[:validates]
+        end
+      end
     end
   end
 

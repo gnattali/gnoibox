@@ -20,6 +20,11 @@ module Gnoibox
       self
     end
     
+    def valid?(context=nil)
+      return false unless content.valid?(context)
+      super
+    end
+    
     class << self
       attr_reader :view_file_options
 

@@ -88,6 +88,12 @@ module Gnoibox
           item.save
         end
       end
+      
+      def form_class(url_parser)
+        @form_class ||= self.name.sub('Box::', 'Form::').constantize
+      # rescue NameError
+      #   nil
+      end
 
     end
   end

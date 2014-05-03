@@ -28,6 +28,10 @@ module Gnoibox
       @view_file ||= (@item.try(:view_file).presence || @box.send("#{resource_type}_view", self))
     end
 
+    def form
+      @form ||= @box.form_class(self)
+    end
+
   private
     ROOT_TOP = ->(params){ !params[:first] }
     AXIS_COLLECTION = ->(params){
