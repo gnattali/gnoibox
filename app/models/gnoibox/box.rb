@@ -1,7 +1,7 @@
 module Gnoibox
   class Box
     class << self
-      attr_reader :key, :label, :layout, :description, :keywords
+      attr_reader :key, :label, :layout
 
       def set_key(key, label)
         Gnoibox::BoxCollection.add self
@@ -70,15 +70,28 @@ module Gnoibox
         items.tagged_with(tags).order(order_value: order_direction)
       end
 
+      def tag_hash
+        @tag_hash ||= item_cols.map(&:axis).compact.map(&:option_hash).reduce({}, :merge)
+      end
+
       #can be overridden
 
+      def title(page=nil) @label end
+      def description(page=nil) @description end
+      def keywords(page=nil) @keywords end
+      def og_type(url_parser=nil) 'article' end
+      def axis_item(page=nil) nil end
       def limit() 20 end
 
-      def member_view(url_parser)
+      def layout(url_parser=nil)
+        @layout ||= 'application'
+      end
+
+      def member_view(url_parser=nil)
         @member_view
       end
 
-      def collection_view(url_parser)
+      def collection_view(url_parser=nil)
         @collection_view
       end
 
@@ -89,7 +102,7 @@ module Gnoibox
         end
       end
       
-      def form_class(url_parser)
+      def form_class(url_parser=nil)
         @form_class ||= self.name.sub('Box::', 'Form::').constantize
       # rescue NameError
       #   nil

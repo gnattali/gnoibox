@@ -1,16 +1,16 @@
 class Gnoibox::SiteController < ApplicationController
   def index
     @page = Gnoibox::UrlParser.new(params)
-    render @page.view_file
+    render @page.view_file, layout: @page.layout
   end
   
   def create_inquiry
     @page = Gnoibox::UrlParser.new(params)
     
     if inquiry(inquiry_params).save
-      #FIXME
+      render @page.thanks_view, layout: @page.layout
     else
-      render @page.view_file
+      render @page.view_file, layout: @page.layout
     end
   end
 

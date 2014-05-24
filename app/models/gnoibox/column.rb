@@ -47,13 +47,17 @@ module Gnoibox
       self.class.label
     end
     def axis
-      self.class.settings[:axis]
+      self.class.axis
     end
 
     class << self
       attr_accessor :name, :type, :label, :settings
 
       def setup(settings)
+      end
+      
+      def axis
+        settings[:axis]
       end
 
       def set_delegator(content_class)

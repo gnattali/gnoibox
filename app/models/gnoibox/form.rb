@@ -51,6 +51,10 @@ module Gnoibox
       def view_file(url_parser)
         @view_file ||= 'gnoibox/forms/new'
       end
+      
+      def thanks_view(url_parser)
+        @thanks_view ||= 'gnoibox/forms/thanks'
+      end
 
     end
   end
