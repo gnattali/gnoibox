@@ -2,15 +2,15 @@ module Gnoibox
   module ApplicationHelper
 
     def gnb_title
-      content_for(:title).presence || Gnoibox::Site.title
+      content_for(:title)
     end
 
     def gnb_description
-      content_for(:description).presence || Gnoibox::Site.description
+      content_for(:description)
     end
 
     def gnb_keywords
-      content_for(:keywords).presence || Gnoibox::Site.keywords
+      content_for(:keywords)
     end
 
     def gnb_og_image
