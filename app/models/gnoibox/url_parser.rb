@@ -4,13 +4,14 @@ module Gnoibox
 
     BOX_KEYS = Gnoibox::BoxCollection.keys
     AXIS_OPTION_KEYS = Gnoibox::AxisCollection.option_keys
+    RESERVED_KEYS = [:gnoibox, :admin, :thanks]
 
     def self.existing_tags
       ActsAsTaggableOn::Tag.pluck(:name)
     end
 
     def self.all_keys_and_tags
-      (BOX_KEYS + AXIS_OPTION_KEYS + UrlParser.existing_tags).map(&:to_s).uniq
+      (BOX_KEYS + AXIS_OPTION_KEYS + RESERVED_KEYS + UrlParser.existing_tags).map(&:to_s).uniq
     end
 
     attr_reader :box, :item, :items, :tags, :category, :resource_type, :params
