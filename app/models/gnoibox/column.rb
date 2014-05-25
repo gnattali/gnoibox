@@ -28,7 +28,10 @@ module Gnoibox
     def presence
       @value.to_s.presence
     end
-
+    def blank?
+      !present?
+    end
+    
     def to_i
       @value.to_i
     end
@@ -49,9 +52,12 @@ module Gnoibox
     def axis
       self.class.axis
     end
+    def required?
+      self.class.required
+    end
 
     class << self
-      attr_accessor :name, :type, :label, :settings
+      attr_accessor :name, :type, :label, :settings, :required
 
       def setup(settings)
       end
@@ -76,6 +82,7 @@ module Gnoibox
         content_class.class_exec(name, settings) do|name, settings|
           validates name, settings[:validates]
         end
+        self.required = true if settings[:validates][:presence]
       end
     end
   end
