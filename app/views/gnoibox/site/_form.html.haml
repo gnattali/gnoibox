@@ -1,7 +1,18 @@
 =form_for inquiry, as: :inquiry, url: "" do |f|
   =f.fields_for :content, inquiry.content do |content_f|
     -inquiry.content.cols.each do |col|
-      .title=col.label
-      =render partial: "gnoibox/columns/#{col.partial_name}", locals: {f: content_f, col: col, item: inquiry}
+      .form-column
+        .column-label
+          =col.label
+          -if col.required?
+            %span.required *
+
+        .column-input
+          =render partial: "gnoibox/columns/#{col.partial_name}", locals: {f: content_f, col: col, item: inquiry}
+          -if inquiry.content.errors[col.name].any?
+            .column-errors
+              -inquiry.content.errors[col.name].each do |error|
+                .column-error=error
+
 
   =f.submit '送信'
