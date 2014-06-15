@@ -14,6 +14,7 @@ module Gnoibox
     def self.load_files
       super
       Gnoibox::Box::Root
+      Gnoibox::Box::Facet
     end
 
   end

@@ -11,7 +11,7 @@ module Gnoibox
     end
 
     def form
-      @form ||= self.class.form
+      self.class.form
     end
 
     def update(args)

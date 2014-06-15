@@ -1,0 +1,20 @@
+#pad-wrapper
+  .table-wrapper.section
+    .row.head
+      .col-md-12
+        %h4 フォーム一覧
+
+    .row
+      %table.table.table-hover
+        %thead
+          %tr
+            %th.col-md-3
+
+            %th.col-md-6
+              
+        %tbody
+          -@forms.each do |form|
+            %tr
+              %td=form.label
+              %td
+                =link_to '一覧', gnoibox_form_inquiries_path(form)

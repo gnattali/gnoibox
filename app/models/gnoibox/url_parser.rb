@@ -4,7 +4,7 @@ module Gnoibox
 
     BOX_KEYS = Gnoibox::BoxCollection.keys
     AXIS_OPTION_KEYS = Gnoibox::AxisCollection.option_keys
-    RESERVED_KEYS = [:gnoibox, :admin, :thanks]
+    RESERVED_KEYS = [:gnoibox, :admin, :thanks, :root, :my, :facet, :box, :axis, :block, :item, :column, :form, :inquiry, :site]
 
     def self.existing_tags
       ActsAsTaggableOn::Tag.pluck(:name)
@@ -13,6 +13,7 @@ module Gnoibox
     def self.all_keys_and_tags
       (BOX_KEYS + AXIS_OPTION_KEYS + RESERVED_KEYS + UrlParser.existing_tags).map(&:to_s).uniq
     end
+
 
     attr_reader :box, :item, :items, :tags, :category, :resource_type, :params
 
@@ -25,6 +26,10 @@ module Gnoibox
       parse
     end
 
+    def i18n(type)
+      I18n.t( ["gnoibox", type, (@first || 'root') ,@second, @third].compact.join("."), default: "" ).presence
+    end
+
     def layout
       @layout ||= @box.layout(self)
     end
@@ -34,13 +39,13 @@ module Gnoibox
     end
 
     def title
-      @title ||= @item ? @item.title : @box.title(self)
+      @title ||= @item ? @item.title : ( @facet_item.try(:title) || i18n(:title) || @box.title(self) )
     end
     def description
-      @description ||= @item ? @item.description : @box.description(self)
+      @description ||= @item ? @item.description : ( @facet_item.try(:description) || i18n(:description) || @box.description(self) )
     end
     def keywords
-      @keywords ||= @item ? @item.keywords : @box.keywords(self)
+      @keywords ||= @item ? @item.keywords : ( @facet_item.try(:keywords) || i18n(:keywords) || @box.keywords(self) )
     end
 
     def tag_hash
@@ -94,6 +99,7 @@ module Gnoibox
       @resource_type = :collection
       @box = Gnoibox::BoxCollection.find(@first)
       @category = @second
+      @facet_item = Gnoibox::Box::Facet.find_item(@category) unless @third
       @items = @box.tagged_with(axis_tags).page(@params[:page]).per(@box.limit)
     end
     def axis_tags
@@ -109,6 +115,7 @@ module Gnoibox
     def box_top
       @resource_type = :collection
       @box = Gnoibox::BoxCollection.find(@first)
+      @facet_item = Gnoibox::Box::Facet.find_item(@first)
       @items = @box.items.page(@params[:page]).per(@box.limit)
     end
 

@@ -65,6 +65,11 @@
           =link_to gnoibox_authors_path do
             %i.icon-group
             %span ライター
+        %li{class: ("active" if current_page?({controller: 'forms'})) }
+          =render partial: 'active_arrow', locals: {url: '/gnoibox/forms'}
+          =link_to gnoibox_forms_path do
+            %i.icon-edit
+            %span お問合せ
     
     .content
       = yield

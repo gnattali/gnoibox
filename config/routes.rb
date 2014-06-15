@@ -9,6 +9,9 @@ Gnoibox::Engine.routes.draw do
       resources :items
     end
     resources :blocks
+    resources :forms do
+      resources :inquiries
+    end
 
     resources :s3 do
       collection do

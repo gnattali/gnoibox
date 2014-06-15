@@ -1,5 +1,7 @@
 module Gnoibox
   class Column
+    delegate :name, :type, :label, :axis, :required, to: :class
+
     attr_reader :value
     def initialize(value=nil)
       set_value value
@@ -38,22 +40,6 @@ module Gnoibox
 
     def tag_list
       Array(value).map{|v| axis.tag_for(v) }.flatten.compact if axis
-    end
-
-    def name
-      self.class.name
-    end
-    def type
-      self.class.type
-    end
-    def label
-      self.class.label
-    end
-    def axis
-      self.class.axis
-    end
-    def required?
-      self.class.required
     end
 
     class << self

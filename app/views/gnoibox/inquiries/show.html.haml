@@ -1,0 +1,8 @@
+%p
+  %b 日付:
+  = @inquiry.created_at
+
+-@inquiry.content.col_hash.each do |k,v|
+  %p
+    %b=k
+    =v

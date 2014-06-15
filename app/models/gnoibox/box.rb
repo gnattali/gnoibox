@@ -76,9 +76,15 @@ module Gnoibox
 
       #can be overridden
 
-      def title(page=nil) @label end
-      def description(page=nil) @description end
-      def keywords(page=nil) @keywords end
+      def title(page=nil)
+        @label
+      end
+      def description(page=nil)
+        @description
+      end
+      def keywords(page=nil)
+        @keywords
+      end
       def og_type(url_parser=nil) 'article' end
       def axis_item(page=nil) nil end
       def limit() 20 end

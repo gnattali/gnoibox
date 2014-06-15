@@ -1,0 +1,14 @@
+ja:
+  gnoibox:
+    title:
+      root: title for root page
+      articles:
+        ruby: title for the page with list of articles about ruby
+    description:
+      root: description for the root page
+      articles:
+        ruby: description for the page with list of articles about ruby
+    keywords:
+      root: "keywords, for, the, root, page"
+      articles:
+        ruby: 'ruby, tips'

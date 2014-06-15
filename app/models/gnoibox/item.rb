@@ -4,7 +4,7 @@ module Gnoibox
 
     self.table_name= :gnoibox_items
 
-    validates :url, presence: true, exclusion: {in: lambda{|record| UrlParser.all_keys_and_tags} }, uniqueness: true
+    validates :url, presence: true, exclusion: {in: lambda{|record| record.box_key.to_s=='facet' ? [] : UrlParser.all_keys_and_tags} }, uniqueness: true
 
     acts_as_taggable
     mount_uploader :main_image, MainImageUploader
@@ -24,7 +24,7 @@ module Gnoibox
     end
     
     def box
-      @box ||= self.class.box
+      self.class.box
     end
 
     def order_value_from(attr)

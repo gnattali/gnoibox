@@ -1,0 +1,27 @@
+#pad-wrapper
+  .table-wrapper.section
+    .row.head
+      .col-md-10
+        %h4 #{@form.label}一覧
+      .col-md-2
+
+    .row
+      %table.table.table-hover
+        %thead
+          %tr
+            %th.col-md-2
+              日付
+            -@form.list_cols.each do |col_name|
+              %th=@form.inquiry_col(col_name).label
+              
+            %th.col-md-1
+              
+        %tbody
+          -@inquiries.each do |inquiry|
+            %tr
+              %td=(l(inquiry.created_at) if inquiry.created_at)
+              -@form.list_cols.each do |col|
+                %td=inquiry.content.send(col).text
+                
+              %td
+                = link_to '表示', gnoibox_form_inquiry_path(@form, inquiry)

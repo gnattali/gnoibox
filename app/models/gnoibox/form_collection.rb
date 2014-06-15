@@ -5,5 +5,12 @@ module Gnoibox
       'form'
     end
     
+  private
+
+    def self.load_files
+      super
+      Gnoibox::Form::Root
+    end
+
   end
 end
