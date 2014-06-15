@@ -51,6 +51,10 @@ module Gnoibox
       @form ||= @box.form_class(self)
     end
     
+    def form_partial
+      @form_partial ||= form.view_file(self)
+    end
+    
     def thanks_view
       @thanks_view ||= form.thanks_view(self)
     end
