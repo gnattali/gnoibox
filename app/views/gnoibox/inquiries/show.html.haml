@@ -1,8 +1,15 @@
-%p
-  %b 日付:
-  = @inquiry.created_at
+#pad-wrapper
+  .table-wrapper.section
+    .row.head
+      .col-md-10
+        %h4 #{@form.label}
+      .col-md-2
 
--@inquiry.content.col_hash.each do |k,v|
   %p
-    %b=k
-    =v
+    %b 日付:
+    = @inquiry.created_at
+
+  -@inquiry.content.col_hash.each do |k,v|
+    %p
+      %b=k
+      =v
