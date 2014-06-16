@@ -68,17 +68,20 @@ module Gnoibox
       @thanks_view ||= form.thanks_view(self)
     end
 
-    def facet_key
-      @third || @second || @first || 'root'
+    def facet_keys
+      if @third
+        ["#{first}/#{second}/#{third}", "#{second}/#{third}", third]
+      elsif @second
+        ["#{first}/#{second}", second]
+      else
+        [(first || 'root')]
+      end
     end
 
     def i18n(type, k=nil)
-      if third
-        I18n.t("gnoibox.#{type}.#{first}/#{second}/#{third}", default: "").presence || I18n.t("gnoibox.#{type}.#{second}/#{third}", default: "").presence || I18n.t("gnoibox.#{type}.#{third}", default: "").presence
-      elsif second
-        I18n.t("gnoibox.#{type}.#{first}/#{second}", default: "").presence || I18n.t("gnoibox.#{type}.#{second}", default: "").presence
-      else
-        I18n.t("gnoibox.#{type}.#{first || 'root'}", default: "").presence
+      facet_keys.detect do |key|
+        r = I18n.t("gnoibox.#{type}.#{key}", default: "").presence
+        break r if r
       end
     end
 
@@ -113,12 +116,7 @@ module Gnoibox
       @resource_type = :collection
       @box = Gnoibox::BoxCollection.find(@first)
       @category = @second
-      if @third
-        @facet_item = Gnoibox::Box::Facet.find_item(@third)
-        @sub_facet = Gnoibox::Box::Facet.find_item(@category)
-      else
-        @facet_item = Gnoibox::Box::Facet.find_item(@category)
-      end
+      @facet_item = Gnoibox::Box::Facet.find_item(facet_keys.first)
       @items = @box.tagged_with(tag_keys).page(@params[:page]).per(@box.limit)
     end
 

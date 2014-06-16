@@ -75,23 +75,6 @@ module Gnoibox
       end
 
       #can be overridden
-      def title(page)
-        return page.tags.reverse.map(&:label).join(' - ') if page.third
-
-        page.facet_item.try(:title) || page.i18n(:title) || @label
-      end
-      def description(page)
-        if page.third && (desc = page.i18n(:description, page.tag_keys.join("/")) ||  page.i18n(:description))
-          return desc
-        end
-
-        page.facet_item.try(:description) || page.i18n(:description) || @description
-      end
-      def keywords(page)
-        return page.tags.reverse.map(&:label).join(',') if page.third
-
-        page.facet_item.try(:keywords) || page.i18n(:keywords) || @keywords
-      end
       def og_type(url_parser) 'article' end
       def limit() 20 end
 
@@ -122,6 +105,27 @@ module Gnoibox
         @form_class ||= self.name.sub('Box::', 'Form::').constantize
       # rescue NameError
       #   nil
+      end
+      
+      def title(page)
+        page.facet_item.try(:title).presence || page.i18n(:title).presence || title_auto(page)
+      end
+      def title_auto(page)
+        page.tags.reverse.map(&:label).join(' - ').presence || @label
+      end
+  
+      def description(page)
+        page.facet_item.try(:description).presence || page.i18n(:description).presence || description_auto(page)
+      end
+      def description_auto(page)
+        page.tags.reverse.map(&:label).join(' - ').presence || @description
+      end
+  
+      def keywords(page)
+        page.facet_item.try(:keywords).presence || page.i18n(:keywords).presence || keywords_auto(page)
+      end
+      def keywords_auto(page)
+        page.tags.reverse.map(&:label).join(',').presence || @keywords
       end
 
     end
