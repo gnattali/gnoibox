@@ -9,6 +9,10 @@ module Gnoibox
       all.each(&:reset_order_values)
     end
 
+    def self.all
+      super.sort_by(&:position)
+    end
+
   private
 
     def self.load_files

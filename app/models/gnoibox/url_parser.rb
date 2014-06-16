@@ -15,7 +15,7 @@ module Gnoibox
     end
 
 
-    attr_reader :box, :item, :items, :tags, :category, :resource_type, :params
+    attr_reader :box, :item, :items, :category, :facet_item, :sub_facet, :resource_type, :params, :first, :second, :third
 
     def initialize(params)
       @first = params[:first].try(:to_sym)
@@ -24,10 +24,6 @@ module Gnoibox
       @params = params
 
       parse
-    end
-
-    def i18n(type)
-      I18n.t( ["gnoibox", type, (@first || 'root') ,@second, @third].compact.join("."), default: "" ).presence
     end
 
     def layout
@@ -39,17 +35,25 @@ module Gnoibox
     end
 
     def title
-      @title ||= @item ? @item.title : ( @facet_item.try(:title) || i18n(:title) || @box.title(self) )
+      @title ||= @item ? @item.title : @box.title(self)
     end
     def description
-      @description ||= @item ? @item.description : ( @facet_item.try(:description) || i18n(:description) || @box.description(self) )
+      @description ||= @item ? @item.description : @box.description(self)
     end
     def keywords
-      @keywords ||= @item ? @item.keywords : ( @facet_item.try(:keywords) || i18n(:keywords) || @box.keywords(self) )
+      @keywords ||= @item ? @item.keywords : @box.keywords(self)
+    end
+
+    def tag_keys
+      @tag_keys ||= Array(@second.to_s) + (@third.to_s || '').split(TAG_DELIMITER)
     end
 
     def tag_hash
-      @tag_hash ||= @box.tag_hash.select{|k, v| axis_tags.include? k.to_s}
+      @tag_hash ||= @box.tag_hash.select{|k, v| tag_keys.include? k.to_s}
+    end
+    
+    def tags
+      @tags ||= tag_keys.map{|t| tag_hash[t.to_sym]}
     end
 
     def form
@@ -64,8 +68,18 @@ module Gnoibox
       @thanks_view ||= form.thanks_view(self)
     end
 
-    def axis_item
-      @axis_item ||= @box.axis_item(self)
+    def facet_key
+      @third || @second || @first || 'root'
+    end
+
+    def i18n(type, k=nil)
+      if third
+        I18n.t("gnoibox.#{type}.#{first}/#{second}/#{third}", default: "").presence || I18n.t("gnoibox.#{type}.#{second}/#{third}", default: "").presence || I18n.t("gnoibox.#{type}.#{third}", default: "").presence
+      elsif second
+        I18n.t("gnoibox.#{type}.#{first}/#{second}", default: "").presence || I18n.t("gnoibox.#{type}.#{second}", default: "").presence
+      else
+        I18n.t("gnoibox.#{type}.#{first || 'root'}", default: "").presence
+      end
     end
 
   private
@@ -99,11 +113,13 @@ module Gnoibox
       @resource_type = :collection
       @box = Gnoibox::BoxCollection.find(@first)
       @category = @second
-      @facet_item = Gnoibox::Box::Facet.find_item(@category) unless @third
-      @items = @box.tagged_with(axis_tags).page(@params[:page]).per(@box.limit)
-    end
-    def axis_tags
-      @tags ||= Array(@second.to_s) + (@third.to_s || '').split(TAG_DELIMITER)
+      if @third
+        @facet_item = Gnoibox::Box::Facet.find_item(@third)
+        @sub_facet = Gnoibox::Box::Facet.find_item(@category)
+      else
+        @facet_item = Gnoibox::Box::Facet.find_item(@category)
+      end
+      @items = @box.tagged_with(tag_keys).page(@params[:page]).per(@box.limit)
     end
 
     def box_item
@@ -115,7 +131,7 @@ module Gnoibox
     def box_top
       @resource_type = :collection
       @box = Gnoibox::BoxCollection.find(@first)
-      @facet_item = Gnoibox::Box::Facet.find_item(@first)
+      @facet_item = @box.facet_item
       @items = @box.items.page(@params[:page]).per(@box.limit)
     end
 

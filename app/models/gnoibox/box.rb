@@ -75,19 +75,29 @@ module Gnoibox
       end
 
       #can be overridden
+      def title(page)
+        return page.tags.reverse.map(&:label).join(' - ') if page.third
 
-      def title(page=nil)
-        @label
+        page.facet_item.try(:title) || page.i18n(:title) || @label
       end
-      def description(page=nil)
-        @description
+      def description(page)
+        if page.third && (desc = page.i18n(:description, page.tag_keys.join("/")) ||  page.i18n(:description))
+          return desc
+        end
+
+        page.facet_item.try(:description) || page.i18n(:description) || @description
       end
-      def keywords(page=nil)
-        @keywords
+      def keywords(page)
+        return page.tags.reverse.map(&:label).join(',') if page.third
+
+        page.facet_item.try(:keywords) || page.i18n(:keywords) || @keywords
       end
-      def og_type(url_parser=nil) 'article' end
-      def axis_item(page=nil) nil end
+      def og_type(url_parser) 'article' end
       def limit() 20 end
+
+      def facet_item
+        Gnoibox::Box::Facet.find_item(key)
+      end
 
       def layout(url_parser=nil)
         @layout ||= 'application'
