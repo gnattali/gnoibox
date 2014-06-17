@@ -21,7 +21,8 @@ module Gnoibox
       content.cols.each do |col|
         set_tag_list_on(col.axis.key, col.tag_list) if col.axis
       end
-      # content.cols.map(&:axis).compact.map(&:grouped_tags).reduce({}, :merge).each do |k,vals|
+      # #allow duplicate axis like station1, station2
+      # content.cols.map(&:tag_list).flatten.compact.reduce({}){|memo, tags| memo[tags[0]] ||= []; memo[tags[0]] += tags; memo}.each do |k, vals|
       #   set_tag_list_on(k, vals)
       # end
     end

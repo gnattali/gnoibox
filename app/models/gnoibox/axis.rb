@@ -1,6 +1,6 @@
 module Gnoibox
   class Axis
-    MATCH_TYPES = [:equal, :range, :below, :above, :month, :prefecture, :city, :rail, :station]
+    # MATCH_TYPES = [:equal, :range, :month, :age, :prefecture, :city, :railway, :station, :custom]
 
     class << self
       attr_reader :key, :label
@@ -40,15 +40,23 @@ module Gnoibox
       def tag_for(v)
         case type
         when :equal then option_keys.include?(v.to_sym) ? v : nil
-        when :range then nil
-        when :below then nil
-        when :above then nil
-        when :month then nil
-        when :prefecture then Gnoibox::Axis::Prefecture.detect_tag_for(v)
-        when :city then Gnoibox::Axis::City.detect_tag_for(v)
-        when :railway then Gnoibox::Axis::Railway.detect_tag_for(v)
-        when :station then Gnoibox::Axis::Station.detect_tag_for(v)
+        when :range then nil #match all
+        when :month then nil #v is date
+        when :age then nil #v is date
+        when :prefecture then Gnoibox::Axis::Prefecture.find_all_tag(v)
+        when :city then Gnoibox::Axis::City.find_all_tag(v)
+        when :railway then Gnoibox::Axis::Railway.find_all_tag(v)
+        when :station then Gnoibox::Axis::Station.find_all_tag(v)
+        when :custom then find_all_tag(v)
         end
+      end
+      
+      def find_all_tag(v)
+        #to be overriden on custom axis type
+      end
+      
+      def match_age(v)
+        #v is date
       end
     end
 

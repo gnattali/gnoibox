@@ -9,7 +9,7 @@ module Gnoibox
       set_option "city_#{r[3]}", r[2], {prefecture_id: r[0], city_id: r[1]}
     end
 
-    def self.detect_tag_for(v)
+    def self.find_all_tag(v)
       #TODO
     end
     

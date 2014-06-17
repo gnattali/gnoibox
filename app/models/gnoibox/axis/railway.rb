@@ -7,7 +7,7 @@ module Gnoibox
       Axis::Railway.options
     end
 
-    def self.detect_tag_for(v)
+    def self.find_all_tag(v)
       #TODO
     end
 

@@ -58,7 +58,7 @@ module Gnoibox
       set_option v[2], v[0], {full_text: v[1], abbr: v[3]}
     end
     
-    def self.detect_tag_for(v)
+    def self.find_all_tag(v)
       #TODO
     end
   end

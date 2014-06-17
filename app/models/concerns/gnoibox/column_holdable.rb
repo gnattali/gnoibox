@@ -22,6 +22,20 @@ module Gnoibox
 
     module ClassMethods
 
+      def set_col(name, type, label, settings={})
+        c_class = content_class
+        content_class.col_classes << Class.new(column_class(type)) do
+          self.name = name
+          self.type = type
+          self.label = label
+          self.settings = settings
+          self.setup(settings)
+          self.set_delegator(c_class)
+          self.set_validator(c_class)
+          self.set_axis(c_class)
+        end
+      end
+
       def content_class
         @content_class ||= Class.new do
           include ActiveModel::Validations
@@ -65,17 +79,9 @@ module Gnoibox
         content_class.col_classes
       end
 
-      def set_col(name, type, label, settings={})
-        c_class = content_class
-        content_class.col_classes << Class.new(column_class(type)) do
-          self.name = name
-          self.type = type
-          self.label = label
-          self.settings = settings
-          self.setup(settings)
-          self.set_delegator(c_class)
-          self.set_validator(c_class)
-        end
+      
+      def axes
+        @axes ||= []
       end
 
       private

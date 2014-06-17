@@ -6,10 +6,6 @@ module Gnoibox
 
     end
 
-    def settings
-      self.class.settings
-    end
-
     def options
       settings[:axis] ? settings[:axis].options : settings[:options].map{|key, label| Axis::Option.new(key, label) }
     end
@@ -22,7 +18,7 @@ module Gnoibox
       Hash[options.map{|option| [option.key, option.label] }]
     end
 
-    def text
+    def to_s
       value.present? ? option_hash[value.to_sym] : ""
     end
 

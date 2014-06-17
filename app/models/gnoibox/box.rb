@@ -73,6 +73,10 @@ module Gnoibox
       def tag_hash
         @tag_hash ||= item_cols.map(&:axis).compact.map(&:option_hash).reduce({}, :merge)
       end
+      
+      # def axis_list
+      #   item_class.content_class.col_classes
+      # end
 
       #can be overridden
       def og_type(url_parser) 'article' end

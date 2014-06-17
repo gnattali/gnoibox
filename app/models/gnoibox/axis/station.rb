@@ -7,9 +7,8 @@ module Gnoibox
       Axis::Station.options
     end
 
-    def self.detect_tag_for(v)
+    def self.find_all_tag(v)
       #TODO
-      #match railway and station
     end
 
   end

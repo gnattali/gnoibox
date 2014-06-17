@@ -1,8 +1,8 @@
 module Gnoibox
   class Column
-    delegate :name, :type, :label, :axis, :required, to: :class
+    delegate :name, :type, :label, :settings, :axis, :required, to: :class
 
-    attr_reader :value
+    attr_reader :value #value to be serialized and matched to tags, may be array
     def initialize(value=nil)
       set_value value
     end
@@ -40,6 +40,7 @@ module Gnoibox
 
     def tag_list
       Array(value).map{|v| axis.tag_for(v) }.flatten.compact if axis
+      # Array(axis).map{|ax| [ax.key, ax.tag_for(v)]} if axis
     end
     
     # def grouped_tags
@@ -74,6 +75,12 @@ module Gnoibox
         end
         self.required = true if settings[:validates][:presence]
       end
+      
+      def set_axis(content_class)
+        Array(axis).each do |ax|
+          content_class.axes.push(ax) unless content_class.axes.include?(ax)
+        end
+      end
     end
   end
 
@@ -97,6 +104,48 @@ module Gnoibox
 
     class CheckBox < Column
       include Gnoibox::ColumnSelectable
+
+      def delimiter
+        settings[:delimiter] || ','
+      end
+
+      def text_list
+        Array(value).map{|v| option_hash[v.to_sym]}
+      end
+
+      def to_s
+        text_list.join(delimiter)
+      end
+
+    end
+    
+    class Parent < Column
+      delegate :parent_class, to: :class
+      def self.parent_class
+        @parent_class ||= settings[:belongs_to]
+      end
+
+      # define belongs_to on column holder model
+
+      def set_value(v)
+        @parent_object = parent_class.find_item(v)
+        @value = v
+      end
+      
+    end
+    
+    # class Suggest < Column
+    #   
+    # end
+
+    class FreeTag < Column
+      def delimiter
+        settings[:delimiter] || ','
+      end
+      
+      def to_s
+        Array(value).join(delimiter)
+      end
     end
 
     class Boolean < Column
@@ -121,7 +170,7 @@ module Gnoibox
         "%050d" % @value
       end
 
-      def text
+      def to_s
         number_with_delimiter(value).to_s
       end
 
@@ -212,16 +261,16 @@ module Gnoibox
     end
 
     class Address < Column
-      def axis
-        #can be Gnoibox::Axis::City to match both city and prefecture
-        self.class.settings[:axis] || Gnoibox::Axis::Prefecture
+      def set_value(v)
+        #to string
+      end
+
+      def to_s
       end
     end
     
     class Station < Column
-      def axis
-        #can be Gnoibox::Axis::Railway
-        self.class.settings[:axis] || Gnoibox::Axis::Station
+      def to_s
       end
     end
   end
