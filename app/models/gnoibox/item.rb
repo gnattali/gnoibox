@@ -19,8 +19,11 @@ module Gnoibox
 
     def set_tags_from_content
       content.cols.each do |col|
-        set_tag_list_on(col.name, col.tag_list) if col.axis
+        set_tag_list_on(col.axis.key, col.tag_list) if col.axis
       end
+      # content.cols.map(&:axis).compact.map(&:grouped_tags).reduce({}, :merge).each do |k,vals|
+      #   set_tag_list_on(k, vals)
+      # end
     end
     
     def box

@@ -41,6 +41,10 @@ module Gnoibox
     def tag_list
       Array(value).map{|v| axis.tag_for(v) }.flatten.compact if axis
     end
+    
+    # def grouped_tags
+    #   {axis.key => tag_list} if axis
+    # end
 
     class << self
       attr_accessor :name, :type, :label, :settings, :required
@@ -209,11 +213,16 @@ module Gnoibox
 
     class Address < Column
       def axis
-        self.class.settings[:axis] || Gnoibox::Axis::Address
+        #can be Gnoibox::Axis::City to match both city and prefecture
+        self.class.settings[:axis] || Gnoibox::Axis::Prefecture
       end
     end
     
     class Station < Column
+      def axis
+        #can be Gnoibox::Axis::Railway
+        self.class.settings[:axis] || Gnoibox::Axis::Station
+      end
     end
   end
 end
