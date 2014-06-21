@@ -17,14 +17,21 @@ module Gnoibox
       super
     end
 
-    def set_tags_from_content
-      content.cols.each do |col|
-        set_tag_list_on(col.axis.key, col.tag_list) if col.axis
+    def grouped_tags_for_content
+      #allow duplicate axis like station1, station2
+      content.cols.map(&:tag_list).compact.reduce({}) do |memo, tag_group|
+        tag_group.each do |k,v|
+          memo[k] ||= []
+          memo[k] += v
+          memo
+        end
       end
-      # #allow duplicate axis like station1, station2
-      # content.cols.map(&:tag_list).flatten.compact.reduce({}){|memo, tags| memo[tags[0]] ||= []; memo[tags[0]] += tags; memo}.each do |k, vals|
-      #   set_tag_list_on(k, vals)
-      # end
+    end
+
+    def set_tags_from_content
+      grouped_tags_for_content.each do |k, vals|
+        set_tag_list_on(k, vals)
+      end
     end
     
     def box

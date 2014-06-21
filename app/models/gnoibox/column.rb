@@ -1,6 +1,6 @@
 module Gnoibox
   class Column
-    delegate :name, :type, :label, :settings, :axis, :required, to: :class
+    delegate :name, :type, :label, :settings, :axis, :axes, :main_axis, :required, to: :class
 
     attr_reader :value #value to be serialized and matched to tags, may be array
     def initialize(value=nil)
@@ -9,6 +9,10 @@ module Gnoibox
 
     def set_value(v)
       @value = v
+    end
+
+    def value_list
+      value.is_a?(Array) ? value : [value]
     end
 
     def partial_name
@@ -37,16 +41,21 @@ module Gnoibox
     def to_i
       @value.to_i
     end
+    
+    def axis_values
+      value_list
+    end
+
+    def grouped_tags
+      axes.map do |ax|
+        [ax.key, axis_values.map{|v| ax.tag_for(v)}.flatten.compact ]
+      end
+    end
 
     def tag_list
-      Array(value).map{|v| axis.tag_for(v) }.flatten.compact if axis
-      # Array(axis).map{|ax| [ax.key, ax.tag_for(v)]} if axis
+      Hash[ grouped_tags ] if axis
     end
     
-    # def grouped_tags
-    #   {axis.key => tag_list} if axis
-    # end
-
     class << self
       attr_accessor :name, :type, :label, :settings, :required
 
@@ -55,6 +64,14 @@ module Gnoibox
       
       def axis
         settings[:axis]
+      end
+      
+      def axes
+        Array(axis)
+      end
+
+      def main_axis
+        axes.first
       end
 
       def set_delegator(content_class)
@@ -77,7 +94,7 @@ module Gnoibox
       end
       
       def set_axis(content_class)
-        Array(axis).each do |ax|
+        axes.each do |ax|
           content_class.axes.push(ax) unless content_class.axes.include?(ax)
         end
       end
@@ -110,7 +127,7 @@ module Gnoibox
       end
 
       def text_list
-        Array(value).map{|v| option_hash[v.to_sym]}
+        value_list.map{|v| option_hash[v.to_sym]}
       end
 
       def to_s
@@ -144,7 +161,7 @@ module Gnoibox
       end
       
       def to_s
-        Array(value).join(delimiter)
+        value_list.join(delimiter)
       end
     end
 
@@ -261,11 +278,24 @@ module Gnoibox
     end
 
     class Address < Column
-      def set_value(v)
-        #to string
+      def pref_value
+        value[:prefecture] || value['prefecture']
+      end
+      
+      def address_value
+        value[:address] || value['address']
       end
 
       def to_s
+        if value.is_a?(Hash) && pref_value.present?
+          Gnoibox::Axis::Prefecture.option_hash[pref_value.to_sym].settings[:full_text] + address_value
+        else
+          value.to_s
+        end
+      end
+      
+      def axis_values
+        [to_s]
       end
     end
     

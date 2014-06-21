@@ -14,10 +14,11 @@ module Gnoibox
       def set_label(v) @label=v end
 
       def set_type(type)
-        @type = type
+        # deprecated
+        # use include Gnoibox::Axis::Type::Range instead
       end
       def type
-        @type ||= :equal
+        :equal
       end
 
       def set_option(key, label, settings={})
@@ -36,28 +37,11 @@ module Gnoibox
       def option(key)
         option_hash[key.to_sym]
       end
-
+      
       def tag_for(v)
-        case type
-        when :equal then option_keys.include?(v.to_sym) ? v : nil
-        when :range then nil #match all
-        when :month then nil #v is date
-        when :age then nil #v is date
-        when :prefecture then Gnoibox::Axis::Prefecture.find_all_tag(v)
-        when :city then Gnoibox::Axis::City.find_all_tag(v)
-        when :railway then Gnoibox::Axis::Railway.find_all_tag(v)
-        when :station then Gnoibox::Axis::Station.find_all_tag(v)
-        when :custom then find_all_tag(v)
-        end
+        option_keys.include?(v.to_sym) ? v :nil
       end
       
-      def find_all_tag(v)
-        #to be overriden on custom axis type
-      end
-      
-      def match_age(v)
-        #v is date
-      end
     end
 
 

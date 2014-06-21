@@ -1,7 +1,8 @@
 module Gnoibox
   class Axis::Walk < Axis
+    include Gnoibox::Axis::Type::Range
+
     set_key :walk, '駅徒歩'
-    set_type :range
 
     set_option :in_3minutes, '3分以内', range: (0..3)
     set_option :in_5minutes, '5分以内', range: (0..5)

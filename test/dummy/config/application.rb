@@ -18,6 +18,15 @@ module Dummy
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+
+    config.before_initialize do
+      Gnoibox::S3.configure do |config|
+        config.access_key_id = ENV['S3_ACCESS_KEY_ID']
+        config.secret_access_key = ENV['S3_SECRET_ACCESS_KEY']
+        config.region = ENV['S3_REGION']
+        config.bucket = ENV['S3_BUCKET']
+      end
+    end
+
   end
 end
-

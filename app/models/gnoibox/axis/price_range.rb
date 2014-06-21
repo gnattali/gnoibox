@@ -1,7 +1,8 @@
 module Gnoibox
   class Axis::PriceRange < Axis
+    include Gnoibox::Axis::Type::Range
+
     set_key :price_range, '価格帯'
-    set_type :range
 
     set_option :in50k, '5万円以下', range: (0..50000)
     set_option :from50k_to70k, '5〜7万円', range: (50001..70000)

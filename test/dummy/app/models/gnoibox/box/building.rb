@@ -12,7 +12,7 @@ module Gnoibox
     set_col :rent, :number, '家賃', axis: Axis::PriceRange
     set_col :age, :date, '築年月日', axis: Axis::Age
     set_col :item_type, :select, '物件種別', axis: Axis::ItemType
-    set_col :preferences, :checkbox, 'こだわり条件', axis: Axis::Preference
+    set_col :preferences, :check_box, 'こだわり条件', axis: Axis::Preference
     (1..10).each do |n|
       set_col "img#{n}".to_sym, :image, "画像#{n}"
       set_col "img#{n}_title".to_sym, :text, "キャプション#{n}"

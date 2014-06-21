@@ -7,7 +7,7 @@ module Gnoibox
     end
 
     def options
-      settings[:axis] ? settings[:axis].options : settings[:options].map{|key, label| Axis::Option.new(key, label) }
+      main_axis ? main_axis.options : settings[:options].map{|key, label| Axis::Option.new(key, label) }
     end
 
     def select_options

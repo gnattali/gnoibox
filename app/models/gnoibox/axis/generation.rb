@@ -1,7 +1,8 @@
 module Gnoibox
   class Axis::Generation < Axis
+    include Gnoibox::Axis::Type::Age
+
     set_key :generation, '世代'
-    set_type :age
 
     set_option :below_10_years_old, '10歳未満', range: (0..9)
     set_option :teenager '10代', range: (10..19)

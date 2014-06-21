@@ -71,6 +71,10 @@ module Gnoibox
             def col_classes
               @col_classes ||= []
             end
+
+            def axes
+              @axes ||= []
+            end
           end
         end
       end
@@ -78,10 +82,9 @@ module Gnoibox
       def col_classes
         content_class.col_classes
       end
-
       
       def axes
-        @axes ||= []
+        content_class.axes
       end
 
       private
