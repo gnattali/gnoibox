@@ -1,3 +1,17 @@
 testest:
-  url: test
-  title: test
+  box_key: root
+  url: index
+  title: トップページ
+  content: '<%= {body: "トップページ本文"}.to_json %>'
+
+shimizu_seizaburo:
+  box_key: sakagura
+  url: shimizu_seizaburo
+  title: 清水清三郎商店
+  content: '<%= {address: {prefecture: "mie", address: "鈴鹿市若松東３－９－３３"}, body: "作"}.to_json %>'
+
+zaku:
+  box_key: sake
+  url: zaku
+  title: 作
+  content: '<%= {}.to_json %>'

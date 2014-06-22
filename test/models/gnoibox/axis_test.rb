@@ -1,11 +1,8 @@
 require 'test_helper'
- 
-class AxisTest < ActiveSupport::TestCase
-  fixtures :all
 
+class AxisTest < ActiveSupport::TestCase
   test "axis type address" do
-    # assert_equal 1, Gnoibox::Box::Sakagura.items.count
-    p Gnoibox::Item.all
-    # p gnoibox_items(:testest)
+    item = items_with_tag(:shimizu_seizaburo)
+    assert_equal 1, Gnoibox::Box::Sakagura.tagged_with(:mie).count, 'prefecture tag not assigned'
   end
 end

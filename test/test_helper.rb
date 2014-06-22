@@ -10,10 +10,20 @@ Rails.backtrace_cleaner.remove_silencers!
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
 # Load fixtures from the engine
-if ActiveSupport::TestCase.method_defined?(:fixture_path=)
-  ActiveSupport::TestCase.fixture_path = File.expand_path("../fixtures", __FILE__)
-end
+ActiveSupport::TestCase.fixture_path = File.expand_path("../fixtures", __FILE__)
 
 class ActiveSupport::TestCase
   fixtures :all
+
+  def items(key)
+    item = gnoibox_items(key)
+    Gnoibox::BoxCollection.find(item.box_key).find_item item.url
+  end
+  
+  def items_with_tag(key)
+    items(key).tap do |i|
+      i.set_tags_from_content
+      i.save
+    end
+  end
 end
