@@ -12,6 +12,18 @@ shimizu_seizaburo:
 
 zaku:
   box_key: sake
-  url: zaku
-  title: 作
-  content: '<%= {}.to_json %>'
+  url: zaku_prototype_h_2014
+  title: 作　プロトタイプ-H　直汲み純米原酒　瓶火入れ
+  content: '<%= {prefecture: "mie", brand: "作", category: "junmai", preferences: ["原酒","直汲み"]}.to_json %>'
+
+daikanyama_tower:
+  box_key: building
+  url: daikanyama_tower
+  title: '代官山タワー'
+  content: '<%= {address: {prefecture: "tokyo", address: "渋谷区鶯谷町"}, station1: "daikanyama_station", walk1: "8", rent: "300000", age: "#{1.year.ago.strftime "%Y-%m-%d"}", item_type: "mansion", preferences: ["pet_ok", "designers"]}.to_json %>'
+
+shinjuku_tower:
+  box_key: building
+  url: shinjuku_tower
+  title: '新宿タワー'
+  content: '<%= {address: {prefecture: "tokyo", address: "新宿区西新宿"}, station1: "nishi_shinjuku_station", walk1: "4", walk2: "12", rent: "200000", age: "#{4.year.ago.strftime "%Y-%m-%d"}", item_type: "mansion", preferences: ["designers"]}.to_json %>'

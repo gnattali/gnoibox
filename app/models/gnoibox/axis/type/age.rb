@@ -11,7 +11,9 @@ module Gnoibox
         def type() :age end
 
         def tag_for(v)
-          
+          return nil if v=="" || v==nil || !v.is_a?(Date)
+          year = (Date.current - v).to_i / 365
+          options.select{|o| o.settings[:range].include? year.to_f }.map(&:key)
         end
       end
 

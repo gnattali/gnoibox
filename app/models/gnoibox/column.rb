@@ -27,6 +27,10 @@ module Gnoibox
     def to_order_value
       @value.to_s
     end
+    
+    def value_to_serialize
+      @value
+    end
 
     def present?
       @value.to_s.present?
@@ -122,6 +126,10 @@ module Gnoibox
     class CheckBox < Column
       include Gnoibox::ColumnSelectable
 
+      include Enumerable
+      delegate :each, to: :value
+      delegate :size, to: :value
+
       def delimiter
         settings[:delimiter] || ','
       end
@@ -180,7 +188,7 @@ module Gnoibox
       include ActionView::Helpers::NumberHelper
 
       def set_value(v)
-        @value = v.to_i
+        @value = v.present? ? v.to_i : nil
       end
 
       def to_order_value
@@ -273,7 +281,11 @@ module Gnoibox
 
     class Date < Column
       def set_value(v)
-        @value = v.to_date
+        @value = v.present? ? v.to_date : nil
+      end
+
+      def value_to_serialize
+        @value.is_a?(Date) ? @valuet.strftime('%Y-%m-%d') : @value
       end
     end
 

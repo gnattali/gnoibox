@@ -23,6 +23,8 @@ module Gnoibox
     module ClassMethods
 
       def set_col(name, type, label, settings={})
+        raise 'third parameter for #set_col should be label' unless label.is_a? String
+
         c_class = content_class
         content_class.col_classes << Class.new(column_class(type)) do
           self.name = name
@@ -56,7 +58,7 @@ module Gnoibox
           end
 
           def to_h
-            Hash[cols.map{|col| [col.name, col.value] }]
+            Hash[cols.map{|col| [col.name, col.value_to_serialize] }]
           end
 
           def to_json

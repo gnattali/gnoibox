@@ -23,8 +23,8 @@ module Gnoibox
         tag_group.each do |k,v|
           memo[k] ||= []
           memo[k] += v
-          memo
         end
+        memo
       end
     end
 
