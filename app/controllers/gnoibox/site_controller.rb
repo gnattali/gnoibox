@@ -1,4 +1,6 @@
 class Gnoibox::SiteController < ApplicationController
+  include Gnoibox::ApplicationHelper
+
   def index
     @page = Gnoibox::UrlParser.new(params)
     render @page.view_file, layout: @page.layout
@@ -8,7 +10,7 @@ class Gnoibox::SiteController < ApplicationController
     @page = Gnoibox::UrlParser.new(params)
     
     if inquiry(inquiry_params).save
-      Gnoibox::InquiryMailer.notice(inquiry).deliver
+      Gnoibox::InquiryMailer.notice(inquiry, gnb_base_info).deliver
       redirect_to gnb_thanks_path(first: params[:first], second: params[:second], third: params[:third])
     else
       render @page.view_file, layout: @page.layout

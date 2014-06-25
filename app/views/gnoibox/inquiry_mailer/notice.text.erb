@@ -1,5 +1,7 @@
 下記内容のお問合せがありました。
 
+<%= @inquiry.form.label %>
+
 <% @inquiry.content.col_hash.each do |k,v| %>
   <%= v.label %>: 
   <%= v.to_s %>

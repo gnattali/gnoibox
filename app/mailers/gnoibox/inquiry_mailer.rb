@@ -1,8 +1,9 @@
 class Gnoibox::InquiryMailer < ActionMailer::Base
   default from: "no-reply@gnoibox.com"
 
-  def notice(inquiry)
+  def notice(inquiry, base_info)
     @inquiry = inquiry
-    mail(to: Gnoibox::Author.pluck(:email), subject: 'GNOIBOX : お問合せがありました')
+    title = base_info.try(:site_name)
+    mail(to: Gnoibox::Author.pluck(:email), subject: "【#{title}】お問合せがありました")
   end
 end
