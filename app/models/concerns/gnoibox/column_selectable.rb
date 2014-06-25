@@ -19,7 +19,8 @@ module Gnoibox
     end
 
     def to_s
-      value.present? ? option_hash[value.to_sym] : ""
+      v = Array(value).first.try(:to_sym)
+      value.present? ? option_hash[v] : ""
     end
 
 

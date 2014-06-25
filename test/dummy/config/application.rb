@@ -19,6 +19,9 @@ module Dummy
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    config.time_zone = 'Asia/Tokyo'
+    config.i18n.default_locale = :ja
+
     config.before_initialize do
       Gnoibox::S3.configure do |config|
         config.access_key_id = ENV['S3_ACCESS_KEY_ID']

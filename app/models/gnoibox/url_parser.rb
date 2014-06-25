@@ -43,6 +43,12 @@ module Gnoibox
     def keywords
       @keywords ||= @item ? @item.keywords : @box.keywords(self)
     end
+    def og_image
+      @og_image ||= @item ? @item.og_image : @box.og_image(self)
+    end
+    def og_type
+      @og_type ||= @item ? @item.og_type : @box.og_type(self)
+    end
 
     def tag_keys
       @tag_keys ||= Array(@second.to_s) + (@third.to_s || '').split(TAG_DELIMITER)
@@ -53,7 +59,7 @@ module Gnoibox
     end
     
     def tags
-      @tags ||= tag_keys.map{|t| tag_hash[t.to_sym]}
+      @tags ||= tag_keys.map{|t| tag_hash[t.to_sym]}.compact
     end
 
     def form

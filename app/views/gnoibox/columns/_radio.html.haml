@@ -1,4 +1,4 @@
 -col.options.each do |option|
-  =f.label "#{col.name}_#{option.key}" do
-    =radio_button_tag "item[content][#{col.name}]", option.key, Array(col.value).include?(option.key.to_s)
+  =label 'inquiry_content', "#{col.name}_#{option.key}" do
+    =radio_button_tag "inquiry[content][#{col.name}]", option.key, Array(col.value).include?(option.key.to_s)
     =option.label

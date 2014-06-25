@@ -1,7 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Dummy</title>
+  <title><%= gnb_title || 'GNOIBOX' %></title>
+
+  <meta name="keywords" content="<%= gnb_keywords || 'GNOIBOX' %>">
+  <meta name="description" content="<%= gnb_description || 'CMS with faceted search' %>">
+
+  <meta property="og:title" content="<%= gnb_title || 'GNOIBOX' %>">
+  <meta property="og:description" content="<%= gnb_description || 'CMS with faceted search' %>">
+  <meta property="og:image" content="<%= gnb_og_image || image_path(nil) %>">
+  <meta property="og:url" content="<%= url_for(only_path: false) %>">
+  <meta property="og:type" content="<%= gnb_og_type %>">
+  <meta property="og:site_name" content="GNOIBOX DUMMY SITE">
+
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>

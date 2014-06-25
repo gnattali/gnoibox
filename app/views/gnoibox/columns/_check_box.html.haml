@@ -1,3 +1,6 @@
--col.options.each do |option|
-  =check_box_tag "item[content][#{col.name}][]", option.key, Array(col.value).include?(option.key.to_s)
-  =f.label option.label
+-# -col.options.each do |option|
+-#   =check_box_tag "inquiry[content][#{col.name}][]", option.key, Array(col.value).include?(option.key.to_s)
+-#   =label 'inquiry_content', "#{col.name}_#{option.key}", option.label
+
+=collection_check_boxes('inquiry[content]', col.name, col.options, :key, :label) do |b|
+  =b.label {b.check_box(checked: Array(col.value).include?(b.object.key.to_s)) + b.text}

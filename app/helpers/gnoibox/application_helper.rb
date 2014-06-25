@@ -14,11 +14,11 @@ module Gnoibox
     end
 
     def gnb_og_image
-      content_for(:og_image).presence || "http://#{request.host_with_port}/#{Gnoibox::Site.default_image}"
+      content_for(:og_image).presence || page.og_image
     end
 
     def gnb_og_type
-      content_for(:og_type).presence || 'website'
+      content_for(:og_type).presence || page.og_type
     end
 
     def gnb_body_class

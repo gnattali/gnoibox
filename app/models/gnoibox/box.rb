@@ -14,6 +14,8 @@ module Gnoibox
       def set_collection_view(v) @collection_view=v end
       def set_description(v) @description=v end
       def set_keywords(v) @keywords=v end
+      def set_og_image(v) @og_image=v end
+      def set_og_type(v) @og_type=v end
       def set_position(v) @position=v end
       def position() @position ||= 999 end
       def set_list_cols(cols) @list_cols = cols end
@@ -78,24 +80,8 @@ module Gnoibox
       #   item_class.content_class.col_classes
       # end
 
-      #can be overridden
-      def og_type(url_parser) 'article' end
-      def limit() 20 end
-
       def facet_item
         Gnoibox::Box::Facet.find_item(key)
-      end
-
-      def layout(url_parser=nil)
-        @layout ||= 'application'
-      end
-
-      def member_view(url_parser=nil)
-        @member_view
-      end
-
-      def collection_view(url_parser=nil)
-        @collection_view
       end
 
       def reset_order_values
@@ -104,8 +90,25 @@ module Gnoibox
           item.save
         end
       end
+
+
+      #can be overridden
+
+      def limit() 20 end
+
+      def layout(page=nil)
+        @layout ||= 'application'
+      end
+
+      def member_view(page=nil)
+        @member_view
+      end
+
+      def collection_view(page=nil)
+        @collection_view
+      end
       
-      def form_class(url_parser=nil)
+      def form_class(page=nil)
         @form_class ||= self.name.sub('Box::', 'Form::').constantize
       # rescue NameError
       #   nil
@@ -130,6 +133,14 @@ module Gnoibox
       end
       def keywords_auto(page)
         page.tags.reverse.map(&:label).join(',').presence || @keywords
+      end
+
+      def og_image(page)
+        page.facet_item.try(:og_image).presence || @og_image
+      end
+
+      def og_type(page)
+        page.facet_item.try(:og_type).presence || @og_type || 'website'
       end
 
     end

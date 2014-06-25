@@ -54,6 +54,14 @@ module Gnoibox
       self
     end
     
+    def og_image
+      main_image_url
+    end
+    
+    def og_type
+      'article'
+    end
+    
     class << self
       attr_reader :view_file_options
 
