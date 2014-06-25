@@ -76,9 +76,9 @@ module Gnoibox
         @tag_hash ||= item_cols.map(&:axis).compact.map(&:option_hash).reduce({}, :merge)
       end
       
-      # def axis_list
-      #   item_class.content_class.col_classes
-      # end
+      def axis_list
+        item_class.content_class.col_classes.map(&:axes).flatten.uniq
+      end
 
       def facet_item
         Gnoibox::Box::Facet.find_item(key)
@@ -101,11 +101,11 @@ module Gnoibox
       end
 
       def member_view(page=nil)
-        @member_view
+        @member_view || 'item'
       end
 
       def collection_view(page=nil)
-        @collection_view
+        @collection_view || 'facet'
       end
       
       def form_class(page=nil)

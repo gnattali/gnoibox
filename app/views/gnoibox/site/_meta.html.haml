@@ -1,0 +1,12 @@
+%title=gnb_title
+
+<meta name="keywords" content="#{ gnb_keywords }">
+<meta name="description" content="#{ gnb_description }">
+
+<meta property="og:title" content="#{ gnb_title }">
+<meta property="og:description" content="#{ gnb_description }">
+<meta property="og:image" content="#{ gnb_og_image || gnb_base_info.og_image_url.presence || gnb_base_info.og_image_upload.url }">
+<meta property="og:url" content="#{ url_for(only_path: false) }">
+<meta property="og:type" content="#{ gnb_og_type }">
+
+<meta property="og:site_name" content="#{gnb_base_info.site_name }">

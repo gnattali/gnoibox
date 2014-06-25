@@ -116,6 +116,7 @@ module Gnoibox
     def root_top
       @resource_type = :collection
       @box = Gnoibox::BoxCollection.find(:root)
+      @item = @box.find_item('index')
     end
 
     def axis_collection

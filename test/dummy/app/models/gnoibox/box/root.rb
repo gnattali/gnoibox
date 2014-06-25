@@ -1,7 +1,7 @@
 module Gnoibox
   class Box::Root < Box
     set_key :root, '固定ページ'
-    set_collection_view 'top'
+    set_collection_view 'index'
     set_member_view 'page'
   end
 

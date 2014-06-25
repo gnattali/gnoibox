@@ -25,7 +25,7 @@ private
   attr_reader :page
   helper_method :page, :inquiry
   helper_method :box, :items, :item, :tags, :form, :form_partial, :resource_type
-  delegate :box, :items, :item, :tags, :form, :form_partial, :resource_type, to: :page
+  delegate :box, :items, :item, :tags, :facet_item, :form, :form_partial, :resource_type, to: :page
 
   def inquiry(inq_params={})
     @inquiry ||= form.new_inquiry(inq_params)

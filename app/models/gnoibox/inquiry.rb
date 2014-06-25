@@ -4,6 +4,8 @@ module Gnoibox
 
     self.table_name= :gnoibox_inquiries
 
+    EMAIL_VALIDATION = /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
+
     def set_content
       # set_tags_from_content
       write_attribute :content, content.to_json

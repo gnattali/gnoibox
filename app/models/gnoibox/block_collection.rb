@@ -13,5 +13,12 @@ module Gnoibox
       find(key).content
     end
 
+  private
+
+    def self.load_files
+      super
+      Gnoibox::Block::BaseInfo
+    end
+
   end
 end

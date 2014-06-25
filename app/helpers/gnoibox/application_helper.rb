@@ -25,6 +25,10 @@ module Gnoibox
       content_for(:body_class).presence || ''
     end
 
+    def gnb_base_info
+      @gnb_base_info ||= gnb.block(:base_info)
+    end
+
     def gnb
       Facade
     end

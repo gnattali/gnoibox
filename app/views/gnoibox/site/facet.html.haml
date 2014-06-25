@@ -1,0 +1,14 @@
+%h1=gnb_title
+
+-if facet_item
+  -if facet_item.main_image_url
+    .main_image=image_tag facet_item.main_image_url
+
+  .content=facet_item.content.body
+
+-items.each do |item|
+  .item
+    .item-title=item.title
+    .item-description=item.description
+    
+=render 'gnoibox/site/axis_list'

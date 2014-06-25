@@ -1,8 +1,1 @@
--# -content_for :body_class, 'page'
--content_for :title, raw(item.title)
--content_for :description, raw(item.description)
--content_for :og_type, "article"
--content_for :og_image, item.main_image.url
--content_for :keywords, item.keywords
-
-.contents!=item.content.body
+.content!=item.content.body
