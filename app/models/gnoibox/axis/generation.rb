@@ -14,6 +14,6 @@ module Gnoibox
     set_option :seventies, '70代', range: (70..79)
     set_option :eighties, '80代', range: (80..89)
     set_option :nineties, '90代', range: (90..99)
-    set_option :over_hundred '100歳以上', range: (100..9999)
+    set_option :over_hundred, '100歳以上', range: (100..9999)
   end
 end
