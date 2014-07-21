@@ -1,3 +1,5 @@
+require 'csv'
+
 module Gnoibox
   module Axis::Type
     module City

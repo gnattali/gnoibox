@@ -1,5 +1,3 @@
-require 'csv'
-
 module Gnoibox
   class Axis::City < Axis
     include Gnoibox::Axis::Type::City
