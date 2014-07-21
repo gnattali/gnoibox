@@ -27,7 +27,7 @@ module Gnoibox
         def tag_for(v)
           if pref_key = Gnoibox::Axis::Prefecture.tag_for(v)
             pref_text = Gnoibox::Axis::Prefecture.option_hash[pref_key].settings[:full_text]
-            v.sub! /^#{pref_text}/, ''
+            v = v.sub /^#{pref_text}/, ''
           end
           text_list.detect do |t|
             break text_hash[t].key if v.index(t)==0
