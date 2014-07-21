@@ -73,7 +73,7 @@ module Gnoibox
       end
 
       def tag_hash
-        @tag_hash ||= item_cols.map(&:axis).compact.map(&:option_hash).reduce({}, :merge)
+        @tag_hash ||= axis_list.map(&:option_hash).reduce({}, :merge)
       end
       
       def axis_list
