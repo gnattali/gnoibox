@@ -53,7 +53,8 @@ module Gnoibox
           "45"=> %w(宮崎 宮崎県 miyazaki mz s),
           "46"=> %w(鹿児島 鹿児島県 kagoshima kg t),
           "47"=> %w(沖縄 沖縄県 okinawa on u),
-          "48"=> %w(海外 海外 oversea zz 0)
+          "48"=> %w(海外 海外 oversea zz 0),
+          "99"=> %w(全国 全国 any_pref al 9)
         }
 
         SEED.each do |k, v|

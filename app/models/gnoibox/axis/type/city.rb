@@ -14,17 +14,23 @@ module Gnoibox
       module ClassMethods
         def type() :city end
 
-        # def prefecture_hash
-        #   @prefecture_hash ||= options.group_by(&:)
-        # end
+        def text_hash
+          @text_hash ||= options.index_by(&:label)
+        end
+
+        def text_list
+          text_hash.keys
+        end
         
-        # def tag_for(v)
-        #   if pref_key = Gnoibox::Axis::Prefecture.tag_for(v)
-        #     prefecture_id = Gnoibox::Axis::Prefecture.options[pref_key].settings[:prefecture_id]
-        #     
-        #   end
-        #   
-        # end
+        def tag_for(v)
+          if pref_key = Gnoibox::Axis::Prefecture.tag_for(v)
+            pref_text = Gnoibox::Axis::Prefecture.option_hash[pref_key].settings[:full_text]
+            v.sub! /^#{pref_text}/, ''
+          end
+          text_list.detect do |t|
+            break text_hash[t].key if v.index(t)==0
+          end
+        end
 
       end
 
