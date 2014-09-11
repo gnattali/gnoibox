@@ -16,6 +16,11 @@ module Gnoibox
 
     config.to_prepare do
       ::ApplicationController.helper(Gnoibox::ApplicationHelper)
+
+      Dir.glob(Rails.root + "app/decorators/**/*_decorator.rb").each do |c|
+        require_dependency(c)
+      end
+
     end
   end
 end
