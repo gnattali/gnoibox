@@ -10,8 +10,9 @@
       %table.table.table-hover
         %thead
           %tr
-            %th.col-md-7
+            %th.col-md-6
 
+            %th.col-md-1
             %th.col-md-1
             %th.col-md-1
               
@@ -19,6 +20,7 @@
           -@authors.each do |author|
             %tr
               %td=author.name
+              %td=author.role_text
               %td
                 =link_to '編集', edit_gnoibox_author_path(author)
               %td

@@ -10,7 +10,8 @@ class Gnoibox::AuthorsController < Gnoibox::ApplicationController
   end
   
   def create
-    if @author = Gnoibox::AuthorProfile.create(author_params)
+    @author = Gnoibox::AuthorProfile.new(author_params)
+    if @author.save
       redirect_to gnoibox_authors_path
     else
       render 'new'
