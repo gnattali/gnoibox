@@ -39,7 +39,7 @@ module Gnoibox
       end
       
       def tag_for(v)
-        option_keys.include?(v.to_sym) ? v :nil
+        option_keys.include?(v.to_sym) ? v : nil
       end
       
     end
