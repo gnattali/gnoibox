@@ -91,6 +91,24 @@ module Gnoibox
       end
     end
 
+    def bread_crumbs
+      if @resource_type==:collection
+        crumbs = [ ["/", "TOP"], ["/#{@box.key}", @box.label] ]
+        crumbs.push( ["/#{@box.key}/#{second}", @box.tag_hash[second.to_sym].label ] ) if second
+        crumbs.push( ["/#{@box.key}/#{second}/#{third}", third.split(TAG_DELIMITER).map{|t| @box.tag_hash[t.to_sym].label}.join(',') ] ) if third
+        crumbs
+      elsif @resource_type==:member
+        path = ""
+        crumbs = [ ["/", "TOP"] ]
+        if @box.key==:root
+          crumbs.push( [(path += "/#{first}"), @item.title] )
+        else
+          crumbs.push( [(path += "/#{@box.key}"), @box.label] ) 
+          crumbs.push( [(path += "/#{second}"), @item.title] )
+        end
+      end
+    end
+
   private
     ROOT_TOP = ->(params){ !params[:first] }
     AXIS_COLLECTION = ->(params){
