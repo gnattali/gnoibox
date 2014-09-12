@@ -12,15 +12,17 @@
           %tr
             %th.col-md-2
               url
-            -unless @box.omit_cols.include?(:published_at)
-              %th.col-md-2
-                日付
             -unless @box.omit_cols.include?(:title)
               %th.col-md-2
                 タイトル
+            -unless @box.omit_cols.include?(:published_at)
+              %th.col-md-2
+                日付
             -@box.list_cols.each do |col_name|
               %th=@box.item_col(col_name).label
               
+            %th.col-md-1 ステータス
+
             -# %th.col-md-1
             %th.col-md-1
             %th.col-md-1
@@ -29,13 +31,15 @@
           -@items.each do |item|
             %tr
               %td=item.url
-              -unless @box.omit_cols.include?(:published_at)
-                %td=(l(item.published_at) if item.published_at)
               -unless @box.omit_cols.include?(:title)
                 %td=item.title
+              -unless @box.omit_cols.include?(:published_at)
+                %td=(l(item.published_at) if item.published_at)
               -@box.list_cols.each do |col|
                 %td=item.content.send(col).text
                 
+              %td=item.status_text
+              
               -# %td
               -#   = link_to '表示', gnoibox_box_item_path(@box, item)
               %td

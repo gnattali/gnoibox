@@ -11,6 +11,8 @@ module Gnoibox
 
     belongs_to :author_profile, foreign_key: :gnoibox_author_id
 
+    scope :published, ->{where(status: :published)}
+
     def set_content
       set_tags_from_content
       # write_attribute :content, content.to_json
@@ -61,6 +63,14 @@ module Gnoibox
     def og_type
       'article'
     end
+
+    def status_text
+      (Hash[Item.status_options].invert)[status.try(:to_sym)]
+    end
+    
+    def link_url
+      "/#{box_key}/#{url}"
+    end
     
     class << self
       attr_reader :view_file_options
@@ -76,6 +86,10 @@ module Gnoibox
 
       def box
         @box ||= self.name.sub('Item::', 'Box::').constantize
+      end
+
+      def status_options
+        [['公開', :published], ['下書き', :draft]]
       end
       
     end

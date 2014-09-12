@@ -59,6 +59,13 @@
           .col-md-7
             = f.select :view_file, @item.class.view_file_options, class: "form-control"
 
+      .field-box
+        = f.label :status, 'ステータス'
+        .col-md-7
+          =f.select :status, Gnoibox::Item.status_options
+          -# =f.collection_radio_buttons :status, Gnoibox::Item.status_options, :last, :first
+
+
       =f.fields_for :content, @item.content do |content_f|
         -@item.content.cols.each do |col|
           .field-box

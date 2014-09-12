@@ -59,6 +59,10 @@ module Gnoibox
         item_class.find_by(url: key)
         # key=~/\D/ ? item_class.find_by(url: key) : item_class.find(key)
       end
+      def find_published_item(key)
+        item_class.published.find_by(url: key)
+      end
+      
 
       def items
         item_class.where(box_key: key)

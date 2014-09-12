@@ -116,21 +116,21 @@ module Gnoibox
     def root_top
       @resource_type = :collection
       @box = Gnoibox::BoxCollection.find(:root)
-      @item = @box.find_item('index')
+      @item = @box.find_published_item('index')
     end
 
     def axis_collection
       @resource_type = :collection
       @box = Gnoibox::BoxCollection.find(@first)
       @category = @second
-      @facet_item = Gnoibox::Box::Facet.find_item(facet_keys.first)
+      @facet_item = Gnoibox::Box::Facet.find_published_item(facet_keys.first)
       @items = @box.tagged_with(tag_keys).page(@params[:page]).per(@box.limit)
     end
 
     def box_item
       @resource_type = :member
       @box = Gnoibox::BoxCollection.find(@first)
-      @item = @box.find_item(@second)
+      @item = @box.find_published_item(@second)
     end
 
     def box_top
@@ -143,7 +143,7 @@ module Gnoibox
     def root_item
       @resource_type = :member
       @box = Gnoibox::BoxCollection.find(:root)
-      @item = @box.find_item(@first)
+      @item = @box.find_published_item(@first)
       unless @item
         @view_file = @first
         @item = @box.new_item
