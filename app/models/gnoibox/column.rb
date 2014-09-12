@@ -12,7 +12,7 @@ module Gnoibox
     end
 
     def value_list
-      value.is_a?(Array) ? value : [value]
+      value.is_a?(Array) ? value : Array(value)
     end
 
     def partial_name
