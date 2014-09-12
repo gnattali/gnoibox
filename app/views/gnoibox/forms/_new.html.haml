@@ -4,7 +4,7 @@
     -inquiry.content.cols.each do |col|
       .form-column
         .column-label
-          =col.label
+          =content_f.label col.name, col.label
           -if col.required
             %span.required *
 
