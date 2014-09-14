@@ -47,7 +47,7 @@
         .field-box
           = f.label :gnoibox_author_id, 'ライター'
           .col-md-7
-            =f.select :gnoibox_author_id, Gnoibox::Author.all.map{|a| [a.name, a.id]}
+            =f.select :gnoibox_author_id, Gnoibox::Author.order(role: :asc).all.map{|a| [a.name, a.id]}
       -else
         =f.hidden_field :gnoibox_author_id, value: Gnoibox::Author.first.id
 
