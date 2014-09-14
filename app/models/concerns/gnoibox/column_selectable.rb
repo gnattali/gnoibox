@@ -22,6 +22,7 @@ module Gnoibox
       v = Array(value).first.try(:to_sym)
       value.present? ? option_hash[v] : ""
     end
+    alias_method :text, :to_s
 
 
     module ClassMethods
