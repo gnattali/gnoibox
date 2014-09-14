@@ -18,7 +18,7 @@ class Gnoibox::ProfilesController < Gnoibox::ApplicationController
 
   private
     def set_author
-      @author = current_gnoibox_gnoibox_author
+      @author = Gnoibox::AuthorProfile.find(current_gnoibox_gnoibox_author.id)
     end
 
     def author_params
