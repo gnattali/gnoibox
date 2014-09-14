@@ -4,6 +4,7 @@ class Gnoibox::ItemsController < Gnoibox::ApplicationController
 
   def index
     @items = @box.ordered_items.page(params[:page]).per(25)
+    @items = @items.where(gnoibox_author_id: gnb_current_author.id) unless gnb_admin?
   end
 
   def show

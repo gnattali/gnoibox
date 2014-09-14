@@ -6,4 +6,16 @@ class Gnoibox::ApplicationController < ActionController::Base
   before_action :authenticate_gnoibox_gnoibox_author!
 
   # layout 'gnoibox/application'
+
+private
+  helper_method :gnb_current_author, :gnb_admin?
+
+  def gnb_current_author
+    current_gnoibox_gnoibox_author
+  end
+  
+  def gnb_admin?
+    gnb_current_author.try(:is_admin?)
+  end
+
 end

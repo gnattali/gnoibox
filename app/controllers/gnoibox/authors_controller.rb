@@ -52,4 +52,10 @@ class Gnoibox::AuthorsController < Gnoibox::ApplicationController
       para.delete('password_confirmation') if para[:password_confirmation].blank?
       para
     end
+    
+    def form_url
+      @author.id ? gnoibox_author_path(@author) : gnoibox_authors_path
+    end
+    helper_method :form_url
+
 end

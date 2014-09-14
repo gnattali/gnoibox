@@ -3,6 +3,7 @@ class Gnoibox::BoxesController < Gnoibox::ApplicationController
 
   def index
     @boxes = Gnoibox::BoxCollection.all
+    @boxes = @boxes.reject{|box| [:root, :facet].include? box.key } unless gnb_admin?
   end
 
   def show

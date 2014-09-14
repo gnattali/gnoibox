@@ -41,7 +41,7 @@
             %i.icon-cog
           %ul.dropdown-menu
             %li
-              =link_to 'ログアウト', destroy_gnoibox_gnoibox_author_session_path
+              =link_to 'ログアウト', destroy_gnoibox_gnoibox_author_session_path, method: :delete
     
     #sidebar-nav
       %ul#dashboard-menu
@@ -55,21 +55,29 @@
           =link_to gnoibox_boxes_path do
             %i.icon-sitemap
             %span コンテンツ
-        %li{class: ("active" if current_page?({controller: 'blocks'})) }
-          =render partial: 'active_arrow', locals: {url: '/gnoibox/blocks'}
-          =link_to gnoibox_blocks_path do
-            %i.icon-leaf
-            %span サイトパーツ
-        %li{class: ("active" if current_page?({controller: 'authors'})) }
-          =render partial: 'active_arrow', locals: {url: '/gnoibox/authors'}
-          =link_to gnoibox_authors_path do
-            %i.icon-group
-            %span ライター
-        %li{class: ("active" if current_page?({controller: 'forms'})) }
-          =render partial: 'active_arrow', locals: {url: '/gnoibox/forms'}
-          =link_to gnoibox_forms_path do
-            %i.icon-edit
-            %span お問合せ
+
+        -if gnb_admin?
+          %li{class: ("active" if current_page?({controller: 'blocks'})) }
+            =render partial: 'active_arrow', locals: {url: '/gnoibox/blocks'}
+            =link_to gnoibox_blocks_path do
+              %i.icon-leaf
+              %span サイトパーツ
+          %li{class: ("active" if current_page?({controller: 'authors'})) }
+            =render partial: 'active_arrow', locals: {url: '/gnoibox/authors'}
+            =link_to gnoibox_authors_path do
+              %i.icon-group
+              %span ライター
+          %li{class: ("active" if current_page?({controller: 'forms'})) }
+            =render partial: 'active_arrow', locals: {url: '/gnoibox/forms'}
+            =link_to gnoibox_forms_path do
+              %i.icon-edit
+              %span お問合せ
+        -else
+          %li{class: ("active" if current_page?({controller: 'profiles', action: 'edit'})) }
+            =render partial: 'active_arrow', locals: {url: '/gnoibox/profile/edit'}
+            =link_to edit_gnoibox_profile_path do
+              %i.icon-group
+              %span プロフィール
     
     .content
       = yield

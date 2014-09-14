@@ -6,11 +6,10 @@
 
     .row
       %table.table.table-hover
-        %thead
-          %tr
-            %th.col-md-3
-
-            %th.col-md-6
+        -# %thead
+        -#   %tr
+        -#     %th.col-md-3
+        -#     %th.col-md-6
 
         %tbody
           -@boxes.each do |box|
@@ -19,24 +18,24 @@
               %td
                 =link_to '編集', gnoibox_box_items_path(box)
 
+-if gnb_admin?
 
-#pad-wrapper
-  .table-wrapper.section
-    .row.head
-      .col-md-12
-        %h4 サイトパーツ一覧
+  #pad-wrapper
+    .table-wrapper.section
+      .row.head
+        .col-md-12
+          %h4 サイトパーツ一覧
 
-    .row
-      %table.table.table-hover
-        %thead
-          %tr
-            %th.col-md-3
+      .row
+        %table.table.table-hover
+          -# %thead
+          -#   %tr
+          -#     %th.col-md-3
+          -#     %th.col-md-6
 
-            %th.col-md-6
-
-        %tbody
-          -@blocks.each do |block|
-            %tr
-              %td=block.label
-              %td
-                =link_to '編集', edit_gnoibox_block_path(block)
+          %tbody
+            -@blocks.each do |block|
+              %tr
+                %td=block.label
+                %td
+                  =link_to '編集', edit_gnoibox_block_path(block)

@@ -13,6 +13,8 @@ Gnoibox::Engine.routes.draw do
       resources :inquiries
     end
 
+    resource :profile
+
     resources :s3 do
       collection do
         get 'put_url'

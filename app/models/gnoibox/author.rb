@@ -30,5 +30,9 @@ module Gnoibox
       (Hash[Author.role_options].invert)[role.try(:to_sym)]
     end
     
+    def is_admin?
+      role.try(:to_sym) == :admin
+    end
+    
   end
 end

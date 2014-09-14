@@ -1,7 +1,7 @@
 .row.form-wrapper
   .col-md-12
 
-    =form_for @author, as: :author, url: (@author.id ? gnoibox_author_path(@author) : gnoibox_authors_path) do |f|
+    =form_for @author, as: :author, url: (form_url) do |f|
       - if @author.errors.any?
         #error_explanation
           %ul
@@ -13,10 +13,11 @@
         .col-md-7
           =f.text_field :name, class: "form-control"
 
-      .field-box
-        = f.label :role, '権限'
-        .col-md-7
-          =f.select :role, Gnoibox::Author.role_options, class: "form-control"
+      -if gnb_admin?
+        .field-box
+          = f.label :role, '権限'
+          .col-md-7
+            =f.select :role, Gnoibox::Author.role_options, class: "form-control"
 
       .field-box
         = f.label :email, 'メールアドレス'
