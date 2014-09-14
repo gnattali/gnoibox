@@ -18,8 +18,9 @@
             -unless @box.omit_cols.include?(:published_at)
               %th.col-md-2
                 日付
+
             -@box.list_cols.each do |col_name|
-              %th=@box.item_col(col_name).label
+              %th.col-md-1=@box.item_col(col_name).label
               
             %th.col-md-1 ステータス
 
@@ -34,7 +35,8 @@
               -unless @box.omit_cols.include?(:title)
                 %td=item.title
               -unless @box.omit_cols.include?(:published_at)
-                %td=(l(item.published_at) if item.published_at)
+                %td=(l(item.published_at, format: :date) if item.published_at)
+
               -@box.list_cols.each do |col|
                 %td=item.content.send(col).text
                 
@@ -46,3 +48,5 @@
                 = link_to '編集', edit_gnoibox_box_item_path(@box, item)
               %td
                 = link_to '削除', gnoibox_box_item_path(@box, item), :method => :delete, :data => { :confirm => '削除してもよろしいですか?' }
+
+  =paginate @items, theme: 'gnoibox'
