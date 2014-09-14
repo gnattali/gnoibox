@@ -14,6 +14,7 @@ module Gnoibox
     devise :database_authenticatable,
            :recoverable, :rememberable, :trackable, :validatable
 
+    scope :fifo, ->{ order(id: :asc) }
     scope :admin, ->{where(role: :admin)}
     scope :not_writer, ->{where.not(role: :writer)}
 
