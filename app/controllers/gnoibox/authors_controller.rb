@@ -2,7 +2,7 @@ class Gnoibox::AuthorsController < Gnoibox::ApplicationController
   before_action :set_author, only: [:show, :edit, :update, :destroy]
 
   def index
-    @authors = Gnoibox::Author.all
+    @authors = Gnoibox::Author.order(role: :asc).all
   end
 
   def new
