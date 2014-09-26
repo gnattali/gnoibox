@@ -3,6 +3,8 @@ module Gnoibox
     extend ActiveSupport::Concern
 
     included do
+      delegate :cols, :col_hash, to: :content
+      delegate :axes, to: :class
     end
 
 
