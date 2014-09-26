@@ -3,7 +3,7 @@ module Gnoibox
     isolate_namespace Gnoibox
 
     initializer "assets.path" do |app|
-      app.config.assets.precompile += %w( *.eot *.woff *.ttf *.svg )
+      app.config.assets.precompile += %w( *.eot *.woff *.ttf *.svg *.png )
 
       app.config.assets.paths << root.join("vendors", "detail-admin", "js")
       app.config.assets.paths << root.join("vendors", "detail-admin", "css")
