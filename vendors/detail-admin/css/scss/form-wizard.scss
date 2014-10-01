@@ -120,17 +120,17 @@
     position: relative;
     top: 2px;
   }
-  input[type="text"] {
-    width: 400px;
-  }
+  // input[type="text"] {
+  //   width: 400px;
+  // }
   &.payment-info label {
     width: 150px;
   }
   .alert-msg {
     display: block;
-    margin-left: 120px;
+    // margin-left: 120px;
     margin-bottom: -4px;
-    margin-top: 10px;
+    margin-top: 20px;
     i {
       font-size: 14px;
     }

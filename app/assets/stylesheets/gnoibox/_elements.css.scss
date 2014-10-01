@@ -3,3 +3,9 @@
     margin-bottom: 10px;
   }
 }
+
+body.gnoibox label.required::after{
+  padding-left: 5px;
+  content: "*";
+  color: red;
+}
