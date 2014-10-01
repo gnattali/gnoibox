@@ -2,17 +2,27 @@
   .col-md-12
 
     =form_for @item, as: :item, url: (@item.persisted? ? gnoibox_box_item_path(@box.key, @item) : gnoibox_box_items_path(@box.key) ) do |f|
-      - if @item.errors.any?
-        #error_explanation
-          - @item.errors.full_messages.each do |msg|
-            %span.alert-msg
-              %i.icon-remove-sign
-              = msg
 
-      .field-box
-        = f.label :url, 'URL'
+      -# - if @item.errors.any?
+      -#   #error_explanation
+      -#     - @item.errors.full_messages.each do |msg|
+      -#       %span.alert-msg
+      -#         %i.icon-remove-sign
+      -#         = msg
+
+      .field-box(class="#{'error' if @item.errors["url"].any?}")
+        = f.label :url, 'URL', class: "required"
         .col-md-7
           =f.text_field :url, class: "form-control"
+          
+          -if @item.errors["url"].any?
+            .column-errors.alert-msg
+              -@item.errors["url"].each do |error|
+                .column-error
+                  %i.icon-remove-sign
+                  =error
+
+          
       -unless @box.omit_cols.include?(:title)
         .field-box
           = f.label :title, 'タイトル'
@@ -68,10 +78,20 @@
 
       =f.fields_for :content, @item.content do |content_f|
         -@item.content.cols.each do |col|
-          .field-box
-            =content_f.label col.label
+          .field-box(class="#{'error' if @item.content.errors[col.name].any?}")
+            =content_f.label col.label, class: "#{'required' if col.required}"
+
             .col-md-7
               =render partial: "gnoibox/columns/#{col.partial_name}", locals: {f: content_f, col: col, item: @item}
+
+              -if @item.content.errors[col.name].any?
+                .clearfix
+                .column-errors.alert-msg
+                  -@item.content.errors[col.name].each do |error|
+                    .column-error
+                      %i.icon-remove-sign
+                      =error
+
 
       %br
 
