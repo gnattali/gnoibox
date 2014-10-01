@@ -67,13 +67,17 @@ module Gnoibox
       def items
         item_class.where(box_key: key)
       end
-
+      
       def ordered_items
-        items.order(order_value: order_direction)
+        items.default_ordered
+      end
+      
+      def published_items
+        items.published
       end
 
       def tagged_with(tags)
-        items.tagged_with(tags).order(order_value: order_direction)
+        items.tagged_with(tags)
       end
 
       def tag_hash

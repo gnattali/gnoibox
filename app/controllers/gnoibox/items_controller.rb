@@ -3,7 +3,7 @@ class Gnoibox::ItemsController < Gnoibox::ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def index
-    @items = @box.ordered_items.page(params[:page]).per(25)
+    @items = @box.items.default_ordered.page(params[:page]).per(25)
     @items = @items.where(gnoibox_author_id: gnb_current_author.id) unless gnb_admin?
   end
 

@@ -4,6 +4,8 @@ module Gnoibox
 
     self.table_name= :gnoibox_items
 
+    delegate :box, :order_direction, to: :class
+
     validates :url, presence: true, exclusion: {in: lambda{|record| record.box_key.to_s=='facet' ? [] : UrlParser.all_keys_and_tags} }, uniqueness: true
 
     acts_as_taggable
@@ -16,6 +18,11 @@ module Gnoibox
     def set_content
       set_tags_from_content
       # write_attribute :content, content.to_json
+      super
+    end
+
+    def valid?(context=nil)
+      return false unless content.valid?(context)
       super
     end
 
@@ -36,10 +43,6 @@ module Gnoibox
       end
     end
     
-    def box
-      self.class.box
-    end
-
     def order_value_from(attr)
       v = send(attr)
       v.is_a?(Integer) ? ("%050d" % v) : v.to_s
@@ -72,8 +75,14 @@ module Gnoibox
       "/#{box_key}/#{url}"
     end
     
+    def author_name
+      author_profile.try(:name) || ''
+    end
+    
     class << self
       attr_reader :view_file_options
+
+      delegate :order_direction, to: :box
 
       def set_view_file_options(options=nil)
         @view_file_options = options
@@ -90,6 +99,10 @@ module Gnoibox
 
       def status_options
         [['公開', :published], ['下書き', :draft]]
+      end
+
+      def default_ordered
+        order(order_value: order_direction)
       end
       
     end

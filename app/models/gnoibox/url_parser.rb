@@ -142,7 +142,7 @@ module Gnoibox
       @box = Gnoibox::BoxCollection.find(@first)
       @category = @second
       @facet_item = Gnoibox::Box::Facet.find_published_item(facet_keys.first)
-      @items = @box.tagged_with(tag_keys).page(@params[:page]).per(@box.limit)
+      @items = @box.tagged_with(tag_keys).published.default_ordered.page(@params[:page]).per(@box.limit)
     end
 
     def box_item
@@ -155,7 +155,7 @@ module Gnoibox
       @resource_type = :collection
       @box = Gnoibox::BoxCollection.find(@first)
       @facet_item = @box.facet_item
-      @items = @box.items.page(@params[:page]).per(@box.limit)
+      @items = @box.published_items.default_ordered.page(@params[:page]).per(@box.limit)
     end
 
     def root_item
