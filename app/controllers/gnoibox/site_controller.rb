@@ -26,7 +26,7 @@ class Gnoibox::SiteController < ApplicationController
 private
   attr_reader :page
   helper_method :page, :inquiry
-  helper_method :box, :items, :item, :tags, :form, :form_partial, :resource_type, :bread_crumbs
+  helper_method :box, :items, :item, :tags, :facet_item, :form, :form_partial, :resource_type, :bread_crumbs
   delegate :box, :items, :item, :tags, :facet_item, :form, :form_partial, :resource_type, :bread_crumbs, to: :page
 
   def inquiry(inq_params={})
