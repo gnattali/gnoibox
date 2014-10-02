@@ -4,3 +4,5 @@ $ ->
     imageGetJson: '/gnoibox/s3'
     minHeight: 200
     convertDivs: false
+
+  $('.js-gn-freetag').select2({tags:[],tokenSeparators: [","]})

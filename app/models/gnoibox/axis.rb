@@ -15,7 +15,7 @@ module Gnoibox
 
       def set_type(type)
         # deprecated
-        # use include Gnoibox::Axis::Type::Range instead
+        # use include Gnoibox::Axis::Type::Hoge instead
       end
       def type
         :equal

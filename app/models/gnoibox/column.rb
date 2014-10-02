@@ -171,6 +171,10 @@ module Gnoibox
       def delimiter
         settings[:delimiter] || ','
       end
+
+      def value_list
+        value.is_a?(Array) ? value : value.split(delimiter)
+      end
       
       def to_s
         value_list.join(delimiter)

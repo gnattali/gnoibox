@@ -9,3 +9,8 @@ body.gnoibox label.required::after{
   content: "*";
   color: red;
 }
+
+body.gnoibox .gn-freetag{
+  padding: 0;
+  border: none;
+}

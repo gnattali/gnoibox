@@ -18,7 +18,7 @@ module Gnoibox
         end
 
         def tag_for(v)
-          v.split(delimiter).reject(&:blank?)          
+          v.split(delimiter).reject(&:blank?)
         end
       end
 
