@@ -2,12 +2,15 @@ module Gnoibox
   module ApplicationHelper
 
     def gnb_title
+      # (content_for(:title) || page.title) + (current_page?("/") ? "" : " - #{gnb_base_info.site_name}")
       content_for(:title) || page.title
     end
+    alias_method :gnb_og_title, :gnb_title
 
     def gnb_description
       content_for(:description) || page.description
     end
+    alias_method :gnb_og_description, :gnb_description
 
     def gnb_keywords
       content_for(:keywords) || page.keywords
