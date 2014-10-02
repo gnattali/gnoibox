@@ -130,6 +130,10 @@ module Gnoibox
       delegate :each, to: :value
       delegate :size, to: :value
 
+      def set_value(v)
+        @value = Array(v).reject(&:blank?)
+      end
+
       def delimiter
         settings[:delimiter] || ','
       end
