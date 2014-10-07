@@ -173,7 +173,7 @@ module Gnoibox
       end
 
       def value_list
-        value.is_a?(Array) ? value : value.split(delimiter)
+        value.is_a?(Array) ? value : Array( value.try(:split, delimiter) )
       end
       
       def to_s
