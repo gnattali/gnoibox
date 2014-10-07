@@ -50,22 +50,21 @@ module Gnoibox
         item.save
         item
       end
-      
-      def find_item_by_id(id)
-        item_class.find(id)
-      end
-
-      def find_item(key)
-        item_class.find_by(url: key)
-        # key=~/\D/ ? item_class.find_by(url: key) : item_class.find(key)
-      end
-      def find_published_item(key)
-        item_class.published.find_by(url: key)
-      end
-      
 
       def items
         item_class.where(box_key: key)
+      end
+      
+      def find_item_by_id(id)
+        items.find(id)
+      end
+
+      def find_item(key)
+        items.find_by(url: key)
+        # key=~/\D/ ? item_class.find_by(url: key) : item_class.find(key)
+      end
+      def find_published_item(key)
+        items.published.find_by(url: key)
       end
       
       def ordered_items
