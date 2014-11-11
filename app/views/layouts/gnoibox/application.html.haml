@@ -53,11 +53,15 @@
           =link_to gnoibox_root_path do
             %i.icon-homek
             %span Home
-        %li{class: ("active" if current_page?({controller: 'boxes'})) }
+        %li.open{class: ("active" if current_page?({controller: 'boxes'})) }
           =render partial: 'active_arrow', locals: {url: {controller: 'boxes'}}
-          =link_to gnoibox_boxes_path do
+          =link_to gnoibox_boxes_path, class: 'parentmenu' do
             %i.icon-sitemap
             %span コンテンツ
+            
+          %ul.submenu(style="display:block;")
+            -Gnoibox::BoxCollection.all.each do |box|
+              %li=link_to box.label, gnoibox_box_items_path(box)
 
         -if gnb_admin?
           %li{class: ("active" if current_page?({controller: 'blocks'})) }

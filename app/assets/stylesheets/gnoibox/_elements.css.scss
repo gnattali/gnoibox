@@ -1,16 +1,28 @@
-.table-wrapper, .form-page{
-  .row.head{
-    margin-bottom: 10px;
+body.gnoibox{
+  
+  .table-wrapper, .form-page{
+    .row.head{
+      margin-bottom: 10px;
+    }
   }
-}
 
-body.gnoibox label.required::after{
-  padding-left: 5px;
-  content: "*";
-  color: red;
-}
+  label.required::after{
+    padding-left: 5px;
+    content: "*";
+    color: red;
+  }
 
-body.gnoibox .gn-freetag{
-  padding: 0;
-  border: none;
+  .gn-freetag{
+    padding: 0;
+    border: none;
+  }
+
+  #sidebar-nav #dashboard-menu > li .parentmenu {
+    border-bottom: 0px;
+    box-shadow: none;
+  }
+
+  #sidebar-nav #dashboard-menu .submenu a{
+    color: rgb(110, 130, 155);
+  }
 }
