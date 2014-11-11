@@ -104,6 +104,8 @@ module Gnoibox
       def default_ordered
         order(order_value: order_direction)
       end
+
+      def author_name_label() 'ライター' end
       
     end
 

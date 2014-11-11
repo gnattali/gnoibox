@@ -16,11 +16,14 @@
               %th.col-md-2
                 タイトル
             -unless @box.omit_cols.include?(:published_at)
-              %th.col-md-2
+              %th.col-md-1
                 日付
 
             -@box.list_cols.each do |col_name|
-              %th.col-md-1=@box.item_col(col_name).label
+              -if @box.item_class.respond_to? (col_name.to_s+"_label")
+                %th.col-md-1=@box.item_class.send(col_name.to_s+"_label")
+              -else
+                %th.col-md-1=@box.item_col(col_name).label
               
             %th.col-md-1 ステータス
 
@@ -38,7 +41,10 @@
                 %td=(l(item.published_at, format: :date) if item.published_at)
 
               -@box.list_cols.each do |col|
-                %td=item.content.send(col).text
+                -if item.respond_to? col
+                  %td=item.send(col)
+                -else
+                  %td=item.content.send(col).snip_display
                 
               %td=item.status_text
               

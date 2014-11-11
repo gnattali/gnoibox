@@ -23,6 +23,10 @@ module Gnoibox
       @value.to_s
     end
     alias_method :text, :to_s
+    
+    def snip_display
+      to_s
+    end
 
     def to_order_value
       @value.to_s
@@ -110,9 +114,15 @@ module Gnoibox
     end
 
     class TextArea < Column
+      def snip_display
+        to_s[0,40]
+      end
     end
 
     class RichText < Column
+      def snip_display
+        ActionController::Base.helpers.strip_tags(to_s)[0,40]
+      end
     end
 
     class Select < Column
