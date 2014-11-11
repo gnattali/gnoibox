@@ -11,7 +11,7 @@ class Gnoibox::ItemsController < Gnoibox::ApplicationController
   end
 
   def new
-    @item = @box.new_item
+    @item = @box.new_item(status: 'draft')
   end
 
   def create
