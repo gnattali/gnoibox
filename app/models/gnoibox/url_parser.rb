@@ -94,8 +94,8 @@ module Gnoibox
     def bread_crumbs
       if @resource_type==:collection
         crumbs = [ ["/", "TOP"], ["/#{@box.key}", @box.label] ]
-        crumbs.push( ["/#{@box.key}/#{second}", @box.tag_hash[second.to_sym].label ] ) if second
-        crumbs.push( ["/#{@box.key}/#{second}/#{third}", third.split(TAG_DELIMITER).map{|t| @box.tag_hash[t.to_sym].label}.join(',') ] ) if third
+        crumbs.push( ["/#{@box.key}/#{second}", (@box.tag_hash[second.to_sym].try(:label) || second) ] ) if second
+        crumbs.push( ["/#{@box.key}/#{second}/#{third}", third.split(TAG_DELIMITER).map{|t| @box.tag_hash[t.to_sym].try(:label) || t}.join(',') ] ) if third
         crumbs
       elsif @resource_type==:member
         path = ""
