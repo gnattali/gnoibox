@@ -32,6 +32,11 @@ class AxisTest < ActiveSupport::TestCase
     assert_equal ['from100k_to200k'], shinjuku.tag_list_on(:price_range)
     assert_equal ['in_5minutes', 'in_10minutes'], shinjuku.tag_list_on(:walk)
   end
+  
+  test 'axis type inclusion' do
+    shinjuku = items_with_tag(:shinjuku_tower)
+    assert_equal ['3ldk'], shinjuku.tag_list_on(:floor_plan)
+  end
 
   test 'axis type railway' do
     

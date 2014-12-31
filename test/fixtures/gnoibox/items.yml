@@ -26,4 +26,4 @@ shinjuku_tower:
   box_key: building
   url: shinjuku_tower
   title: '新宿タワー'
-  content: '<%= {address: {prefecture: "tokyo", address: "新宿区西新宿"}, station1: "nishi_shinjuku_station", walk1: "4", walk2: "12", rent: "200000", age: "#{4.year.ago.strftime "%Y-%m-%d"}", item_type: "mansion", preferences: ["designers"]}.to_json %>'
+  content: '<%= {address: {prefecture: "tokyo", address: "新宿区西新宿"}, station1: "nishi_shinjuku_station", walk1: "4", walk2: "12", rent: "200000", age: "#{4.year.ago.strftime "%Y-%m-%d"}", item_type: "mansion", floor_plan: "3DK", preferences: ["designers"]}.to_json %>'
