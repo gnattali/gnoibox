@@ -10,6 +10,10 @@ module Gnoibox
       module ClassMethods
         def type() :railway end
 
+        def options
+          Gnoibox::Axis::Type::RailwayOptions.all
+        end
+          
         def tag_for(v)
           
         end

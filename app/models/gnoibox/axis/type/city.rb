@@ -1,23 +1,21 @@
-require 'csv'
-
 module Gnoibox
   module Axis::Type
     module City
       extend ActiveSupport::Concern
 
       included do
-
-        CSV.foreach(File.join(Gnoibox::Engine.root, "db", "seeds", "cities.csv")) do |r|
-          set_option "city_#{r[3]}", r[2], {prefecture_id: r[0], city_id: r[1]}
-        end
-
+        
       end
 
       module ClassMethods
         def type() :city end
 
+        def options
+          Gnoibox::Axis::Type::CityOptions.all
+        end
+
         def text_hash
-          @text_hash ||= options.index_by(&:label)
+          Gnoibox::Axis::Type::CityOptions.text_hash
         end
 
         def text_list
