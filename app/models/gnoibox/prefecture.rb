@@ -54,15 +54,23 @@ module Gnoibox
     }
 
     def self.axis_options
-      @options ||= begin
+      @axis_options ||= begin
         SEED.map do |k, v|
           Gnoibox::Axis::Option.new v[2], v[0], {full_text: v[1], abbr: v[3], prefecture_id: k.to_i.to_s}
         end
       end
     end
 
+    def self.option_hash
+      @option_hash ||= axis_options.index_by(&:key)
+    end
+    
     def self.full_text_hash
       @full_text_hash ||= axis_options.index_by{|o| o.settings[:full_text]}
+    end
+
+    def self.full_text_list
+      @full_text_list ||= full_text_hash.keys
     end
     
   end

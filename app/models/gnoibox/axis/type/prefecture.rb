@@ -14,18 +14,20 @@ module Gnoibox
           Gnoibox::Prefecture.axis_options
         end
         
+        def option_hash
+          Gnoibox::Prefecture.option_hash
+        end
+        
         def full_text_hash
           Gnoibox::Prefecture.full_text_hash
         end
-        
+
         def full_text_list
-          full_text_hash.keys
+          Gnoibox::Prefecture.full_text_list
         end
         
         def tag_for(v)
-          full_text_list.detect do |t|
-            break full_text_hash[t].key if v.index(t)==0
-          end
+          full_text_list.map{|t| full_text_hash[t].key if v.include?(t) }.compact
         end
 
       end

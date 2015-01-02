@@ -33,7 +33,7 @@ class AxisTest < ActiveSupport::TestCase
     assert_equal ['in_5minutes', 'in_10minutes'], shinjuku.tag_list_on(:walk)
   end
   
-  test 'axis type inclusion' do
+  test 'axis type group' do
     shinjuku = items_with_tag(:shinjuku_tower)
     assert_equal ['3ldk'], shinjuku.tag_list_on(:floor_plan)
   end
@@ -55,6 +55,10 @@ class AxisTest < ActiveSupport::TestCase
     item = items_with_tag(:shimizu_seizaburo)
     assert_equal ['mie'], item.tag_list_on(:prefecture)
     assert_equal ['city_suzuka_shi'], item.tag_list_on(:city)
+
+    multi_address_kura = items_with_tag(:multi_address_kura)
+    assert_equal ['tokyo', 'chiba'].to_set, multi_address_kura.tag_list_on(:prefecture).to_set
+    assert_equal ['city_setagaya_ku', 'city_ichikawa_shi'].to_set, multi_address_kura.tag_list_on(:city).to_set
   end
   
   test "one axis for plural column" do

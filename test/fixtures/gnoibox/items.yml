@@ -8,7 +8,13 @@ shimizu_seizaburo:
   box_key: sakagura
   url: shimizu_seizaburo
   title: 清水清三郎商店
-  content: '<%= {address: {prefecture: "mie", address: "鈴鹿市若松東３－９－３３"}, body: "作"}.to_json %>'
+  content: '<%= {address: "三重県鈴鹿市若松東３－９－３３", body: "作"}.to_json %>'
+
+multi_address_kura:
+  box_key: sakagura
+  url: multi_address_kura
+  title: 複数箇所蔵
+  content: '<%= {address: "東京都世田谷区,千葉県市川市", body: "複数住所蔵"}.to_json %>'
 
 zaku:
   box_key: sake
@@ -20,10 +26,10 @@ daikanyama_tower:
   box_key: building
   url: daikanyama_tower
   title: '代官山タワー'
-  content: '<%= {address: {prefecture: "tokyo", address: "渋谷区鶯谷町"}, station1: "daikanyama_station", walk1: "8", rent: "300000", age: "#{1.year.ago.strftime "%Y-%m-%d"}", item_type: "mansion", preferences: ["pet_ok", "designers"]}.to_json %>'
+  content: '<%= {address: "東京都渋谷区鶯谷町", station1: "daikanyama_station", walk1: "8", rent: "300000", age: "#{1.year.ago.strftime "%Y-%m-%d"}", item_type: "mansion", preferences: ["pet_ok", "designers"]}.to_json %>'
 
 shinjuku_tower:
   box_key: building
   url: shinjuku_tower
   title: '新宿タワー'
-  content: '<%= {address: {prefecture: "tokyo", address: "新宿区西新宿"}, station1: "nishi_shinjuku_station", walk1: "4", walk2: "12", rent: "200000", age: "#{4.year.ago.strftime "%Y-%m-%d"}", item_type: "mansion", floor_plan: "3DK", preferences: ["designers"]}.to_json %>'
+  content: '<%= {address: "東京都新宿区西新宿", station1: "nishi_shinjuku_station", walk1: "4", walk2: "12", rent: "200000", age: "#{4.year.ago.strftime "%Y-%m-%d"}", item_type: "mansion", floor_plan: "3DK", preferences: ["designers"]}.to_json %>'

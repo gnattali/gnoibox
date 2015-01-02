@@ -19,5 +19,9 @@ module Gnoibox
       @text_hash ||= axis_options.index_by(&:label)
     end
     
+    def self.text_list
+      @text_list ||= text_hash.keys
+    end
+    
   end
 end
