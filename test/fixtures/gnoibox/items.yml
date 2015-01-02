@@ -26,10 +26,10 @@ daikanyama_tower:
   box_key: building
   url: daikanyama_tower
   title: '代官山タワー'
-  content: '<%= {address: "東京都渋谷区鶯谷町", station1: "daikanyama_station", walk1: "8", rent: "300000", age: "#{1.year.ago.strftime "%Y-%m-%d"}", item_type: "mansion", preferences: ["pet_ok", "designers"]}.to_json %>'
+  content: '<%= {address: "東京都渋谷区鶯谷町", station1: "daikanyama_station", walk1: "8", rent: "300000", age: "#{1.year.ago.strftime "%Y-%m-%d"}", item_type: "mansion", floor_space: "50.36", preferences: ["pet_ok", "designers"]}.to_json %>'
 
 shinjuku_tower:
   box_key: building
   url: shinjuku_tower
   title: '新宿タワー'
-  content: '<%= {address: "東京都新宿区西新宿", station1: "nishi_shinjuku_station", walk1: "4", walk2: "12", rent: "200000", age: "#{4.year.ago.strftime "%Y-%m-%d"}", item_type: "mansion", floor_plan: "3DK", preferences: ["designers"]}.to_json %>'
+  content: '<%= {address: "東京都新宿区西新宿", station1: "nishi_shinjuku_station", walk1: "4", walk2: "12", rent: "200000", age: "#{4.year.ago.strftime "%Y-%m-%d"}", item_type: "mansion", floor_plan: "3DK", floor_space: "63.5", preferences: ["designers"]}.to_json %>'

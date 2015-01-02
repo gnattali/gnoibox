@@ -216,25 +216,25 @@ module Gnoibox
       def to_s
         number_with_delimiter(value).to_s
       end
-
+      alias_method :text, :to_s
+      
       def unit
         self.class.settings[:unit]
       end
 
       def text_with_unit
-        text.to_s + unit.to_s
+        number_with_delimiter(value).to_s + unit.to_s
       end
     end
 
     class Float < Column
-      include ActionView::Helpers::NumberHelper
-      
+
       def set_value(v)
         @value = v.present? ? v.to_f : nil
       end
       
       def to_order_value
-        @value
+        (@value.to_f * 1000000000000000000000000000000).to_i
       end
       
       def unit

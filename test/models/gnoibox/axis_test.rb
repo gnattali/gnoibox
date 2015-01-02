@@ -31,6 +31,8 @@ class AxisTest < ActiveSupport::TestCase
     shinjuku = items_with_tag(:shinjuku_tower)
     assert_equal ['from100k_to200k'], shinjuku.tag_list_on(:price_range)
     assert_equal ['in_5minutes', 'in_10minutes'], shinjuku.tag_list_on(:walk)
+    #float range
+    assert_equal ['from60_to65'], shinjuku.tag_list_on(:floor_space)
   end
   
   test 'axis type group' do

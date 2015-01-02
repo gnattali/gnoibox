@@ -23,6 +23,7 @@ class ActiveSupport::TestCase
   def items_with_tag(key)
     items(key).tap do |i|
       i.set_tags_from_content
+      i.cache_order_value
       i.save
     end
   end
