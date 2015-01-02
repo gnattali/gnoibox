@@ -11,7 +11,7 @@ module Gnoibox
         def type() :station end
 
         def options
-          Gnoibox::Axis::Type::StationOptions.all
+          Gnoibox::Station.axis_options
         end
 
         def tag_for(v)

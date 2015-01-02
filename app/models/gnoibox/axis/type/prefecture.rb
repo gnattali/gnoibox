@@ -11,11 +11,11 @@ module Gnoibox
         def type() :prefecture end
 
         def options
-          Gnoibox::Axis::Type::PrefectureOptions.all
+          Gnoibox::Prefecture.axis_options
         end
         
         def full_text_hash
-          Gnoibox::Axis::Type::PrefectureOptions.full_text_hash
+          Gnoibox::Prefecture.full_text_hash
         end
         
         def full_text_list

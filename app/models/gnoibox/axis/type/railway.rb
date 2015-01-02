@@ -11,7 +11,7 @@ module Gnoibox
         def type() :railway end
 
         def options
-          Gnoibox::Axis::Type::RailwayOptions.all
+          Gnoibox::Railway.axis_options
         end
           
         def tag_for(v)

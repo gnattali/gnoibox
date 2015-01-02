@@ -11,11 +11,11 @@ module Gnoibox
         def type() :city end
 
         def options
-          Gnoibox::Axis::Type::CityOptions.all
+          Gnoibox::City.axis_options
         end
 
         def text_hash
-          Gnoibox::Axis::Type::CityOptions.text_hash
+          Gnoibox::City.text_hash
         end
 
         def text_list
