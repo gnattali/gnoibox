@@ -218,7 +218,7 @@ module Gnoibox
       end
 
       def unit
-        self.class.settings[:unit]        
+        self.class.settings[:unit]
       end
 
       def text_with_unit
@@ -226,6 +226,26 @@ module Gnoibox
       end
     end
 
+    class Float < Column
+      include ActionView::Helpers::NumberHelper
+      
+      def set_value(v)
+        @value = v.present? ? v.to_f : nil
+      end
+      
+      def to_order_value
+        @value
+      end
+      
+      def unit
+        self.class.settings[:unit]
+      end
+      
+      def text_with_unit
+        text.to_s + unit.to_s
+      end
+    end
+    
     class Image < Column
       extend CarrierWave::Mount
 
@@ -317,8 +337,8 @@ module Gnoibox
       end
 
       def to_s
-        if value.is_a?(Hash) && pref_value.present?
-          Gnoibox::Axis::Prefecture.option_hash[pref_value.to_sym].settings[:full_text] + address_value
+        if value.is_a?(Hash) && pref_value.present? #deprecated
+          Gnoibox::Prefecture.option_hash[pref_value.to_sym].settings[:full_text] + address_value
         else
           value.to_s
         end
