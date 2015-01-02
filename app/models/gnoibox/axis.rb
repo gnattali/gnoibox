@@ -1,6 +1,6 @@
 module Gnoibox
   class Axis
-    # MATCH_TYPES = [:equal, :range, :month, :age, :prefecture, :city, :railway, :station, :custom]
+    # MATCH_TYPES = [:equal, :range, :group, :month, :age, :prefecture, :city, :railway, :station, :custom]
 
     class << self
       attr_reader :key, :label

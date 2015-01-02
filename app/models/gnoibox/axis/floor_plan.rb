@@ -1,6 +1,6 @@
 module Gnoibox
   class Axis::FloorPlan < Axis
-    include Gnoibox::Axis::Type::Inclusion
+    include Gnoibox::Axis::Type::Group
 
     set_key :floor_plan, '間取り'
 

@@ -1,6 +1,6 @@
 module Gnoibox
   module Axis::Type
-    module Inclusion
+    module Group
       extend ActiveSupport::Concern
 
       included do
@@ -8,7 +8,7 @@ module Gnoibox
       end
 
       module ClassMethods
-        def type() :inclusion end
+        def type() :group end
 
         def tag_for(v)
           return nil if v=="" || v==nil
