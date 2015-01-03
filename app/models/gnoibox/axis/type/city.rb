@@ -23,6 +23,11 @@ module Gnoibox
         end
         
         def tag_for(v)
+          # if /^[0-9０-９ー\s-]+$/.match v
+          #   v.gsub!(/[０-９\s　ー-]/, Hash[("０".."９").zip(0..9)] )
+          #   #detect from zipcode
+          # end
+          
           if (pref_keys = Gnoibox::Axis::Prefecture.tag_for(v)).present?
             pref_text = pref_keys.map{|pref_key| Gnoibox::Axis::Prefecture.option_hash[pref_key].settings[:full_text] }.join("|")
             v.gsub! /#{pref_text}/, ''
