@@ -20,4 +20,8 @@ class ColumnTest < ActiveSupport::TestCase
     assert_equal "63.5㎡", shinjuku.content.floor_space.text_with_unit
   end
 
+  test 'station column' do
+    shinjuku = items_with_tag(:shinjuku_tower)
+  end
+
 end

@@ -350,8 +350,8 @@ module Gnoibox
     end
     
     class Station < Column
-      def to_s
-      end
+      # def to_s
+      # end
     end
   end
 end
