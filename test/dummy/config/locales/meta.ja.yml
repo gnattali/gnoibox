@@ -1,7 +1,7 @@
 ja:
   gnoibox:
     title:
-      root: title for root page
+      root: root page title from yml
       articles:
         ruby: title for the page with list of articles about ruby
     description:
