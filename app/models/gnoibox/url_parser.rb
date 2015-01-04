@@ -4,6 +4,7 @@ module Gnoibox
 
     BOX_KEYS = Gnoibox::BoxCollection.keys
     AXIS_OPTION_KEYS = Gnoibox::AxisCollection.option_keys
+    AXIS_OPTION_KEYS_TO_S = AXIS_OPTION_KEYS.map(&:to_s)
     RESERVED_KEYS = [:gnoibox, :admin, :thanks, :root, :my, :facet, :box, :axis, :block, :item, :column, :form, :inquiry, :site]
 
     def self.existing_tags
@@ -14,7 +15,9 @@ module Gnoibox
       (BOX_KEYS + AXIS_OPTION_KEYS + RESERVED_KEYS + UrlParser.existing_tags).map(&:to_s).uniq
     end
 
-
+    Link = Struct.new(:key, :name, :selected, :tags, :cross_searchable_in_axis)
+    AxisLinks = Struct.new(:axis_key, :axis_label, :links, :cross_searchable_in_axis)
+    
     attr_reader :box, :item, :base_relation, :items, :category, :facet_item, :sub_facet, :resource_type, :params, :first, :second, :third
 
     def initialize(url_params)
@@ -51,11 +54,11 @@ module Gnoibox
     end
 
     def tag_keys
-      @tag_keys ||= Array(second.to_s) + (third.to_s || '').split(TAG_DELIMITER)
+      @tag_keys ||= Array(second) + (third.to_s || '').split(TAG_DELIMITER).map(&:to_sym)
     end
 
     def tag_hash
-      @tag_hash ||= box.tag_hash.select{|k, v| tag_keys.include? k.to_s}
+      @tag_hash ||= box.tag_hash.select{|k, v| tag_keys.include? k.to_sym}
     end
     
     def tags
@@ -113,55 +116,59 @@ module Gnoibox
       @items ||= base_relation.default_ordered.page(params[:page]).per(box.limit)
     end
 
-    # def selected_tags_in(facet)
-    #   Subsidy.category_hash.keys.map(&:to_s) & tag_keys
-    # end
+    def selected_tags_in(facet)
+      tag_keys & Gnoibox::AxisCollection.find(facet.to_sym).option_keys
+    end
     
-    # def available_links
-    #   @available_links ||= begin
-    #     if @on_box_top
-    #     else
-    #       item_sql = base_relation.select(:id).to_sql
-    #       sql = "SELECT DISTINCT(tags.name), taggings.context FROM taggings LEFT JOIN tags ON taggings.tag_id=tags.id WHERE taggings.taggable_id IN ( #{item_sql} );"
-    #       ActsAsTaggableOn::Tagging.find_by_sql(sql).group_by{|tag| tag.context }
-    #     end
-    #   end
-    # end
-    # 
-    # def options_for(facet)
-    #   return available_links[facet] if @on_box_top || selected_tags_in(facet).blank?
-    #   
-    #   other_tags = tag_keys - selected_tags_in(facet)
-    #   altered_relation = box.published_items.select(:id)
-    #   #FIXME: should reset previous tagged_with unless in axis cross search is allowed?
-    #   altered_relation = altered_relation.tagged_with(other_tags) if other_tags.present?
-    #   item_sql = altered_relation.to_sql
-    #   
-    #   item_sql = @base_relation.select(:id).to_sql
-    #   
-    #   sql = "SELECT DISTINCT(tags.name) FROM taggings LEFT JOIN tags ON taggings.tag_id=tags.id WHERE taggings.context='#{facet}' AND taggings.taggable_id IN ( #{item_sql} );"
-    #   ActsAsTaggableOn::Tagging.find_by_sql(sql)
-    # end
-    # 
-    # def links_for(facet)
-    #   options = options_for(facet)
-    #   option_keys = options.map(&:name)
-    # 
-    #   #check if allowed_to_cross_search_in_axis
-    #   
-    #   context = facet.to_s.pluralize
-    #   selected = send("selected_#{context}")
-    #   
-    #   Subsidy.send("#{facet}_hash").map do |k,v|
-    #     if option_keys.include?(k.to_s)
-    #       Link.new(k.to_s, v, selected.include?(k.to_s), (selected.present? ? (selected.include?(k.to_s) ? tags-selected : tags-selected+[k] ) : (tags+[k]) ).join(DELIMITER) )
-    #     else
-    #       nil
-    #     end
-    #   end.compact
-    # end
-    # 
+    def tags_in_searched_items
+      @tags_in_searched_items ||= begin
+        item_sql = base_relation.select(:id).to_sql
+        sql = "SELECT DISTINCT(tags.name), taggings.context FROM taggings LEFT JOIN tags ON taggings.tag_id=tags.id WHERE taggings.taggable_id IN ( #{item_sql} );"
+        Hash[ ActiveRecord::Base.connection.select_all(sql).group_by{|t| t["context"].to_sym}.map{|context, ts| [context, ts.map{|t| t["name"].to_sym }]} ]
+      end
+    end
+    
+    def options_for(facet)
+      facet = facet.to_sym
+      return tags_in_searched_items[facet] if @on_box_top || Gnoibox::AxisCollection.find(facet).allowed_to_cross_search_in_axis || selected_tags_in(facet).blank?
+      
+      other_tags = tag_keys - selected_tags_in(facet)
+      altered_relation = box.published_items.select(:id)
+      altered_relation = altered_relation.tagged_with(other_tags) if other_tags.present?
+      item_sql = altered_relation.to_sql
+      
+      sql = "SELECT DISTINCT(tags.name) FROM taggings LEFT JOIN tags ON taggings.tag_id=tags.id WHERE taggings.context='#{facet}' AND taggings.taggable_id IN ( #{item_sql} );"
+      ActiveRecord::Base.connection.select_all(sql).map{|t| t["name"].to_sym }
+    end
+    
+    def links_for(facet)
+      facet = facet.to_sym
+      options = options_for(facet)
+      return [] if options.blank?
+      axis = Gnoibox::AxisCollection.find(facet)
+      option_hash = axis.option_hash
+      selected = selected_tags_in(facet)
 
+      option_hash.map do |k,o|
+        if options.include? k
+          link_tags = if selected.present?
+            if selected.include?(k)
+              tag_keys - [k]
+            else
+              axis.allowed_to_cross_search_in_axis ? tag_keys+[k] : tag_keys+[k]-selected
+            end
+          else
+            tag_keys + [k]
+          end
+          #FIXME: should order link_tags according to axis order
+          Link.new(k, o.label, selected.include?(k), link_tags, axis.allowed_to_cross_search_in_axis )
+        end
+      end.compact
+    end
+    
+    def link_axes
+      box.axis_list.map{|axis| AxisLinks.new axis.key, axis.label, links_for(axis.key), axis.allowed_to_cross_search_in_axis}.index_by(&:axis_key)
+    end
 
   private
     ROOT_TOP = ->(params){ !params[:first] }

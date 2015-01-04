@@ -13,6 +13,10 @@ module Gnoibox
         def options
           Gnoibox::Prefecture.axis_options
         end
+
+        def option_keys
+          Gnoibox::Prefecture.option_keys
+        end
         
         def option_hash
           Gnoibox::Prefecture.option_hash

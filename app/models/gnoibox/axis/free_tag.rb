@@ -5,5 +5,7 @@ module Gnoibox
     set_key :free_tag, '任意タグ'
 
     set_delimiter ','
+
+    allow_in_axis_cross_search
   end
 end

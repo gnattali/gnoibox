@@ -13,6 +13,14 @@ module Gnoibox
         def options
           Gnoibox::Station.axis_options
         end
+        
+        def option_keys
+          Gnoibox::Station.option_keys
+        end
+        
+        def option_hash
+          Gnoibox::Station.option_hash
+        end
 
         def tag_for(v)
           

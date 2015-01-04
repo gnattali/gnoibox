@@ -44,4 +44,4 @@ shinjuku_tower:
   url: shinjuku_tower
   title: '新宿タワー'
   status: published
-  content: '<%= {address: "東京都新宿区西新宿", station1: "nishi_shinjuku_station", walk1: "4", walk2: "12", rent: "200000", age: "#{4.year.ago.strftime "%Y-%m-%d"}", item_type: "mansion", floor_plan: "3DK", floor_space: "63.5", preferences: ["designers"]}.to_json %>'
+  content: '<%= {address: "東京都新宿区西新宿", station1: "nishi_shinjuku_station", walk1: "4", walk2: "12", rent: "200000", age: "#{4.year.ago.strftime "%Y-%m-%d"}", item_type: "mansion", floor_plan: "3DK", floor_space: "63.5", preferences: ["designers","floor_heating"]}.to_json %>'

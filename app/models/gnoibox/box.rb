@@ -84,7 +84,8 @@ module Gnoibox
       end
       
       def axis_list
-        item_class.content_class.col_classes.map(&:axes).flatten.uniq
+        # item_class.content_class.col_classes.map(&:axes).flatten.uniq
+        item_class.axes
       end
 
       def facet_item

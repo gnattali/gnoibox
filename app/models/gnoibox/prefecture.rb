@@ -60,7 +60,11 @@ module Gnoibox
         end
       end
     end
-
+    
+    def self.option_keys
+      @option_keys ||= axis_options.map(&:key)
+    end
+    
     def self.option_hash
       @option_hash ||= axis_options.index_by(&:key)
     end

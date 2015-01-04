@@ -2,7 +2,6 @@ require 'csv'
 
 module Gnoibox
   class Station
-
     def self.arrays
       #id,title,prefecture_id,railway_id,station_key,title_unique,title_kana,latitude,longitude,station_g_cd,position
       @arrays ||= CSV.read(File.join(Gnoibox::Engine.root, "db", "seeds", "stations.csv"))
@@ -16,6 +15,14 @@ module Gnoibox
       end
     end
 
+    def self.option_keys
+      @option_keys ||= axis_options.map(&:key)
+    end
+
+    def self.option_hash
+      @option_hash ||= axis_options.index_by(&:key)
+    end
+    
     def self.suggest_options
       @suggest_options ||= begin
         dic = Gnoibox::Railway.long_title_dictionary

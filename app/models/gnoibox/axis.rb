@@ -21,6 +21,14 @@ module Gnoibox
         :equal
       end
 
+      def allow_in_axis_cross_search
+        @allowed_to_cross_search_in_axis = true
+      end
+      
+      def allowed_to_cross_search_in_axis
+        @allowed_to_cross_search_in_axis || false
+      end
+
       def set_option(key, label, settings={})
         options << Option.new(key, label, settings)
       end
@@ -29,7 +37,7 @@ module Gnoibox
         @options ||= []
       end
       def option_keys
-        options.map(&:key)
+        @option_keys ||= options.map(&:key)
       end
       def option_hash
         @option_hash ||= options.index_by(&:key)

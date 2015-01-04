@@ -14,6 +14,14 @@ module Gnoibox
           Gnoibox::City.axis_options
         end
 
+        def option_keys
+          Gnoibox::City.option_keys
+        end
+        
+        def option_hash
+          Gnoibox::City.option_hash
+        end
+        
         def text_hash
           Gnoibox::City.text_hash
         end
