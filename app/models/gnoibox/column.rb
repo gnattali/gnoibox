@@ -356,7 +356,7 @@ module Gnoibox
 
       def set_value(v)
         return unless v
-        @value = v.is_a?(Hash) ? v : {station_id: v, title: Gnoibox::Station.title_for(v)}
+        @value = v.is_a?(Hash) ? v : {station_id: v, title: Gnoibox::Station.suggest_options.detect{|o| o[0]==v }.try(:last) }
       end
 
       def to_s

@@ -10,7 +10,9 @@ $ ->
   $('.js-gn-freetag').select2({tags:[],tokenSeparators: [","]})
 
   $('.js-gn-station').select2
+    width: "copy"
     minimumInputLength: 1
+    initSelection: (element, callback)-> callback({id: element.val(), text: $(element).data('station-title')})
     ajax:
       url: "/gnoibox/stations.json"
       dataType: "json"
@@ -18,4 +20,3 @@ $ ->
       cache: true
       data: (term, page)-> {q: term}
       results: (data, page)-> {results: data}
-    width: "copy"
