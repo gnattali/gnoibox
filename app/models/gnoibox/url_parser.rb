@@ -15,47 +15,47 @@ module Gnoibox
     end
 
 
-    attr_reader :box, :item, :items, :category, :facet_item, :sub_facet, :resource_type, :params, :first, :second, :third
+    attr_reader :box, :item, :base_relation, :items, :category, :facet_item, :sub_facet, :resource_type, :params, :first, :second, :third
 
-    def initialize(params)
-      @first = params[:first].try(:to_sym)
-      @second = params[:second].try(:to_sym)
-      @third = params[:third]
-      @params = params
+    def initialize(url_params)
+      @first = url_params[:first].try(:to_sym)
+      @second = url_params[:second].try(:to_sym)
+      @third = url_params[:third]
+      @params = url_params
 
       parse
     end
 
     def layout
-      @layout ||= @box.layout(self)
+      @layout ||= box.layout(self)
     end
 
     def view_file
-      @view_file ||= (@item.try(:view_file).presence || @box.send("#{resource_type}_view", self))
+      @view_file ||= (item.try(:view_file).presence || box.send("#{resource_type}_view", self))
     end
 
     def title
-      @title ||= @item ? @item.title : @box.title(self)
+      @title ||= item ? item.title : box.title(self)
     end
     def description
-      @description ||= @item ? @item.description : @box.description(self)
+      @description ||= item ? item.description : box.description(self)
     end
     def keywords
-      @keywords ||= @item ? @item.keywords : @box.keywords(self)
+      @keywords ||= item ? item.keywords : box.keywords(self)
     end
     def og_image
-      @og_image ||= @item ? @item.og_image : @box.og_image(self)
+      @og_image ||= item ? item.og_image : box.og_image(self)
     end
     def og_type
-      @og_type ||= @item ? @item.og_type : @box.og_type(self)
+      @og_type ||= item ? item.og_type : box.og_type(self)
     end
 
     def tag_keys
-      @tag_keys ||= Array(@second.to_s) + (@third.to_s || '').split(TAG_DELIMITER)
+      @tag_keys ||= Array(second.to_s) + (third.to_s || '').split(TAG_DELIMITER)
     end
 
     def tag_hash
-      @tag_hash ||= @box.tag_hash.select{|k, v| tag_keys.include? k.to_s}
+      @tag_hash ||= box.tag_hash.select{|k, v| tag_keys.include? k.to_s}
     end
     
     def tags
@@ -63,7 +63,7 @@ module Gnoibox
     end
 
     def form
-      @form ||= @box.form_class(self)
+      @form ||= box.form_class(self)
     end
     
     def form_partial
@@ -75,9 +75,9 @@ module Gnoibox
     end
 
     def facet_keys
-      if @third
+      if third
         ["#{first}/#{second}/#{third}", "#{second}/#{third}", third]
-      elsif @second
+      elsif second
         ["#{first}/#{second}", second]
       else
         [(first || 'root')]
@@ -92,22 +92,76 @@ module Gnoibox
     end
 
     def bread_crumbs
-      if @resource_type==:collection
-        crumbs = [ ["/", "TOP"], ["/#{@box.key}", @box.label] ]
-        crumbs.push( ["/#{@box.key}/#{second}", (@box.tag_hash[second.to_sym].try(:label) || second) ] ) if second
-        crumbs.push( ["/#{@box.key}/#{second}/#{third}", third.split(TAG_DELIMITER).map{|t| @box.tag_hash[t.to_sym].try(:label) || t}.join(',') ] ) if third
+      if resource_type==:collection
+        crumbs = [ ["/", "TOP"], ["/#{box.key}", box.label] ]
+        crumbs.push( ["/#{box.key}/#{second}", (box.tag_hash[second.to_sym].try(:label) || second) ] ) if second
+        crumbs.push( ["/#{box.key}/#{second}/#{third}", third.split(TAG_DELIMITER).map{|t| box.tag_hash[t.to_sym].try(:label) || t}.join(',') ] ) if third
         crumbs
-      elsif @resource_type==:member
+      elsif resource_type==:member
         path = ""
         crumbs = [ ["/", "TOP"] ]
-        if @box.key==:root
-          crumbs.push( [(path += "/#{first}"), @item.title] )
+        if box.key==:root
+          crumbs.push( [(path += "/#{first}"), item.title] )
         else
-          crumbs.push( [(path += "/#{@box.key}"), @box.label] ) 
-          crumbs.push( [(path += "/#{second}"), @item.title] )
+          crumbs.push( [(path += "/#{box.key}"), box.label] ) 
+          crumbs.push( [(path += "/#{second}"), item.title] )
         end
       end
     end
+
+    def items
+      @items ||= base_relation.default_ordered.page(params[:page]).per(box.limit)
+    end
+
+    # def selected_tags_in(facet)
+    #   Subsidy.category_hash.keys.map(&:to_s) & tag_keys
+    # end
+    
+    # def available_links
+    #   @available_links ||= begin
+    #     if @on_box_top
+    #     else
+    #       item_sql = base_relation.select(:id).to_sql
+    #       sql = "SELECT DISTINCT(tags.name), taggings.context FROM taggings LEFT JOIN tags ON taggings.tag_id=tags.id WHERE taggings.taggable_id IN ( #{item_sql} );"
+    #       ActsAsTaggableOn::Tagging.find_by_sql(sql).group_by{|tag| tag.context }
+    #     end
+    #   end
+    # end
+    # 
+    # def options_for(facet)
+    #   return available_links[facet] if @on_box_top || selected_tags_in(facet).blank?
+    #   
+    #   other_tags = tag_keys - selected_tags_in(facet)
+    #   altered_relation = box.published_items.select(:id)
+    #   #FIXME: should reset previous tagged_with unless in axis cross search is allowed?
+    #   altered_relation = altered_relation.tagged_with(other_tags) if other_tags.present?
+    #   item_sql = altered_relation.to_sql
+    #   
+    #   item_sql = @base_relation.select(:id).to_sql
+    #   
+    #   sql = "SELECT DISTINCT(tags.name) FROM taggings LEFT JOIN tags ON taggings.tag_id=tags.id WHERE taggings.context='#{facet}' AND taggings.taggable_id IN ( #{item_sql} );"
+    #   ActsAsTaggableOn::Tagging.find_by_sql(sql)
+    # end
+    # 
+    # def links_for(facet)
+    #   options = options_for(facet)
+    #   option_keys = options.map(&:name)
+    # 
+    #   #check if allowed_to_cross_search_in_axis
+    #   
+    #   context = facet.to_s.pluralize
+    #   selected = send("selected_#{context}")
+    #   
+    #   Subsidy.send("#{facet}_hash").map do |k,v|
+    #     if option_keys.include?(k.to_s)
+    #       Link.new(k.to_s, v, selected.include?(k.to_s), (selected.present? ? (selected.include?(k.to_s) ? tags-selected : tags-selected+[k] ) : (tags+[k]) ).join(DELIMITER) )
+    #     else
+    #       nil
+    #     end
+    #   end.compact
+    # end
+    # 
+
 
   private
     ROOT_TOP = ->(params){ !params[:first] }
@@ -122,7 +176,7 @@ module Gnoibox
     BOX_TOP = ->(params){ BOX_KEYS.include?(params[:first].to_sym) }
 
     def parse
-      case @params
+      case params
       when ROOT_TOP then root_top
       when AXIS_COLLECTION then axis_collection
       when BOX_ITEM then box_item
@@ -134,37 +188,38 @@ module Gnoibox
     def root_top
       @resource_type = :collection
       @box = Gnoibox::BoxCollection.find(:root)
-      @item = @box.find_published_item('index')
+      @item = box.find_published_item('index')
     end
 
     def axis_collection
       @resource_type = :collection
-      @box = Gnoibox::BoxCollection.find(@first)
-      @category = @second
+      @box = Gnoibox::BoxCollection.find(first)
+      @category = second
       @facet_item = Gnoibox::Box::Facet.find_published_item(facet_keys.first)
-      @items = @box.tagged_with(tag_keys).published.default_ordered.page(@params[:page]).per(@box.limit)
+      @base_relation = box.published_items.tagged_with(tag_keys)
     end
 
     def box_item
       @resource_type = :member
-      @box = Gnoibox::BoxCollection.find(@first)
-      @item = @box.find_published_item(@second)
+      @box = Gnoibox::BoxCollection.find(first)
+      @item = box.find_published_item(second)
     end
 
     def box_top
       @resource_type = :collection
-      @box = Gnoibox::BoxCollection.find(@first)
-      @facet_item = @box.facet_item
-      @items = @box.published_items.default_ordered.page(@params[:page]).per(@box.limit)
+      @box = Gnoibox::BoxCollection.find(first)
+      @facet_item = box.facet_item
+      @on_box_top = true
+      @base_relation = box.published_items
     end
 
     def root_item
       @resource_type = :member
       @box = Gnoibox::BoxCollection.find(:root)
-      @item = @box.find_published_item(@first)
-      unless @item
-        @view_file = @first
-        @item = @box.new_item
+      @item = box.find_published_item(first)
+      unless item
+        @view_file = first
+        @item = box.new_item
       end
     end
 
