@@ -213,6 +213,10 @@ module Gnoibox
         "%050d" % @value
       end
 
+      def raw_number
+        value
+      end
+
       def to_s
         number_with_delimiter(value).to_s
       end
