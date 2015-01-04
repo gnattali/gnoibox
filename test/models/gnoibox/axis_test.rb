@@ -10,6 +10,10 @@ class AxisTest < ActiveSupport::TestCase
   test 'axis type age' do
     shinjuku = items_with_tag(:shinjuku_tower)
     assert_equal ['in_5year','in_10year'], shinjuku.tag_list_on(:age)
+    
+    shinjuku.content.age = 1.year.ago.strftime "%Y-%m-%d"
+    shinjuku.set_tags_from_content
+    assert_equal ['in_3year', 'in_5year','in_10year'], shinjuku.tag_list_on(:age)
   end
 
   test 'axis type free' do
