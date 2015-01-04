@@ -38,7 +38,7 @@ module Gnoibox
           
           if (pref_keys = Gnoibox::Axis::Prefecture.tag_for(v)).present?
             pref_text = pref_keys.map{|pref_key| Gnoibox::Axis::Prefecture.option_hash[pref_key].settings[:full_text] }.join("|")
-            v.gsub! /#{pref_text}/, ''
+            v = v.gsub /#{pref_text}/, ''
           end
           text_list.map{|t| text_hash[t].key if v.include?(t) }.compact
         end
