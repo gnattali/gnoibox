@@ -15,7 +15,11 @@ module Gnoibox
       (BOX_KEYS + AXIS_OPTION_KEYS + RESERVED_KEYS + UrlParser.existing_tags).map(&:to_s).uniq
     end
 
-    Link = Struct.new(:key, :name, :selected, :tags, :cross_searchable_in_axis)
+    Link = Struct.new(:box_key, :tag_key, :name, :selected, :tags, :cross_searchable_in_axis) do
+      def url
+        "/#{box_key}/#{tags.first}" + (tags.count>1 ? "/#{tags.drop(1).map(&:to_s).join(TAG_DELIMITER)}" : "")
+      end
+    end
     AxisLinks = Struct.new(:axis_key, :axis_label, :links, :cross_searchable_in_axis)
     
     attr_reader :box, :item, :base_relation, :items, :category, :facet_item, :sub_facet, :resource_type, :params, :first, :second, :third
@@ -161,7 +165,7 @@ module Gnoibox
             tag_keys + [k]
           end
           #FIXME: should order link_tags according to axis order
-          Link.new(k, o.label, selected.include?(k), link_tags, axis.allowed_to_cross_search_in_axis )
+          Link.new(box.key, k, o.label, selected.include?(k), link_tags, axis.allowed_to_cross_search_in_axis )
         end
       end.compact
     end
