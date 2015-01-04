@@ -5,6 +5,8 @@ module Gnoibox
     initializer "assets.path" do |app|
       app.config.assets.precompile += %w( *.eot *.woff *.ttf *.svg *.png *.gif gnoibox/custom.css )
 
+      app.config.assets.paths << root.join("vendors", "assets", "select2-3.5.2")
+
       app.config.assets.paths << root.join("vendors", "detail-admin", "js")
       app.config.assets.paths << root.join("vendors", "detail-admin", "css")
       app.config.assets.paths << root.join("vendors", "detail-admin", "img")
