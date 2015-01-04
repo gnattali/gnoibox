@@ -29,7 +29,7 @@ module Gnoibox
     end
 
     def to_order_value
-      @value.to_s
+      to_s
     end
     
     def value_to_serialize
@@ -350,8 +350,26 @@ module Gnoibox
     end
     
     class Station < Column
-      # def to_s
-      # end
+      def value
+        @value || {}
+      end
+
+      def set_value(v)
+        return unless v
+        @value = v.is_a?(Hash) ? v : {station_id: v, title: Gnoibox::Station.title_for(v)}
+      end
+
+      def to_s
+        value[:title] || value["title"] || ""
+      end
+      
+      def station_id
+        value[:station_id] || value["station_id"]
+      end
+      
+      def axis_values
+        Array(station_id)
+      end
     end
   end
 end

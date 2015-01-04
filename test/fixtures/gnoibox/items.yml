@@ -28,7 +28,7 @@ zaku:
 
 building_shibuya:
   box_key: facet
-  url: building/city_shibuya_ku
+  url: building/shibuya_ku
   title: 渋谷区の物件一覧(from facet item)
   status: published
 
@@ -37,11 +37,11 @@ daikanyama_tower:
   url: daikanyama_tower
   title: '代官山タワー'
   status: published
-  content: '<%= {address: "東京都渋谷区鶯谷町", station1: "daikanyama_station", walk1: "8", rent: "300000", age: "#{1.year.ago.strftime "%Y-%m-%d"}", item_type: "mansion", floor_space: "50.36", preferences: ["pet_ok", "designers"]}.to_json %>'
+  content: '<%= {address: "東京都渋谷区鶯谷町", station1: {station_id: "2600102", title: "代官山"}, walk1: "8", rent: "300000", age: "#{1.year.ago.strftime "%Y-%m-%d"}", item_type: "mansion", floor_space: "50.36", preferences: ["pet_ok", "designers"]}.to_json %>'
 
 shinjuku_tower:
   box_key: building
   url: shinjuku_tower
   title: '新宿タワー'
   status: published
-  content: '<%= {address: "東京都新宿区西新宿", station1: "nishi_shinjuku_station", walk1: "4", walk2: "12", rent: "200000", age: "#{4.year.ago.strftime "%Y-%m-%d"}", item_type: "mansion", floor_plan: "3DK", floor_space: "63.5", preferences: ["designers","floor_heating"]}.to_json %>'
+  content: '<%= {address: "東京都新宿区西新宿", station1: {station_id: "2800219", title: "西新宿"}, walk1: "4", walk2: "12", rent: "200000", age: "#{4.year.ago.strftime "%Y-%m-%d"}", item_type: "mansion", floor_plan: "3DK", floor_space: "63.5", preferences: ["designers","floor_heating"]}.to_json %>'

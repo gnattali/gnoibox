@@ -7,10 +7,14 @@ module Gnoibox
       @arrays ||= CSV.read(File.join(Gnoibox::Engine.root, "db", "seeds", "stations.csv"))
     end
 
+    def self.gnoibox_key_from(key)
+      key.try(:+, "_station")
+    end
+
     def self.axis_options
       @axis_options ||= begin
         arrays.map do |r|
-          Gnoibox::Axis::Option.new "#{r[4]}_station", r[1], {railway_id: r[3]}
+          Gnoibox::Axis::Option.new gnoibox_key_from(r[4]), r[1], {railway_id: r[3], station_id: r[0]}
         end
       end
     end
@@ -21,6 +25,23 @@ module Gnoibox
 
     def self.option_hash
       @option_hash ||= axis_options.index_by(&:key)
+    end
+    
+    def self.id_hash
+      @id_hash ||= axis_options.index_by{|o| o.settings[:station_id].to_s}
+    end
+    
+    def self.title_for(id)
+      id_hash[id.to_s].try(:label)
+    end
+
+    def self.key_for(id)
+      id_hash[id.to_s].try(:key)
+    end
+
+    def self.railway_key_for(id)
+      railway_id = id_hash[id.to_s].try(:settings).try(:"[]", :railway_id)
+      Gnoibox::Railway.key_for(railway_id)
     end
     
     def self.suggest_options

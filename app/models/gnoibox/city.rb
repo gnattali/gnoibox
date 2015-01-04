@@ -10,7 +10,7 @@ module Gnoibox
     def self.axis_options
       @axis_options ||= begin
         arrays.map do |r|
-          Gnoibox::Axis::Option.new "city_#{r[3]}", r[2], {prefecture_id: r[0], city_id: r[1]}
+          Gnoibox::Axis::Option.new r[3], r[2], {prefecture_id: r[0], city_id: r[1]}
         end
       end
     end

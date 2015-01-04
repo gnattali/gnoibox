@@ -22,8 +22,8 @@ module Gnoibox
           Gnoibox::Railway.option_hash
         end
         
-        def tag_for(v)
-          
+        def tag_for(station_id)
+          Gnoibox::Station.railway_key_for(station_id)
         end
       end
 

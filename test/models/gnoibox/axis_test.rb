@@ -41,11 +41,13 @@ class AxisTest < ActiveSupport::TestCase
   end
 
   test 'axis type railway' do
-    
+    shinjuku = items_with_tag(:shinjuku_tower)
+    assert_equal ['marunochi_line'], shinjuku.tag_list_on(:railway)
   end
   
   test 'axis type station' do
-    
+    shinjuku = items_with_tag(:shinjuku_tower)
+    assert_equal ['nishishinjuku_station'], shinjuku.tag_list_on(:station)
   end
 
   test 'multiple value and tag for one column' do
@@ -56,11 +58,11 @@ class AxisTest < ActiveSupport::TestCase
   test "two axis(prefecture and city) for one column(address column)" do
     item = items_with_tag(:shimizu_seizaburo)
     assert_equal ['mie'], item.tag_list_on(:prefecture)
-    assert_equal ['city_suzuka_shi'], item.tag_list_on(:city)
+    assert_equal ['suzuka_shi'], item.tag_list_on(:city)
 
     multi_address_kura = items_with_tag(:multi_address_kura)
     assert_equal ['tokyo', 'chiba'].to_set, multi_address_kura.tag_list_on(:prefecture).to_set
-    assert_equal ['city_setagaya_ku', 'city_ichikawa_shi'].to_set, multi_address_kura.tag_list_on(:city).to_set
+    assert_equal ['setagaya_ku', 'ichikawa_shi'].to_set, multi_address_kura.tag_list_on(:city).to_set
   end
   
   test "one axis for plural column" do

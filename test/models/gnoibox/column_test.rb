@@ -22,6 +22,9 @@ class ColumnTest < ActiveSupport::TestCase
 
   test 'station column' do
     shinjuku = items_with_tag(:shinjuku_tower)
+    assert_equal "西新宿", shinjuku.content.station1.to_s
+    shinjuku.content.station1 = "2600102"
+    assert_equal "代官山", shinjuku.content.station1.to_s
   end
 
 end
