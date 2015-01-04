@@ -16,5 +16,15 @@ module Gnoibox
       end
     end
 
+    def self.suggest_options
+      @suggest_options ||= begin
+        dic = Gnoibox::Railway.long_title_dictionary
+        arrays.map{|s| [ s[0], dic[s[3]]+" "+s[1]+"駅" ] if dic[s[3]] }.compact
+      end
+    end
+
+    def self.select2_options_for(q)
+      suggest_options.lazy.select{|o| o[1].include? q }.first(100).map{|o| {id: o[0], text: o[1]} }
+    end
   end
 end

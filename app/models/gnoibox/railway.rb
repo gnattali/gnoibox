@@ -4,7 +4,7 @@ module Gnoibox
   class Railway
 
     def self.arrays
-      #id,title,railway_key,line_type,title_long,title_kana,line_g_cd
+      #id,title,railway_key,line_type,long_title,title_kana,line_g_cd
       @arrays ||= CSV.read(File.join(Gnoibox::Engine.root, "db", "seeds", "railways.csv"))
     end
     
@@ -14,6 +14,10 @@ module Gnoibox
           Gnoibox::Axis::Option.new "#{r[2]}_railway", r[1], {line_type: r[3], railway_id: r[0]}
         end
       end
+    end
+    
+    def self.long_title_dictionary
+      @long_title_dictionary ||= Hash[ arrays.map{|r| [r[0],r[4]] } ]
     end
 
   end

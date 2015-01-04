@@ -21,6 +21,8 @@ Gnoibox::Engine.routes.draw do
       end
     end
 
+    resources :stations
+    
     root 'dashboard#index'
   end
 
