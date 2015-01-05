@@ -1,7 +1,9 @@
 module Gnoibox
   class Form::Root < Form
     set_key :root, 'お問い合わせ'
-    
+
+    set_list_cols [:name, :email]
+
     set_view_file 'gnoibox/forms/new'
     set_thanks_view 'gnoibox/forms/thanks'
   end
