@@ -61,7 +61,7 @@
             %span コンテンツ
             
           %ul.submenu(style="display:block;")
-            -Gnoibox::BoxCollection.all.each do |box|
+            -gnb.boxes.each do |box|
               %li=link_to box.label, gnoibox_box_items_path(box)
 
         -if gnb_admin?
@@ -85,7 +85,7 @@
               %span お問合せ
 
             %ul.submenu(style="display:block;")
-              -Gnoibox::FormCollection.all.each do |form|
+              -gnb.forms.each do |form|
                 %li=link_to form.label, gnoibox_form_path(form)
         -else
           %li{class: ("active" if current_page?({controller: 'profiles', action: 'edit'})) }

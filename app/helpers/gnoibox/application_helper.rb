@@ -32,6 +32,10 @@ module Gnoibox
       @gnb_base_info ||= gnb.block(:base_info)
     end
 
+    def gnb_render_form
+      render "gnoibox/site/form"
+    end
+
     def gnb
       Facade
     end
@@ -52,6 +56,9 @@ module Gnoibox
         end
         def block(key)
           Gnoibox::BlockCollection::load(key)
+        end
+        def forms
+          Gnoibox::FormCollection::all
         end
       end
     end
