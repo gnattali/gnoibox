@@ -41,9 +41,8 @@ module Gnoibox
       end
     end
     
-    def inquirer_address
-      #FIXME: detect inquiery_address
-      nil
+    def inquirer_email
+      cols.detect{|col| col.settings[:belongs_to_inquirer]}.try(:to_s)
     end
     
     class << self

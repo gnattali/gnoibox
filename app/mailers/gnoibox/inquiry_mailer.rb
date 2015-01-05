@@ -8,9 +8,9 @@ class Gnoibox::InquiryMailer < ActionMailer::Base
   end
 
   def thank_if_possible(inquiry, url_parser)
-    if inquiry.inquirer_address
+    if inquiry.inquirer_email.present?
       @inquiry = inquiry
-      mail(to: inquiry.inquirer_address, subject: inquiry.thanks_mail_subject(url_parser), template_name: inquiry.thanks_mail_view(url_parser) )
+      mail(to: inquiry.inquirer_email, subject: inquiry.thanks_mail_subject(url_parser), template_name: inquiry.thanks_mail_view(url_parser) )
     end
   end
 end
