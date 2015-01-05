@@ -25,3 +25,5 @@
                 
               %td
                 = link_to '表示', gnoibox_form_inquiry_path(@form, inquiry)
+
+  =paginate @inquiries, theme: 'gnoibox'
