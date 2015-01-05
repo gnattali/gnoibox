@@ -31,11 +31,11 @@ module Gnoibox
         inquiry_class.new args.merge({form_key: key})
       end
       
-      def create_inquiry(args)
-        inquiry = new_item(args)
-        inquiry.save
-        inquiry
-      end
+      # def create_inquiry(args)
+      #   inquiry = new_inquiry(args)
+      #   inquiry.save
+      #   inquiry
+      # end
       
       def find_inquiry(id)
         inquiry_class.find(id)
