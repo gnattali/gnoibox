@@ -70,6 +70,10 @@ module Gnoibox
       def setup(settings)
       end
       
+      def settings
+        @settings ||= {}
+      end
+      
       def axis
         settings[:axis]
       end
@@ -128,7 +132,15 @@ module Gnoibox
     class Select < Column
       include Gnoibox::ColumnSelectable
     end
+    
+    class Prefecture < Column
+      include Gnoibox::ColumnSelectable
 
+      def self.options
+        Gnoibox::Prefecture.axis_options
+      end
+    end
+    
     class Radio < Column
       include Gnoibox::ColumnSelectable
     end
@@ -223,7 +235,7 @@ module Gnoibox
       alias_method :text, :to_s
       
       def unit
-        self.class.settings[:unit]
+        settings[:unit]
       end
 
       def text_with_unit
@@ -242,7 +254,7 @@ module Gnoibox
       end
       
       def unit
-        self.class.settings[:unit]
+        settings[:unit]
       end
       
       def text_with_unit
