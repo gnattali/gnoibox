@@ -29,6 +29,7 @@ module Gnoibox
     end
 
     def gnb_base_info
+      #fallback to yml info?
       @gnb_base_info ||= gnb.block(:base_info)
     end
 
