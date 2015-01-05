@@ -55,7 +55,8 @@
             %span Home
         %li.open{class: ("active" if current_page?({controller: 'boxes'})) }
           =render partial: 'active_arrow', locals: {url: {controller: 'boxes'}}
-          =link_to gnoibox_boxes_path, class: 'parentmenu' do
+          -# =link_to gnoibox_boxes_path, class: 'parentmenu' do
+          .parentmenu
             %i.icon-sitemap
             %span コンテンツ
             
@@ -66,19 +67,26 @@
         -if gnb_admin?
           %li{class: ("active" if current_page?({controller: 'blocks'})) }
             =render partial: 'active_arrow', locals: {url: '/gnoibox/blocks'}
-            =link_to gnoibox_blocks_path do
+            =link_to gnoibox_blocks_path, class: 'parentmenu' do
               %i.icon-leaf
               %span サイトパーツ
+
           %li{class: ("active" if current_page?({controller: 'authors'})) }
             =render partial: 'active_arrow', locals: {url: '/gnoibox/authors'}
-            =link_to gnoibox_authors_path do
+            =link_to gnoibox_authors_path, class: 'parentmenu' do
               %i.icon-group
               %span ライター
-          %li{class: ("active" if current_page?({controller: 'forms'})) }
+
+          %li.open{class: ("active" if current_page?({controller: 'forms'})) }
             =render partial: 'active_arrow', locals: {url: '/gnoibox/forms'}
-            =link_to gnoibox_forms_path do
+            -# =link_to gnoibox_forms_path, class: 'parentmenu' do
+            .parentmenu
               %i.icon-edit
               %span お問合せ
+
+            %ul.submenu(style="display:block;")
+              -Gnoibox::FormCollection.all.each do |form|
+                %li=link_to form.label, gnoibox_form_path(form)
         -else
           %li{class: ("active" if current_page?({controller: 'profiles', action: 'edit'})) }
             =render partial: 'active_arrow', locals: {url: '/gnoibox/profile/edit'}

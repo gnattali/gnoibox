@@ -16,7 +16,7 @@
             %tr
               %td=box.label
               %td
-                =link_to '編集', gnoibox_box_items_path(box)
+                =link_to '一覧', gnoibox_box_items_path(box)
 
 -if gnb_admin?
 
@@ -39,3 +39,23 @@
                 %td=block.label
                 %td
                   =link_to '編集', edit_gnoibox_block_path(block)
+
+  #pad-wrapper
+    .table-wrapper.section
+      .row.head
+        .col-md-12
+          %h4 お問合せ一覧
+
+      .row
+        %table.table.table-hover
+          -# %thead
+          -#   %tr
+          -#     %th.col-md-3
+          -#     %th.col-md-6
+
+          %tbody
+            -@forms.each do |form|
+              %tr
+                %td=form.label
+                %td
+                  =link_to '一覧', gnoibox_form_path(form)

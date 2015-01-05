@@ -285,7 +285,7 @@ input.search{
     margin-bottom: 0;
     margin-left: 20px;
 
-    > li > a {
+    > li > .parentmenu {
       display: block;
       padding: 19px 14px 15px 14px;
       margin-left: -15px;
@@ -353,7 +353,7 @@ input.search{
         top: 0px;
       }
     }
-    a {
+    // a {
       span {
         margin-left: 35px;
         transition: color .1s linear;
@@ -385,7 +385,7 @@ input.search{
           height: initial;
         }
       }    
-    }
+    // }
 
     /* sidebar submenus */
     > li.active,
