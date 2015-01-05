@@ -10,6 +10,7 @@ module Gnoibox
       end
 
       def set_view_file(v) @view_file=v end
+      def set_thanks_view(v) @thanks_view=v end
       def set_list_cols(cols) @list_cols = cols end
       def list_cols() @list_cols ||= [] end
 
