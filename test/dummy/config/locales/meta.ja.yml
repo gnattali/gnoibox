@@ -1,5 +1,7 @@
 ja:
   gnoibox:
+    # site_name: site name
+    # og_image_url:
     title:
       root: root page title from yml
       articles:
