@@ -330,6 +330,12 @@ module Gnoibox
 
     end
 
+    class Email < Column
+      def belongs_to_inquirer
+        settings[:belongs_to_inquirer]
+      end
+    end
+
     class Medium < Column
     end
 

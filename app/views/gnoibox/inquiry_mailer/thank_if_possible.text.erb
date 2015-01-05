@@ -1,0 +1,9 @@
+下記の内容でお問合せを承りました
+
+<%= @inquiry.form.label %>
+
+<% @inquiry.content.col_hash.each do |k,v| %>
+  <%= v.label %>: 
+  <%= v.to_s %>
+  
+<% end %>
