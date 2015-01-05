@@ -7,11 +7,10 @@ class Gnoibox::InquiryMailer < ActionMailer::Base
     mail(to: Gnoibox::Author.admin.pluck(:email), subject: "【#{title}】お問合せがありました")
   end
 
-  def thank_if_possible(inquiry, base_info)
+  def thank_if_possible(inquiry, url_parser)
     if inquiry.inquirer_address
       @inquiry = inquiry
-      title = base_info.try(:site_name)
-      mail(to: inquiry.inquirer_address, subject: "【#{title}】お問合せありがとうございます")
+      mail(to: inquiry.inquirer_address, subject: inquiry.thanks_mail_subject(url_parser), template_name: inquiry.thanks_mail_view(url_parser) )
     end
   end
 end

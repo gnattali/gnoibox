@@ -8,6 +8,8 @@ module Gnoibox
 
     scope :recent, ->{ order(created_at: :desc) }
 
+    delegate :thanks_mail_subject, :thanks_mail_view, to: :form
+    
     def set_content
       # set_tags_from_content
       write_attribute :content, content.to_json
