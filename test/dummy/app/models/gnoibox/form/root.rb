@@ -8,7 +8,7 @@ module Gnoibox
 
   class Inquiry::Root < Inquiry
     set_col :name, :text, 'お名前', validates: {presence: true}
-    set_col :email, :text, 'メールアドレス', validates: { presence: true, format: { with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/ } }
+    set_col :email, :email, 'メールアドレス', belongs_to_inquirer: true, validates: { presence: true, format: { with: EMAIL_VALIDATION } }
 
     set_col :select_col, :select, 'selectサンプル', options: {a: 'A', b: 'B', c: 'C'}, include_blank: true
     set_col :radio_col, :radio, 'radioサンプル', options: {a: 'A', b: 'B', c: 'C'}
