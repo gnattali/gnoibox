@@ -11,6 +11,7 @@ module Gnoibox
 
       def set_view_file(v) @view_file=v end
       def set_thanks_view(v) @thanks_view=v end
+      def set_thanks_mail_view(v) @thanks_mail_view=v end
       def set_list_cols(cols) @list_cols = cols end
       def list_cols() @list_cols ||= [] end
 
@@ -50,13 +51,20 @@ module Gnoibox
       def limit() 20 end
 
       def view_file(url_parser)
-        @view_file ||= 'gnoibox/forms/new'
+        @view_file || 'gnoibox/forms/new'
       end
       
       def thanks_view(url_parser)
-        @thanks_view ||= 'gnoibox/forms/thanks'
+        @thanks_view || 'gnoibox/forms/thanks'
       end
 
+      def thanks_mail_view(url_parser)
+        @thanks_mail_view || 'thanks'
+      end
+      
+      def thanks_mail_subject(url_parser)
+        "【#{Gnoibox::BlockCollection.load(:base_info).try(:site_name)}】お問合せありがとうございます"
+      end
     end
   end
 end

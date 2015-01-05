@@ -23,7 +23,7 @@ module Gnoibox
       end
 
       def substance
-        @substance ||= find_or_create_by(key: key)
+        find_or_create_by(key: key)
       end
 
       def content

@@ -105,7 +105,7 @@ module Gnoibox
       def limit() 20 end
 
       def layout(page=nil)
-        @layout ||= 'application'
+        @layout || 'application'
       end
 
       def member_view(page=nil)
