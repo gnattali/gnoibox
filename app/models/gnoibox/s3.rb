@@ -59,7 +59,7 @@ module Gnoibox
       def encode_signs(s)
         signs = {'+' => "%2B", '=' => "%3D", '?' => '%3F', '@' => '%40',
           '$' => '%24', '&' => '%26', ',' => '%2C', '/' => '%2F', ':' => '%3A',
-          ';' => '%3B', '?' => '%3F'}
+          ';' => '%3B'}
         signs.keys.each do |key|
           s.gsub!(key, signs[key])
         end

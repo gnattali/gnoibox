@@ -8,7 +8,7 @@ module Gnoibox
 
     scope :recent, ->{ order(created_at: :desc) }
 
-    delegate :thanks_mail_subject, :thanks_mail_view, to: :form
+    delegate :notice_mail_subject, :notice_mail_view, :thanks_mail_subject, :thanks_mail_view, to: :form
     
     def set_content
       # set_tags_from_content
@@ -31,18 +31,17 @@ module Gnoibox
       super
     end
 
-    def save_and_notify
+    def save_and_notify(url_parser)
       save.tap do |result|
         if result
-          base_info = Gnoibox::BlockCollection::load(:base_info)
-          Gnoibox::InquiryMailer.notice(self, base_info).deliver
-          Gnoibox::InquiryMailer.thank_if_possible(self, base_info).deliver
+          Gnoibox::InquiryMailer.notice(self, url_parser).deliver
+          Gnoibox::InquiryMailer.thank_if_possible(self, url_parser).deliver
         end
       end
     end
     
     def inquirer_email
-      cols.detect{|col| col.settings[:belongs_to_inquirer]}.try(:to_s)
+      cols.detect{|col| col.settings[:belongs_to_inquirer]}.try(:to_s).presence
     end
     
     class << self

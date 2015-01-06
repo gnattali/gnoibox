@@ -1,0 +1,3 @@
+base_info:
+  key: base_info
+  content: '<%= {site_name: "テストサイト名"}.to_json %>'

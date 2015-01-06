@@ -1,0 +1,4 @@
+admin:
+  email: admin@gnoibox.com
+  # encrypted_password: test
+  role: admin

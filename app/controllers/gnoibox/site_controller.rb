@@ -9,7 +9,7 @@ class Gnoibox::SiteController < ApplicationController
   def create_inquiry
     @page = Gnoibox::UrlParser.new(params)
     
-    if inquiry(inquiry_params).save_and_notify
+    if inquiry(inquiry_params).save_and_notify(@page)
       redirect_to gnb_thanks_path(first: params[:first], second: params[:second], third: params[:third])
     else
       render @page.view_file, layout: @page.layout
