@@ -1,5 +1,13 @@
 module Gnoibox
   class Box
+
+    Link = Struct.new(:box_key, :tag_key, :name, :axis_option, :selected, :tags, :cross_searchable_in_axis) do
+      def url
+        "/#{box_key}/#{tags.first}" + (tags.count>1 ? "/#{tags.drop(1).map(&:to_s).join(Gnoibox::UrlParser::TAG_DELIMITER)}" : "")
+      end
+    end
+    AxisLinks = Struct.new(:axis_key, :axis_label, :links, :cross_searchable_in_axis)
+    
     class << self
       attr_reader :key, :label, :layout
 
@@ -149,6 +157,28 @@ module Gnoibox
 
       def og_type(page)
         page.facet_item.try(:og_type).presence || @og_type || 'website'
+      end
+
+      def links_for(facet, available_on_facet, current_tags=[])
+        return [] if available_on_facet.blank?
+        facet = facet.to_sym
+        axis = Gnoibox::AxisCollection.find(facet)
+        selected_on_facet = current_tags & axis.option_keys
+        axis.option_hash.map do |k,o|
+          if available_on_facet.include? k
+            link_tags = if selected_on_facet.present?
+              if selected_on_facet.include?(k)
+                current_tags - [k]
+              else
+                axis.allowed_to_cross_search_in_axis ? current_tags+[k] : current_tags+[k]-selected_on_facet
+              end
+            else
+              current_tags + [k]
+            end
+            #FIXME: should order link_tags according to axis order
+            Link.new(key, k, o.label, o, selected_on_facet.include?(k), link_tags, axis.allowed_to_cross_search_in_axis )
+          end
+        end.compact
       end
 
     end
