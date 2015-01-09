@@ -125,11 +125,7 @@ module Gnoibox
     end
     
     def tags_in_searched_items
-      @tags_in_searched_items ||= begin
-        item_sql = base_relation.select(:id).to_sql
-        sql = "SELECT DISTINCT(tags.name), taggings.context FROM taggings LEFT JOIN tags ON taggings.tag_id=tags.id WHERE taggings.taggable_id IN ( #{item_sql} );"
-        Hash[ ActiveRecord::Base.connection.select_all(sql).group_by{|t| t["context"].to_sym}.map{|context, ts| [context, ts.map{|t| t["name"].to_sym }]} ]
-      end
+      @tags_in_searched_items ||= base_relation.associated_tags
     end
     
     def options_for(facet)
@@ -137,12 +133,9 @@ module Gnoibox
       return tags_in_searched_items[facet] if @on_box_top || Gnoibox::AxisCollection.find(facet).allowed_to_cross_search_in_axis || selected_tags_in(facet).blank?
       
       other_tags = tag_keys - selected_tags_in(facet)
-      altered_relation = box.published_items.select(:id)
+      altered_relation = box.published_items
       altered_relation = altered_relation.tagged_with(other_tags) if other_tags.present?
-      item_sql = altered_relation.to_sql
-      
-      sql = "SELECT DISTINCT(tags.name) FROM taggings LEFT JOIN tags ON taggings.tag_id=tags.id WHERE taggings.context='#{facet}' AND taggings.taggable_id IN ( #{item_sql} );"
-      ActiveRecord::Base.connection.select_all(sql).map{|t| t["name"].to_sym }
+      altered_relation.associated_tags_on(facet)
     end
     
     def links_for(facet)

@@ -106,6 +106,18 @@ module Gnoibox
       end
 
       def author_name_label() 'ライター' end
+
+      def associated_tags
+        item_sql = select(:id).to_sql
+        sql = "SELECT DISTINCT(tags.name), taggings.context FROM taggings LEFT JOIN tags ON taggings.tag_id=tags.id WHERE taggings.taggable_id IN ( #{item_sql} );"
+        Hash[ ActiveRecord::Base.connection.select_all(sql).group_by{|t| t["context"].to_sym}.map{|context, ts| [context, ts.map{|t| t["name"].to_sym }]} ]
+      end
+      
+      def associated_tags_on(facet)
+        item_sql = select(:id).to_sql
+        sql = "SELECT DISTINCT(tags.name) FROM taggings LEFT JOIN tags ON taggings.tag_id=tags.id WHERE taggings.context='#{facet}' AND taggings.taggable_id IN ( #{item_sql} );"
+        ActiveRecord::Base.connection.select_all(sql).map{|t| t["name"].to_sym }
+      end
       
     end
 
