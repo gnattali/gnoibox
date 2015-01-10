@@ -175,6 +175,7 @@ module Gnoibox
       @category = second
       @facet_item = Gnoibox::Box::Facet.find_published_item(facet_keys.first)
       @base_relation = box.published_items.tagged_with(tag_keys)
+      @base_relation = @base_relation.search(params[:q]) if params[:q]
     end
 
     def box_item
@@ -189,6 +190,7 @@ module Gnoibox
       @facet_item = box.facet_item
       @on_box_top = true
       @base_relation = box.published_items
+      @base_relation = @base_relation.search(params[:q]) if params[:q]
     end
 
     def root_item

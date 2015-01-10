@@ -28,8 +28,10 @@
           %a.navbar-brand(href="/gnoibox")
             GNOIBOX
       %ul.nav.navbar-nav.pull-right.hidden-xs
-        -# %li.hidden-xs.hidden-sm
-        -#   %input.search(type="text")
+        -if @box
+          %li.hidden-xs.hidden-sm
+            %form(action="#{gnoibox_box_items_path(@box.key)}")
+              %input.search(type="text" name="q" value="#{params[:q]}")
         -# %li.dropdown
         -#   %a.dropdown-toggle.hidden-xs.hidden-sm(data-toggle="dropdown" href="#")
         -#     Your account

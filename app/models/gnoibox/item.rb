@@ -14,6 +14,7 @@ module Gnoibox
     belongs_to :author_profile, foreign_key: :gnoibox_author_id
 
     scope :published, ->{where(status: :published)}
+    scope :search, ->(q){ where("gnoibox_items.url LIKE :q OR gnoibox_items.title LIKE :q OR gnoibox_items.description LIKE :q OR gnoibox_items.content LIKE :q OR gnoibox_items.id IN (#{tagged_with(q).select(:id).to_sql})", q: "%#{q}%") }
 
     def set_content
       set_tags_from_content
