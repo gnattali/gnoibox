@@ -54,5 +54,11 @@ module Gnoibox
     def self.select2_options_for(q)
       suggest_options.lazy.select{|o| o[1].include? q }.first(100).map{|o| {id: o[0], text: o[1]} }
     end
+    
+    def self.railway_hash
+      @railway_hash ||= begin
+        arrays.map{|s| [s[3], (s[4]+"_station").to_sym]}.group_by{|s| s[0] }.to_a.map{|r| [Gnoibox::Railway.key_for(r[0]), r[1].map{|s| s[1]} ] }.to_h
+      end
+    end
   end
 end
