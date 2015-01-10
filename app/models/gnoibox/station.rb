@@ -24,7 +24,8 @@ module Gnoibox
     end
 
     def self.option_hash
-      @option_hash ||= axis_options.index_by(&:key)
+      #reverse to reflect priority
+      @option_hash ||= axis_options.reverse.index_by(&:key)
     end
     
     def self.id_hash
