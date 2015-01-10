@@ -72,8 +72,11 @@
       .field-box
         = f.label :status, 'ステータス'
         .col-md-7
-          =f.select :status, Gnoibox::Item.status_options
-          -# =f.collection_radio_buttons :status, Gnoibox::Item.status_options, :last, :first
+          -# =f.select :status, @box.item_class.status_options
+          -@box.item_class.status_options.each do |option|
+            =f.label :status, value: option.last do
+              =f.radio_button :status, option.last
+              =option.first
 
 
       =f.fields_for :content, @item.content do |content_f|

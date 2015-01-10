@@ -68,7 +68,7 @@ module Gnoibox
     end
 
     def status_text
-      (Hash[Item.status_options].invert)[status.try(:to_sym)]
+      (Hash[self.class.status_options].invert)[status.try(:to_sym)]
     end
     
     def link_url
