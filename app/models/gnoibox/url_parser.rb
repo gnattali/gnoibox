@@ -114,7 +114,7 @@ module Gnoibox
     end
 
     def selected_tags_in(facet)
-      tag_keys & Gnoibox::AxisCollection.find(facet.to_sym).option_keys
+      Gnoibox::AxisCollection.find(facet.to_sym).option_keys & tag_keys
     end
     
     def tags_in_searched_items

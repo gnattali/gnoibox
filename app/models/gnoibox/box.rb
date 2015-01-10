@@ -163,7 +163,7 @@ module Gnoibox
         return [] if available_on_facet.blank?
         facet = facet.to_sym
         axis = Gnoibox::AxisCollection.find(facet)
-        selected_on_facet = current_tags & axis.option_keys
+        selected_on_facet = axis.option_keys & current_tags
         axis.option_hash.map do |k,o|
           if available_on_facet.include? k
             link_tags = if selected_on_facet.present?
