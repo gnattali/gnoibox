@@ -20,4 +20,11 @@ class ItemTest < ActiveSupport::TestCase
     assert_equal [:shibuya_ku], Gnoibox::Box::Building.items.where(url: "daikanyama_tower").associated_tags_on(:city)
     assert_equal [:shibuya_ku, :shinjuku_ku].to_set, Gnoibox::Box::Building.items.associated_tags_on(:city).to_set
   end
+
+  test 'keyword search' do
+    shinjuku = items_with_tag(:shinjuku_tower)
+
+    assert_equal ["daikanyama_tower"], Gnoibox::Box::Building.items.search_with("代官山").map(&:url)
+    assert_equal ["shinjuku_tower"], Gnoibox::Box::Building.items.search_with(:shinjuku_ku).map(&:url)
+  end
 end

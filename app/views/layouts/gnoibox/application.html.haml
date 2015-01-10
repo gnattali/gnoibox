@@ -30,7 +30,7 @@
       %ul.nav.navbar-nav.pull-right.hidden-xs
         -if @box
           %li.hidden-xs.hidden-sm
-            %form(action="#{gnoibox_box_items_path(@box.key)}")
+            %form(action="#{gnoibox_box_items_path(@box.key)}" method="get")
               %input.search(type="text" name="q" value="#{params[:q]}")
         -# %li.dropdown
         -#   %a.dropdown-toggle.hidden-xs.hidden-sm(data-toggle="dropdown" href="#")
