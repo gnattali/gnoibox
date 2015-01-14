@@ -19,14 +19,14 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", ">= 4.0.0"
 
   s.add_dependency 'haml-rails', '>= 0.4'
-  s.add_dependency 'kaminari', '>= 0.14.1'
   s.add_dependency 'acts-as-taggable-on', '>= 3.1.1'
+  s.add_dependency 'kaminari', '>= 0.14.1'
   s.add_dependency 'devise', '>= 3.2.0'
-  s.add_dependency 'simple_form', '>= 3.0.0'
   s.add_dependency 'mini_magick', '>= 3.6.0'
   s.add_dependency 'carrierwave', '>= 0.9.0'
   s.add_dependency 'fog', '>= 1.18.0'
-  # s.add_dependency 'draper', '>= 1.3.0'
+  s.add_dependency 'simple_form', '>= 3.0.0'
+  s.add_dependency 'google-api-client', '>= 0.8.2'
   # s.add_dependency 'acts_as_list', '>= 0.3.0'
 
   s.add_development_dependency "sqlite3"
