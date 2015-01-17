@@ -68,9 +68,10 @@ class FormTest < ActiveSupport::TestCase
   test 'when inquirer_email is not provided, no thanks mail' do
     url_parser = Gnoibox::UrlParser.new({first: "building", second: "daikanyama_tower"})
     inquiry = Gnoibox::Form::Building.new_inquiry(content: {name: 'test name', email: 'test@example.com'})
-    
+
     assert_equal nil, inquiry.inquirer_email
-    assert_kind_of ActionMailer::Base::NullMail, Gnoibox::InquiryMailer.thank_if_possible(inquiry, url_parser)
+    r = Gnoibox::InquiryMailer.thank_if_possible(inquiry, url_parser)
+    assert_equal nil, Gnoibox::InquiryMailer.thank_if_possible(inquiry, url_parser).to
   end
 
 end
