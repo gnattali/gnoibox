@@ -1,12 +1,21 @@
-require 'csv'
-
 module Gnoibox
   class City
-    def self.arrays
+    def self.csv_arrays
+      require 'csv'
       #prefecture_id,city_id,title,city_key
-      @arrays ||= CSV.read(File.join(Gnoibox::Engine.root, "db", "seeds", "cities.csv"))
+      CSV.read(File.join(Gnoibox::Engine.root, "db", "seeds", "cities.csv"))
     end
 
+    def self.dump_arrays
+      File.open(File.join(Gnoibox::Engine.root, "db", "seeds", "cities.dump"), 'w') do |f|
+        Marshal.dump csv_arrays, f
+      end
+    end
+    
+    def self.arrays
+      @arrays ||= File.open(File.join(Gnoibox::Engine.root, "db", "seeds", "cities.dump"), 'r'){|f| Marshal.load(f) }
+    end
+    
     def self.axis_options
       @axis_options ||= begin
         arrays.map do |r|

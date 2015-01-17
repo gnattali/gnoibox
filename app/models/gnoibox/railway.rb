@@ -1,10 +1,19 @@
-require 'csv'
-
 module Gnoibox
   class Railway
-    def self.arrays
+    def self.csv_arrays
+      require 'csv'
       #id,title,railway_key,line_type,long_title,title_kana,line_g_cd
-      @arrays ||= CSV.read(File.join(Gnoibox::Engine.root, "db", "seeds", "railways.csv"))
+      CSV.read(File.join(Gnoibox::Engine.root, "db", "seeds", "railways.csv"))
+    end
+
+    def self.dump_arrays
+      File.open(File.join(Gnoibox::Engine.root, "db", "seeds", "railways.dump"), 'w') do |f|
+        Marshal.dump csv_arrays.map{|r| r[0..4] }, f
+      end
+    end
+    
+    def self.arrays
+      @arrays ||= File.open(File.join(Gnoibox::Engine.root, "db", "seeds", "railways.dump"), 'r'){|f| Marshal.load(f) }
     end
     
     def self.axis_options
