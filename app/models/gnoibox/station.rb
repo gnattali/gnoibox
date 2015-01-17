@@ -8,24 +8,26 @@ module Gnoibox
 
     def self.dump_arrays
       File.open(File.join(Gnoibox::Engine.root, "db", "seeds", "stations.dump"), 'w') do |f|
-        Marshal.dump csv_arrays.map{|r| r[0..4] }, f
+        Marshal.dump csv_arrays.map{|r| [r[0],r[1],r[2],r[4]] }, f
       end
     end
     
     def self.arrays
+      #id,title,prefecture_id,station_key
       @arrays ||= File.open(File.join(Gnoibox::Engine.root, "db", "seeds", "stations.dump"), 'r'){|f| Marshal.load(f) }
     end
 
     def self.gnoibox_key_from(key)
-      key.try(:+, "_station")
+      return nil unless key
+      key.concat("_station").to_sym
+    end
+
+    def self.railway_id_from(station_id)
+      station_id[0,5]
     end
 
     def self.axis_options
-      @axis_options ||= begin
-        arrays.map do |r|
-          Gnoibox::Axis::Option.new gnoibox_key_from(r[4]), r[1], {railway_id: r[3], station_id: r[0]}
-        end
-      end
+      @axis_options ||= arrays.map{|r| Gnoibox::Station::Option.new gnoibox_key_from(r[3]), r[1], r[0] }
     end
 
     def self.option_keys
@@ -38,26 +40,30 @@ module Gnoibox
     end
     
     def self.id_hash
-      @id_hash ||= axis_options.index_by{|o| o.settings[:station_id].to_s}
+      @id_hash ||= axis_options.index_by{|o| o.station_id.to_sym}
     end
     
     def self.title_for(id)
-      id_hash[id.to_s].try(:label)
+      id_hash[id.to_sym].try(:label)
     end
 
     def self.key_for(id)
-      id_hash[id.to_s].try(:key)
+      id_hash[id.to_sym].try(:key)
     end
 
     def self.railway_key_for(id)
-      railway_id = id_hash[id.to_s].try(:settings).try(:"[]", :railway_id)
-      Gnoibox::Railway.key_for(railway_id)
+      return nil unless option = id_hash[id.to_sym]
+      Gnoibox::Railway.key_for railway_id_from(option.station_id)
     end
     
     def self.suggest_options
       @suggest_options ||= begin
         dic = Gnoibox::Railway.long_title_dictionary
-        arrays.map{|s| [ s[0], dic[s[3]]+" "+s[1]+"駅" ] if dic[s[3]] }.compact
+        arrays.map do |s|
+          if railway = dic[railway_id_from(s[0])]
+            [ s[0], railway+" "+s[1]+"駅" ]
+          end
+        end.compact
       end
     end
 
@@ -67,8 +73,18 @@ module Gnoibox
     
     def self.railway_hash
       @railway_hash ||= begin
-        arrays.map{|s| [s[3], (s[4]+"_station").to_sym]}.group_by{|s| s[0] }.to_a.map{|r| [Gnoibox::Railway.key_for(r[0]), r[1].map{|s| s[1]} ] }.to_h
+        arrays.map{|s| [railway_id_from(s[0]), gnoibox_key_from(s[3])] }.group_by{|s| s[0] }.to_a.map{|r| [Gnoibox::Railway.key_for(r[0]), r[1].map{|s| s[1]} ] }.to_h
       end
     end
+
+    class Option
+      attr_reader :key, :label, :station_id
+      def initialize(key, label, station_id)
+        @key = key
+        @label = label
+        @station_id = station_id
+      end
+    end
+    
   end
 end
