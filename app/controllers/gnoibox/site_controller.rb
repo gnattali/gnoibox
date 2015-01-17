@@ -3,7 +3,13 @@ class Gnoibox::SiteController < ApplicationController
 
   def index
     @page = Gnoibox::UrlParser.new(params)
-    render @page.view_file, layout: @page.layout
+    respond_to do |format|
+      format.html{ render @page.view_file, layout: @page.layout }
+      format.json do
+        render json: {items: @page.items, facet_item: @page.facet_item} if @page.items.present?
+        render json: {item: @page.item} if @page.item.present?
+      end
+    end
   end
   
   def create_inquiry

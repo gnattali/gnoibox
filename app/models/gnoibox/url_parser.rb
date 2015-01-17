@@ -110,7 +110,7 @@ module Gnoibox
     end
 
     def items
-      @items ||= base_relation.default_ordered.page(params[:page]).per(box.limit)
+      @items ||= base_relation.default_ordered.page(params[:page]).per(box.limit) if base_relation
     end
 
     def selected_tags_in(facet)
