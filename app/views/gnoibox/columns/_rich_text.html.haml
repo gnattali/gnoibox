@@ -1,1 +1,1 @@
-=f.text_area col.name, class: "form-control js-redactor", rows: 10
+=f.text_area col.name, {class: "form-control js-redactor gn-form-column", rows: 10}.merge( col.settings.select{|k,v| [:class, :placeholder].include? k} ).merge({required: col.required})

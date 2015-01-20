@@ -1,1 +1,1 @@
-=f.select col.name, col.select_options, class: "form-control", selected: col.value, include_blank: col.settings[:include_blank]
+=f.select col.name, col.select_options, {class: "form-control gn-form-column", selected: col.value, include_blank: col.settings[:include_blank]}.merge( col.settings.select{|k,v| [:class, :placeholder].include? k} ).merge({required: col.required})

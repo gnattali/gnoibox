@@ -1,5 +1,6 @@
-=image_tag col.url, style: 'max-width: 100%;'
-=f.file_field "#{col.name}"
-削除する
-=f.check_box "remove_#{col.name}".to_sym
-=f.hidden_field "#{col.name}_cache" if f.object.send("#{col.name}_cache")
+.gn-form-column-image
+  =image_tag col.url, style: 'max-width: 100%;'
+  =f.file_field "#{col.name}"
+  削除する
+  =f.check_box "remove_#{col.name}".to_sym
+  =f.hidden_field "#{col.name}_cache" if f.object.send("#{col.name}_cache")

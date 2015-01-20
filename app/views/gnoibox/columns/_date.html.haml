@@ -1,1 +1,1 @@
-=f.date_field col.name, value: col.to_s, class: "form-control"
+=f.date_field col.name, {value: col.to_s, class: "form-control gn-form-column"}.merge( col.settings.select{|k,v| [:class].include? k} ).merge({required: col.required})

@@ -1,2 +1,2 @@
-=f.text_field col.name, value: col.raw_number, class: "form-control"
+=f.text_field col.name, {value: col.raw_number, class: "form-control gn-form-column"}.merge( col.settings.select{|k,v| [:class, :placeholder].include? k} ).merge({required: col.required})
 .pull-right=col.unit

@@ -1,5 +1,5 @@
-.radio-buttons
+.radio-buttons.gn-form-column-radio
   -col.options.each do |option|
     =label f.object_name.gsub(/\[/, '_').delete(']'), "#{col.name}_#{option.key}" do
-      =radio_button_tag "#{f.object_name}[#{col.name}]", option.key, Array(col.value).include?(option.key.to_s)
+      =radio_button_tag "#{f.object_name}[#{col.name}]", option.key, Array(col.value).include?(option.key.to_s), {required: col.required}
       =option.label
