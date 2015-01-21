@@ -53,7 +53,7 @@
         .col-md-7
           = f.datetime_select :published_at, class: "form-control"
 
-      -if Gnoibox::Author.count > 1 && gnb_admin?
+      -if Gnoibox::Author.count > 1 && gnb_admin? && !@box.omit_cols.include?(:gnoibox_author_id)
         .field-box
           = f.label :gnoibox_author_id, 'ライター'
           .col-md-7
