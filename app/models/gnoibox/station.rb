@@ -19,7 +19,7 @@ module Gnoibox
 
     def self.gnoibox_key_from(key)
       return nil unless key
-      key.concat("_station").to_sym
+      (key + "_station").to_sym
     end
 
     def self.railway_id_from(station_id)
