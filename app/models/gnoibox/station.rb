@@ -14,7 +14,7 @@ module Gnoibox
     
     def self.arrays
       #id,title,prefecture_id,station_key
-      Rails.cache.fetch("gnoibox/station/arrays")fetch{ File.open(File.join(Gnoibox::Engine.root, "db", "seeds", "stations.dump"), 'r'){|f| Marshal.load(f) } }
+      Rails.cache.fetch("gnoibox/station/arrays"){ File.open(File.join(Gnoibox::Engine.root, "db", "seeds", "stations.dump"), 'r'){|f| Marshal.load(f) } }
       # @arrays ||= File.open(File.join(Gnoibox::Engine.root, "db", "seeds", "stations.dump"), 'r'){|f| Marshal.load(f) }
     end
 
