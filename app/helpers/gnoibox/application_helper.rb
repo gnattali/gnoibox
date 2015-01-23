@@ -47,7 +47,7 @@ module Gnoibox
           Gnoibox::AxisCollection::find(key)
         end
         def boxes
-          @boxes ||= Gnoibox::BoxCollection::all
+          Gnoibox::BoxCollection::all
         end
         def box(key)
           Gnoibox::BoxCollection::find(key)

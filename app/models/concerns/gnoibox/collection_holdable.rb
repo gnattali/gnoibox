@@ -27,7 +27,8 @@ module Gnoibox
       end
 
       def hash
-        @hash ||= all.index_by(&:key)
+        # @hash ||= all.index_by(&:key)
+        all.index_by(&:key)
       end
 
       def find(key)
@@ -42,7 +43,8 @@ module Gnoibox
 
       def load_files
         raise 'please override collection_type' unless collection_type
-        @loaded_files ||= Dir.glob(File.join(Rails.application.config.root, "app", "models", "gnoibox", collection_type, "*.rb")).each do |file|
+
+        Dir.glob(File.join(Rails.application.config.root, "app", "models", "gnoibox", collection_type, "*.rb")).each do |file|
           require_dependency file
         end
       end
