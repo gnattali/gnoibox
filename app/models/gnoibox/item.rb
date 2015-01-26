@@ -4,7 +4,7 @@ module Gnoibox
 
     self.table_name= :gnoibox_items
 
-    delegate :box, :order_direction, to: :class
+    delegate :box, :order_direction, :label_for, to: :class
 
     validates :url, presence: true, exclusion: {in: lambda{|record| record.box_key.to_s=='facet' ? [] : UrlParser.all_keys_and_tags} }, uniqueness: true
 
@@ -107,6 +107,10 @@ module Gnoibox
       end
 
       def author_name_label() 'ライター' end
+
+      def label_for(col)
+        I18n.t "activerecord.attributes.gnoibox_item_#{box.key}.#{col}", default: I18n.t("activerecord.attributes.gnoibox_item.#{col}")
+      end
 
       def associated_tags
         item_sql = select(:id).to_sql

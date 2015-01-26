@@ -25,22 +25,22 @@
           
       -unless @box.omit_cols.include?(:title)
         .field-box
-          = f.label :title, 'タイトル'
+          = f.label :title, @item.label_for(:title)
           .col-md-7
             = f.text_field :title, class: "form-control"
       -unless @box.omit_cols.include?(:description)
         .field-box
-          = f.label :description, '説明'
+          = f.label :description, @item.label_for(:description)
           .col-md-7
             = f.text_area :description, class: "form-control"
       -unless @box.omit_cols.include?(:keywords)
         .field-box
-          = f.label :keywords, 'キーワード'
+          = f.label :keywords, @item.label_for(:keywords)
           .col-md-7
             = f.text_field :keywords, class: "form-control"
       -unless @box.omit_cols.include?(:main_image)
         .field-box
-          =f.label :main_image, 'メイン画像'
+          =f.label :main_image, @item.label_for(:main_image)
           .col-md-7
             =f.file_field :main_image
             =f.hidden_field :main_image_cache
@@ -49,13 +49,13 @@
               画像を削除する
               =f.check_box :remove_main_image
       .field-box(style="#{'display:none' if @box.omit_cols.include?(:published_at)}")
-        = f.label :published_at, '日付'
+        = f.label :published_at, @item.label_for(:published_at)
         .col-md-7
           = f.datetime_select :published_at, class: "form-control"
 
       -if Gnoibox::Author.count > 1 && gnb_admin? && !@box.omit_cols.include?(:gnoibox_author_id)
         .field-box
-          = f.label :gnoibox_author_id, 'ライター'
+          = f.label :gnoibox_author_id, @item.label_for(:gnoibox_author_id)
           .col-md-7
             =f.select :gnoibox_author_id, Gnoibox::Author.order(role: :asc).order(name: :asc).all.map{|a| [a.name, a.id]}
       -else
@@ -65,12 +65,12 @@
 
       -if @item.class.view_file_options
         .field-box
-          = f.label :view_file, 'ビューファイル'
+          = f.label :view_file, @item.label_for(:view_file)
           .col-md-7
             = f.select :view_file, @item.class.view_file_options, class: "form-control"
 
       .field-box
-        = f.label :status, 'ステータス'
+        = f.label :status, @item.label_for(:status)
         .col-md-7
           -# =f.select :status, @box.item_class.status_options
           -@box.item_class.status_options.each do |option|

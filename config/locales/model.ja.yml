@@ -1,0 +1,13 @@
+ja:
+  activerecord:
+    attributes:
+      gnoibox_item:
+        url: URL
+        title: タイトル
+        description: 説明
+        keywords: キーワード
+        main_image: メイン画像
+        published_at: 日付
+        gnoibox_author_id: ライター
+        view_file: ビューファイル
+        status: ステータス
