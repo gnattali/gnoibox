@@ -1,5 +1,8 @@
 ja:
   activerecord:
+    models:
+      gnoibox/author: ライター
+      gnoibox/inquiry: お問合せ
     attributes:
       gnoibox_item:
         url: URL

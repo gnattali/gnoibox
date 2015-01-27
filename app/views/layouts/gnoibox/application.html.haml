@@ -77,14 +77,14 @@
             =render partial: 'active_arrow', locals: {url: '/gnoibox/authors'}
             =link_to gnoibox_authors_path, class: 'parentmenu' do
               %i.icon-group
-              %span ライター
+              %span=Gnoibox::Author.model_name.human
 
           %li.open{class: ("active" if current_page?({controller: 'forms'})) }
             =render partial: 'active_arrow', locals: {url: '/gnoibox/forms'}
             -# =link_to gnoibox_forms_path, class: 'parentmenu' do
             .parentmenu
               %i.icon-edit
-              %span お問合せ
+              %span=Gnoibox::Inquiry.model_name.human
 
             %ul.submenu(style="display:block;")
               -gnb.forms.each do |form|
