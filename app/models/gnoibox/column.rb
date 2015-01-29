@@ -345,7 +345,7 @@ module Gnoibox
       end
 
       def value_to_serialize
-        @value.is_a?(Date) ? @valuet.strftime('%Y-%m-%d') : @value
+        @value.is_a?(::Date) ? @value.strftime('%Y-%m-%d') : @value
       end
     end
 
