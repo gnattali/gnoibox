@@ -83,7 +83,7 @@ module Gnoibox
     class << self
       attr_reader :view_file_options
 
-      delegate :order_direction, to: :box
+      delegate :order_direction, :label_for, :base_col_names, :content_col_names, to: :box
 
       def set_view_file_options(options=nil)
         @view_file_options = options
@@ -106,19 +106,12 @@ module Gnoibox
         order(order_value: order_direction)
       end
 
-      def author_name_label() 'ライター' end
-
-      def label_for(col)
-        I18n.t "activerecord.attributes.gnoibox_item_#{box.key}.#{col}", default: I18n.t("activerecord.attributes.gnoibox_item.#{col}")
-      end
-      
       def to_csv
         require 'csv'
-        base_cols = column_names - ["content"]
         CSV.generate do |csv|
-          csv << (base_cols + col_classes.map(&:name))
+          csv << (base_col_names + content_col_names)
           all.each do |item|
-            csv << ( item.attributes.values_at(*base_cols) + item.cols.map(&:to_s) )
+            csv << ( item.attributes.values_at(*base_col_names) + item.cols.map(&:to_s) )
           end
         end
       end

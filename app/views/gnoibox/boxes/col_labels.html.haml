@@ -1,0 +1,18 @@
+#pad-wrapper
+  .table-wrapper.section
+    .row.head
+      .col-md-12
+        %h4 項目名対応表：#{@box.label}
+
+    .row
+      %table.table.table-hover
+        %tbody
+          -@box.base_col_names.each do |col|
+            %tr
+              %td(style="width: 150px")=col
+              %td=@box.label_for(col)
+
+          -@box.item_cols.each do |col|
+            %tr
+              %td(style="width: 150px")=col.name
+              %td=col.label

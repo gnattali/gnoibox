@@ -106,6 +106,18 @@ module Gnoibox
           item.save
         end
       end
+      
+      def label_for(col)
+        I18n.t "activerecord.attributes.gnoibox_item_#{key}.#{col}", default: I18n.t("activerecord.attributes.gnoibox_item.#{col}")
+      end
+      
+      def base_col_names
+        item_class.column_names - ["content"]
+      end
+      
+      def content_col_names
+        item_cols.map(&:name)
+      end
 
 
       #can be overridden

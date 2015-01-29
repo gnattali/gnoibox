@@ -7,6 +7,9 @@ Gnoibox::Engine.routes.draw do
     resources :authors
     resources :boxes do
       resources :items
+      member do
+        get "col_labels"
+      end
     end
     resources :blocks
     resources :forms do

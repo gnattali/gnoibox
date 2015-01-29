@@ -5,6 +5,8 @@ ja:
       gnoibox/inquiry: お問合せ
     attributes:
       gnoibox_item:
+        id: ID
+        box_key: アイテム種別
         url: URL
         title: タイトル
         description: 説明
@@ -14,3 +16,6 @@ ja:
         gnoibox_author_id: ライター
         view_file: ビューファイル
         status: ステータス
+        order_value: 並べ替え用値
+        created_at: 作成日
+        updated_at: 更新日
