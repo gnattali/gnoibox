@@ -12,6 +12,10 @@ class Gnoibox::SiteController < ApplicationController
     end
   end
   
+  def search
+    @items = Gnoibox::Item.published.order(published_at: :desc).search_with(params[:q])
+  end
+  
   def create_inquiry
     @page = Gnoibox::UrlParser.new(params)
     

@@ -5,7 +5,7 @@ module Gnoibox
     BOX_KEYS = Gnoibox::BoxCollection.keys
     AXIS_OPTION_KEYS = Gnoibox::AxisCollection.option_keys
     AXIS_OPTION_KEYS_TO_S = AXIS_OPTION_KEYS.map(&:to_s)
-    RESERVED_KEYS = [:gnoibox, :admin, :thanks, :root, :my, :facet, :box, :axis, :block, :item, :column, :form, :inquiry, :site]
+    RESERVED_KEYS = [:gnoibox, :admin, :thanks, :root, :my, :facet, :box, :axis, :block, :item, :column, :form, :inquiry, :site, :search, :s]
 
     def self.existing_tags
       ActsAsTaggableOn::Tag.pluck(:name)

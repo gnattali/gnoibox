@@ -1,0 +1,12 @@
+-content_for :title, "#{params[:q]} の検索結果"
+-content_for :description, "#{params[:q]} の検索結果"
+-content_for :keywords, params[:q]
+-content_for :og_image, "default.png"
+-content_for :og_type, "article"
+
+%ul
+  -@items.each do |item|
+    %li
+      =link_to "/#{item.box_key}/#{item.url}" do
+        %h2=item.title
+        %div=item.description

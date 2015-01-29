@@ -25,6 +25,8 @@ Gnoibox::Engine.routes.draw do
     
     root 'dashboard#index'
   end
+  
+  get 'search' =>'site#search'
 
   get 'thanks/:first(/:second(/:third))' => 'site#thanks', as: :gnb_thanks
   get ':first(/:second(/:third))' => 'site#index', as: :gnb
