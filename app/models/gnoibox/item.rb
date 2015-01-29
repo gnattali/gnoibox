@@ -111,6 +111,17 @@ module Gnoibox
       def label_for(col)
         I18n.t "activerecord.attributes.gnoibox_item_#{box.key}.#{col}", default: I18n.t("activerecord.attributes.gnoibox_item.#{col}")
       end
+      
+      def to_csv
+        require 'csv'
+        base_cols = column_names - ["content"]
+        CSV.generate do |csv|
+          csv << (base_cols + col_classes.map(&:name))
+          all.each do |item|
+            csv << ( item.attributes.values_at(*base_cols) + item.cols.map(&:to_s) )
+          end
+        end
+      end
 
       def associated_tags
         item_sql = select(:id).to_sql

@@ -57,3 +57,5 @@
                   = link_to '削除', gnoibox_box_item_path(@box, item), :method => :delete, :data => { :confirm => '削除してもよろしいですか?' }
 
   =paginate @items, theme: 'gnoibox'
+
+  .pull-right=link_to "CSVダウンロード", gnoibox_box_items_path(@box, format: 'csv', per: 1000), class: "btn-flat"

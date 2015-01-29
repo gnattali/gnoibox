@@ -3,9 +3,13 @@ class Gnoibox::ItemsController < Gnoibox::ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def index
-    @items = @box.items.default_ordered.page(params[:page]).per(25)
+    @items = @box.items.default_ordered.page(params[:page]).per(per)
     @items = @items.search_with(params[:q]) if params[:q]
     @items = @items.where(gnoibox_author_id: gnb_current_author.id) unless gnb_admin?
+    respond_to do |format|
+      format.html
+      format.csv{ send_data @items.to_csv }
+    end
   end
 
   def show
@@ -55,5 +59,9 @@ class Gnoibox::ItemsController < Gnoibox::ApplicationController
         params[:item][:content][col.name] = [] if col.type==:check_box && params[:item][:content][col.name]==nil
       end
       params.require(:item).permit!
+    end
+    
+    def per
+      params[:per] || 25
     end
 end
