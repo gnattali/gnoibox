@@ -6,10 +6,10 @@ ja:
     attributes:
       gnoibox_item:
         id: ID
-        box_key: アイテム種別
+        box_key: コンテンツ種別
         url: URL
         title: タイトル
-        description: 説明
+        description: 説明文
         keywords: キーワード
         main_image: メイン画像
         published_at: 日付
