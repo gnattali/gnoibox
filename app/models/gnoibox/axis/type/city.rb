@@ -26,21 +26,26 @@ module Gnoibox
           Gnoibox::City.text_hash
         end
 
+        def text_hash_with_pref
+          Gnoibox::City.text_hash_with_pref
+        end
+        
         def text_list
           Gnoibox::City.text_list
         end
         
+        def text_list_with_pref
+          Gnoibox::City.text_list_with_pref
+        end
+        
         def tag_for(v)
-          # if /^[0-9０-９ー\s-]+$/.match v
-          #   v.gsub!(/[０-９\s　ー-]/, Hash[("０".."９").zip(0..9)] )
-          #   #detect from zipcode
-          # end
-          
           if (pref_keys = Gnoibox::Axis::Prefecture.tag_for(v)).present?
-            pref_text = pref_keys.map{|pref_key| Gnoibox::Axis::Prefecture.option_hash[pref_key].settings[:full_text] }.join("|")
-            v = v.gsub /#{pref_text}/, ''
+            # pref_text = pref_keys.map{|pref_key| Gnoibox::Axis::Prefecture.option_hash[pref_key].settings[:full_text] }.join("|")
+            # v = v.gsub /#{pref_text}/, ''
+            text_list_with_pref.map{|t| text_hash_with_pref[t].key if v.include?(t) }.compact
+          else
+            text_list.map{|t| text_hash[t].key if v.include?(t) }.compact
           end
-          text_list.map{|t| text_hash[t].key if v.include?(t) }.compact
         end
 
       end

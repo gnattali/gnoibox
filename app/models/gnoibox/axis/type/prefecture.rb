@@ -32,7 +32,7 @@ module Gnoibox
         
         def tag_for(v)
           # if /^[0-9０-９ー\s-]+$/.match v
-          #   v.gsub!(/[０-９\s　ー-]/, Hash[("０".."９").zip(0..9)] )
+          #   z = v.gsub(/[０-９\s　ー-]/, Hash[("０".."９").zip(0..9)] )
           #   #detect from zipcode
           # end
 

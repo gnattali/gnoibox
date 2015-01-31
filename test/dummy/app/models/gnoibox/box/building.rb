@@ -6,7 +6,8 @@ module Gnoibox
   end
   
   class Item::Building < Item
-    set_col :address, :address, '住所', axis: [Axis::Prefecture, Axis::City]
+    set_col :address, :address, '住所', axis: [Axis::Prefecture, Axis::City, Axis::Town]
+    # set_col :address, :address, '住所', axis: [Axis::Prefecture, Axis::City]
     (1..3).each do |n|
       set_col "station#{n}".to_sym, :station, "最寄駅#{n}", axis: [Axis::Railway, Axis::Station]
       set_col "walk#{n}".to_sym, :number, "駅徒歩#{n}", axis: Axis::Walk

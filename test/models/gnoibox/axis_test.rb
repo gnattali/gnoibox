@@ -59,6 +59,19 @@ class AxisTest < ActiveSupport::TestCase
     assert_equal ['matsudo_station'], matsudo.tag_list_on(:station)
     assert_equal ['joban_line'], matsudo.tag_list_on(:railway)
   end
+
+  test 'axis type town' do
+    daikanyama = items_with_tag(:daikanyama_tower)
+    shinjuku = items_with_tag(:shinjuku_tower)
+    matsudo = items_with_tag(:matsudo_park)
+
+    # assert_equal ['shibuya_ku_uguisudanichou'], daikanyama.tag_list_on(:town)
+    # assert_equal ['shinjuku_ku_nishishinjuku'], shinjuku.tag_list_on(:town)
+    # assert_equal ['matsudo_shi_matsudo'], matsudo.tag_list_on(:town)
+    assert_equal ['渋谷区鶯谷町'], daikanyama.tag_list_on(:town)
+    assert_equal ['新宿区西新宿'], shinjuku.tag_list_on(:town)
+    assert_equal ['松戸市松戸'], matsudo.tag_list_on(:town)
+  end
   
   test 'multiple value and tag for one column' do
     daikanyama = items_with_tag(:daikanyama_tower)
