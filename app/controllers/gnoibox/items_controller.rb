@@ -8,7 +8,7 @@ class Gnoibox::ItemsController < Gnoibox::ApplicationController
     @items = @items.where(gnoibox_author_id: gnb_current_author.id) unless gnb_admin?
     respond_to do |format|
       format.html
-      format.csv{ send_data @items.to_csv.encode("Windows-31J") }
+      format.csv{ send_data @items.to_csv.encode("Windows-31J", invalid: :replace, undef: :replace) }
     end
   end
 
