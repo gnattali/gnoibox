@@ -19,7 +19,7 @@ module Gnoibox
     def self.axis_options
       Rails.cache.fetch("gnoibox/town/axis_options") do
         arrays.map do |r|
-          Gnoibox::Axis::Option.new r[3], r[2], {prefecture_id: r[0], city_id: r[1]}
+          Gnoibox::Town::Option.new r[4], r[3], r[2]
         end
       end
     end
@@ -40,5 +40,14 @@ module Gnoibox
       Rails.cache.fetch("gnoibox/town/text_list"){ text_hash.keys }
     end
     
+    class Option
+      attr_reader :key, :label, :city_name
+      def initialize(key, label, city_name)
+        @key = key
+        @label = label
+        @city_name = city_name
+      end
+    end
+
   end
 end

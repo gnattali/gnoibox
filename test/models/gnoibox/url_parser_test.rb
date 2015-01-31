@@ -39,9 +39,10 @@ class UrlParserTest < ActiveSupport::TestCase
   test 'box top' do
     daikanyama = items_with_tag(:daikanyama_tower)
     shinjuku = items_with_tag(:shinjuku_tower)
+    matsudo = items_with_tag(:matsudo_park)
     page = Gnoibox::UrlParser.new({first: 'building'})
-    assert_equal 2, page.items.count
-    assert_equal [:shibuya_ku, :shinjuku_ku].to_set, page.options_for(:city).to_set
+    assert_equal 3, page.items.count
+    assert_equal [:shibuya_ku, :shinjuku_ku, :matsudo_shi].to_set, page.options_for(:city).to_set
   end
   
   test 'root item' do

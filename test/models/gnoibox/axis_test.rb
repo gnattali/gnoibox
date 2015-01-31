@@ -54,6 +54,12 @@ class AxisTest < ActiveSupport::TestCase
     assert_equal ['nishishinjuku_station'], shinjuku.tag_list_on(:station)
   end
 
+  test 'axis type station with irregular railway_id' do
+    matsudo = items_with_tag(:matsudo_park)
+    assert_equal ['matsudo_station'], matsudo.tag_list_on(:station)
+    assert_equal ['joban_line'], matsudo.tag_list_on(:railway)
+  end
+  
   test 'multiple value and tag for one column' do
     daikanyama = items_with_tag(:daikanyama_tower)
     assert daikanyama.tag_list_on(:preference)==["pet_ok", "designers"]
