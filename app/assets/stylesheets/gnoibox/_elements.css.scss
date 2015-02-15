@@ -25,4 +25,16 @@ body.gnoibox{
   #sidebar-nav #dashboard-menu .submenu a{
     color: rgb(110, 130, 155);
   }
+
+
+  .col-unit{
+    position:absolute;
+    right: 20px;
+    height: 34px;
+    padding: 6px;
+    vertical-align: middle;
+    line-height: 1.87em;
+    font-size: 13px;
+    bottom: 0;
+  }
 }
