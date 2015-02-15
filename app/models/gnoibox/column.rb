@@ -115,6 +115,13 @@ module Gnoibox
 
   class Column
     class Text < Column
+      def unit
+        settings[:unit]
+      end
+
+      def text_with_unit
+        text.to_s + unit.to_s
+      end
     end
 
     class TextArea < Column
