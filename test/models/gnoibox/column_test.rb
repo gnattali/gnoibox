@@ -2,6 +2,12 @@ require 'test_helper'
 
 class ColumnTest < ActiveSupport::TestCase
 
+  test 'text column' do
+    shinjuku = items_with_tag(:matsudo_park)
+
+    assert_equal "40戸", shinjuku.content.number_of_rooms.text_with_unit
+  end
+
   test 'number column' do
     Gnoibox::Box::Building.set_order_key(:rent)
     shinjuku = items_with_tag(:shinjuku_tower)

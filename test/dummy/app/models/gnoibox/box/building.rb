@@ -17,6 +17,7 @@ module Gnoibox
     set_col :item_type, :select, '物件種別', axis: Axis::ItemType
     set_col :floor_plan, :text, '間取り', axis: Axis::FloorPlan
     set_col :floor_space, :float, '面積', axis: Axis::FloorSpace, unit: '㎡'
+    set_col :number_of_rooms, :text, '部屋数', unit: '戸'
     set_col :preferences, :check_box, 'こだわり条件', axis: Axis::Preference
     (1..10).each do |n|
       set_col "img#{n}".to_sym, :image, "画像#{n}"

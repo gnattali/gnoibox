@@ -51,4 +51,4 @@ matsudo_park:
   url: matsudo_park
   title: '松戸パーク'
   status: published
-  content: '<%= {address: "千葉県松戸市松戸", station1: {station_id: "1132009", title: "JR常磐線 松戸駅"}, walk1: "10", rent: "100000", age: "#{10.year.ago.strftime "%Y-%m-%d"}", item_type: "mansion", floor_plan: "3DK", floor_space: "60.5", preferences: []}.to_json %>'
+  content: '<%= {address: "千葉県松戸市松戸", station1: {station_id: "1132009", title: "JR常磐線 松戸駅"}, walk1: "10", rent: "100000", age: "#{10.year.ago.strftime "%Y-%m-%d"}", item_type: "mansion", floor_plan: "3DK", floor_space: "60.5", number_of_rooms: "40", preferences: []}.to_json %>'

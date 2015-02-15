@@ -115,13 +115,7 @@ module Gnoibox
 
   class Column
     class Text < Column
-      def unit
-        settings[:unit]
-      end
-
-      def text_with_unit
-        text.to_s + unit.to_s
-      end
+      include Gnoibox::ColumnUnitable
     end
 
     class TextArea < Column
@@ -222,6 +216,7 @@ module Gnoibox
     end
 
     class Number < Column
+      include Gnoibox::ColumnUnitable
       include ActionView::Helpers::NumberHelper
 
       def set_value(v)
@@ -240,10 +235,6 @@ module Gnoibox
         number_with_delimiter(value).to_s
       end
       alias_method :text, :to_s
-      
-      def unit
-        settings[:unit]
-      end
 
       def text_with_unit
         number_with_delimiter(value).to_s + unit.to_s
@@ -251,6 +242,7 @@ module Gnoibox
     end
 
     class Float < Column
+      include Gnoibox::ColumnUnitable
 
       def set_value(v)
         @value = v.present? ? v.to_f : nil
@@ -258,14 +250,6 @@ module Gnoibox
       
       def to_order_value
         (@value.to_f * 1000000000000000000000000000000).to_i
-      end
-      
-      def unit
-        settings[:unit]
-      end
-      
-      def text_with_unit
-        text.to_s + unit.to_s
       end
     end
     
