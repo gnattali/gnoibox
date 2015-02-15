@@ -108,7 +108,7 @@ module Gnoibox
       end
       
       def label_for(col)
-        I18n.t "activerecord.attributes.gnoibox_item_#{key}.#{col}", default: I18n.t("activerecord.attributes.gnoibox_item.#{col}")
+        (I18n.t "activerecord.attributes.gnoibox_item_#{key}.#{col}", default: ["activerecord.attributes.gnoibox_item.#{col}".to_sym, ""]).presence || nil
       end
       
       def base_col_names

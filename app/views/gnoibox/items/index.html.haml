@@ -20,8 +20,8 @@
                 日付
 
             -@box.list_cols.each do |col_name|
-              -if @box.item_class.respond_to? (col_name.to_s+"_label")
-                %th.col-md-1=@box.item_class.send(col_name.to_s+"_label")
+              -if @box.label_for(col_name).present?
+                %th.col-md-1=@box.label_for(col_name)
               -else
                 %th.col-md-1=@box.item_col(col_name).label
               

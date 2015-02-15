@@ -14,6 +14,7 @@ ja:
         main_image: メイン画像
         published_at: 日付
         gnoibox_author_id: ライター
+        author_name: ライター
         view_file: ビューファイル
         status: ステータス
         order_value: 並べ替え用値
