@@ -5,6 +5,7 @@ class Gnoibox::ItemsController < Gnoibox::ApplicationController
   def index
     @items = @box.items.includes(:author_profile).default_ordered.page(params[:page]).per(per)
     @items = @items.search_with(params[:q]) if params[:q]
+    @items = @items.send(params[:scope]) if params[:scope]
     @items = @items.where(gnoibox_author_id: gnb_current_author.id) unless gnb_admin?
     respond_to do |format|
       format.html

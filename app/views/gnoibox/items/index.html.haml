@@ -59,7 +59,7 @@
   =paginate @items, theme: 'gnoibox'
 
   .pull-right
-    =link_to "CSVダウンロード", gnoibox_box_items_path(@box, format: 'csv', per: 1000), class: "btn-flat"
+    =link_to "CSVダウンロード", gnoibox_box_items_path(@box, format: 'csv', per: 5000), class: "btn-flat"
     %br
     %br
     =link_to "項目名表", col_labels_gnoibox_box_path(@box)
