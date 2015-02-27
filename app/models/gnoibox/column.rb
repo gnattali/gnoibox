@@ -277,8 +277,7 @@ module Gnoibox
       class << self
         def setup(settings)
           self.class_exec(settings) do |settings|
-            mount_uploader :image, (settings[:uploader] || Gnoibox::MainImageUploader)
-            # mount_uploader :image, (settings[:uploader] || Gnoibox::ColumnImageUploader)
+            mount_uploader :image, (settings[:uploader] || Gnoibox::ColumnImageUploader)
             def read_uploader(column)
               # pp 'read_uploader'
               # pp value
