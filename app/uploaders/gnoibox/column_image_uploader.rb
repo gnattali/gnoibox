@@ -1,5 +1,5 @@
 module Gnoibox
-  class MainImageUploader < CarrierWave::Uploader::Base
+  class ColumnImageUploader < CarrierWave::Uploader::Base
 
     # Include RMagick or MiniMagick support:
     # include CarrierWave::RMagick
@@ -12,7 +12,8 @@ module Gnoibox
     # Override the directory where uploaded files will be stored.
     # This is a sensible default for uploaders that are meant to be mounted:
     def store_dir
-      "uploads/#{model.class.name.to_s.underscore}/#{mounted_as}/#{model.id}"
+      # "uploads/#{model.class.name.to_s.underscore}/#{mounted_as}/#{model.id}"
+      "uploads/#{model.holder_name.to_s.underscore.gsub("/","_")}/#{model.name}"
     end
 
     # Provide a default URL as a default if there hasn't been a file uploaded:

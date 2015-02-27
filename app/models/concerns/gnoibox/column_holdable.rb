@@ -27,6 +27,7 @@ module Gnoibox
       def set_col(name, type, label, settings={})
         raise 'third parameter for #set_col should be label' unless label.is_a? String
 
+        holder_name = self.name
         c_class = content_class
         content_class.col_classes << Class.new(column_class(type)) do
           self.name = name
@@ -37,6 +38,7 @@ module Gnoibox
           self.set_delegator(c_class)
           self.set_validator(c_class)
           self.set_axis(c_class)
+          self.holder_name = holder_name
         end
       end
 

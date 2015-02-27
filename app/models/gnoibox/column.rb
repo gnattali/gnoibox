@@ -1,6 +1,6 @@
 module Gnoibox
   class Column
-    delegate :name, :type, :label, :settings, :axis, :axes, :main_axis, :required, to: :class
+    delegate :name, :type, :label, :settings, :axis, :axes, :main_axis, :required, :holder_name, to: :class
 
     attr_reader :value #value to be serialized and matched to tags, may be array
     def initialize(value=nil)
@@ -65,7 +65,7 @@ module Gnoibox
     end
     
     class << self
-      attr_accessor :name, :type, :label, :settings, :required
+      attr_accessor :name, :type, :label, :settings, :required, :holder_name
 
       def setup(settings)
       end
@@ -278,6 +278,7 @@ module Gnoibox
         def setup(settings)
           self.class_exec(settings) do |settings|
             mount_uploader :image, (settings[:uploader] || Gnoibox::MainImageUploader)
+            # mount_uploader :image, (settings[:uploader] || Gnoibox::ColumnImageUploader)
             def read_uploader(column)
               # pp 'read_uploader'
               # pp value
