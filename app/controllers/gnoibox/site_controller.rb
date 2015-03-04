@@ -33,6 +33,7 @@ class Gnoibox::SiteController < ApplicationController
   end
 
   def sitemap
+    @items = Gnoibox::Item.published
   end
 
 private

@@ -73,7 +73,11 @@ module Gnoibox
     end
     
     def link_url
-      "/#{box_key}/#{url}"
+      case box_key
+      when "root" then "/#{url}"
+      when "facet" then "/#{url}"
+      else "/#{box_key}/#{url}"
+      end
     end
     
     def author_name
