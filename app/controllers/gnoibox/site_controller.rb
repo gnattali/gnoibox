@@ -32,6 +32,9 @@ class Gnoibox::SiteController < ApplicationController
     render @page.thanks_view, layout: @page.layout
   end
 
+  def sitemap
+  end
+
 private
   attr_reader :page
   helper_method :page, :inquiry

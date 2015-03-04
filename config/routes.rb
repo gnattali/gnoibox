@@ -31,6 +31,8 @@ Gnoibox::Engine.routes.draw do
   
   get 'search' =>'site#search'
 
+  get 'sitemap' => 'site#sitemap'
+
   get 'thanks/:first(/:second(/:third))' => 'site#thanks', as: :gnb_thanks
   get ':first(/:second(/:third))' => 'site#index', as: :gnb
   post ':first(/:second(/:third))' => 'site#create_inquiry'
