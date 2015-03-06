@@ -138,7 +138,7 @@ module Gnoibox
     end
     
     def link_axes
-      box.axis_list.map{|axis| Gnoibox::Box::AxisLinks.new axis.key, axis.label, links_for(axis.key), axis.allowed_to_cross_search_in_axis}.index_by(&:axis_key)
+      box.axis_list.map{|axis| box::AxisLinks.new axis.key, axis.label, links_for(axis.key), axis.allowed_to_cross_search_in_axis}.index_by(&:axis_key)
     end
     
     def exists?
