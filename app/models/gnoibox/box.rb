@@ -1,6 +1,11 @@
 module Gnoibox
   class Box
 
+    def self.collection_url(tags=[])
+      tags = Array(tags)
+      "/#{key}/#{tags.first}" + (tags.count>1 ? "/#{tags.drop(1).map(&:to_s).join(Gnoibox::UrlParser::TAG_DELIMITER)}" : "")
+    end
+
     Link = Struct.new(:box_key, :tag_key, :name, :axis_option, :selected, :tags, :cross_searchable_in_axis) do
       def url
         "/#{box_key}/#{tags.first}" + (tags.count>1 ? "/#{tags.drop(1).map(&:to_s).join(Gnoibox::UrlParser::TAG_DELIMITER)}" : "")
