@@ -10,7 +10,7 @@ class Gnoibox::SiteController < ApplicationController
     respond_to do |format|
       format.html do
         if @page.exists?
-          render @page.view_file, layout: @page.layout
+          render_page
         else
           page_not_found
         end
@@ -51,6 +51,10 @@ private
   helper_method :page, :inquiry
   helper_method :box, :items, :item, :tags, :facet_item, :form, :form_partial, :resource_type, :bread_crumbs, :link_axes
   delegate :box, :items, :item, :tags, :facet_item, :form, :form_partial, :resource_type, :bread_crumbs, :link_axes, to: :page
+
+  def render_page
+    render page.view_file, layout: page.layout
+  end
 
   def inquiry(inq_params={})
     @inquiry ||= form.new_inquiry(inq_params)
