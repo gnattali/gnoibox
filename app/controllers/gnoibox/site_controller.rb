@@ -1,10 +1,20 @@
 class Gnoibox::SiteController < ApplicationController
+  if Rails.env.production?
+    rescue_from ActionView::MissingTemplate, with: :page_not_found
+  end
+
   include Gnoibox::ApplicationHelper
 
   def index
     @page = Gnoibox::UrlParser.new(params)
     respond_to do |format|
-      format.html{ render @page.view_file, layout: @page.layout }
+      format.html do
+        if @page.exists?
+          render @page.view_file, layout: @page.layout
+        else
+          page_not_found
+        end
+      end
       format.json do
         render json: {items: @page.items, facet_item: @page.facet_item} if @page.items.present?
         render json: {item: @page.item} if @page.item.present?
@@ -48,5 +58,9 @@ private
 
   def inquiry_params
     params[:inquiry].permit!
+  end
+
+  def page_not_found
+    render "404", status: 404
   end
 end

@@ -15,7 +15,7 @@ module Gnoibox
       (BOX_KEYS + AXIS_OPTION_KEYS + RESERVED_KEYS + UrlParser.existing_tags).map(&:to_s).uniq
     end
 
-    attr_reader :box, :item, :base_relation, :items, :category, :facet_item, :sub_facet, :resource_type, :params, :first, :second, :third
+    attr_reader :box, :item, :base_relation, :items, :category, :facet_item, :sub_facet, :page_type, :resource_type, :params, :first, :second, :third
 
     def initialize(url_params)
       @first = url_params[:first].try(:to_sym)
@@ -140,6 +140,10 @@ module Gnoibox
     def link_axes
       box.axis_list.map{|axis| Gnoibox::Box::AxisLinks.new axis.key, axis.label, links_for(axis.key), axis.allowed_to_cross_search_in_axis}.index_by(&:axis_key)
     end
+    
+    def exists?
+      [:root_top, :axis_collection, :box_top].include?(page_type) || item.present?
+    end
 
   private
     ROOT_TOP = ->(params){ !params[:first] }
@@ -164,12 +168,14 @@ module Gnoibox
     end
 
     def root_top
+      @page_type = :root_top
       @resource_type = :collection
       @box = Gnoibox::BoxCollection.find(:root)
       @item = box.find_published_item('index')
     end
 
     def axis_collection
+      @page_type = :axis_collection
       @resource_type = :collection
       @box = Gnoibox::BoxCollection.find(first)
       @category = second
@@ -179,12 +185,14 @@ module Gnoibox
     end
 
     def box_item
+      @page_type = :box_item
       @resource_type = :member
       @box = Gnoibox::BoxCollection.find(first)
       @item = box.find_published_item(second)
     end
 
     def box_top
+      @page_type = :box_top
       @resource_type = :collection
       @box = Gnoibox::BoxCollection.find(first)
       @facet_item = box.facet_item
@@ -194,6 +202,7 @@ module Gnoibox
     end
 
     def root_item
+      @page_type = :root_item
       @resource_type = :member
       @box = Gnoibox::BoxCollection.find(:root)
       @item = box.find_published_item(first)
