@@ -8,6 +8,7 @@ module Gnoibox
     RESERVED_KEYS = [:gnoibox, :admin, :thanks, :root, :my, :facet, :box, :axis, :block, :item, :column, :form, :inquiry, :site, :search, :s, :town]
 
     def self.existing_tags
+      # ActsAsTaggableOn::Tag.pluck(:name) + Gnoibox::Box::Facet.items.pluck(:url).map{|u| u.split("/")}.flatten.uniq
       ActsAsTaggableOn::Tag.pluck(:name)
     end
 
