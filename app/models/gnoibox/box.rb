@@ -107,8 +107,7 @@ module Gnoibox
 
       def reset_order_values
         items.find_each do |item|
-          item.cache_order_value
-          item.save
+          item.update_column :order_value, item.cache_order_value
         end
       end
       
