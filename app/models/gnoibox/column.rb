@@ -315,6 +315,15 @@ module Gnoibox
             define_method "#{name}_cache" do
               col_hash[name].send "image_cache"
             end
+            
+            define_method "#{name}_remote_source" do
+              col_hash[name].remote_image_url
+            end
+            define_method "#{name}_remote_source=" do |v|
+              return unless v.present?
+              col_hash[name].remote_image_url=(v) 
+              col_hash[name].set_value col_hash[name].image
+            end
           end
         end
       end

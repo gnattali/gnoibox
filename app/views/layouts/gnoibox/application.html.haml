@@ -8,6 +8,15 @@
 
     = stylesheet_link_tag    "gnoibox/application", media: "all"
     = stylesheet_link_tag    "gnoibox/custom", media: "all"
+
+    -if Gnoibox::S3.access_key_id.present?
+      <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.15.min.js"></script>
+      :javascript
+          if (window.Gnoibox == null) window.Gnoibox = {};
+          AWS.config.update({accessKeyId: '#{Gnoibox::S3.access_key_id}', secretAccessKey: '#{Gnoibox::S3.secret_access_key}'});
+          AWS.config.region = '#{Gnoibox::S3.region}';
+          Gnoibox.s3bucket = new AWS.S3({params: {Bucket: '#{Gnoibox::S3.bucket}'}, apiVersion: '2006-03-01'});
+
     = javascript_include_tag "gnoibox/application"
   
     -# <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />

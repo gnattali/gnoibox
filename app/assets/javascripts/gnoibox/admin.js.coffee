@@ -20,3 +20,18 @@ $ ->
       cache: true
       data: (term, page)-> {q: term}
       results: (data, page)-> {results: data}
+
+  $('.gn-form-column-image input[type=file]').on 'change', (evt)->
+    file = evt.currentTarget.files[0]
+    if file
+      d = new Date()
+      path = "tmp/"+d.toLocaleDateString("ja", {year: "numeric", month: "2-digit", day: "2-digit"}).split("/").join("-")+"/"+d.valueOf()+"-"+file.name
+      params = {Key: path, ContentType: file.type, Body: file, ACL: "public-read"}
+      Gnoibox.s3bucket.upload params, (err, data)->
+        if data.Location
+          col = $(evt.currentTarget).parents('.gn-form-column-image')
+          $('img', col).attr('src', data.Location)
+          $('.gn-remote-image-url', col).val(data.Location)
+          $(evt.currentTarget).val(null)
+        else
+          console.log err
