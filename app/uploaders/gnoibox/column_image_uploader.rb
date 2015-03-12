@@ -45,7 +45,13 @@ module Gnoibox
     # Override the filename of the uploaded files:
     # Avoid using model.id or version_name here, see uploader/store.rb for details.
     def filename
-      Time.now.strftime("%Y%m%d%H%M%S-") + @filename if original_filename
+      timestamp + @filename if original_filename
+    end
+
+  protected
+    def timestamp
+      var = :"@#{mounted_as}_timestamp"
+      model.instance_variable_get(var) or model.instance_variable_set(var, Time.now.strftime("%Y%m%d%H%M%S-"))
     end
 
   end
