@@ -10,6 +10,7 @@ Gnoibox::Engine.routes.draw do
       member do
         get "col_labels"
       end
+      resources :images
     end
     resources :blocks
     resources :forms do

@@ -84,6 +84,10 @@ module Gnoibox
       author_profile.try(:name) || ''
     end
     
+    def async_upload_path
+      "/gnoibox/boxes/#{box_key}/images"
+    end
+    
     class << self
       attr_reader :view_file_options
 

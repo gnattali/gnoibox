@@ -1,6 +1,6 @@
 module Gnoibox
   class Column
-    delegate :name, :type, :label, :settings, :axis, :axes, :main_axis, :required, :holder_name, to: :class
+    delegate :name, :type, :label, :settings, :axis, :axes, :main_axis, :required, :holder_name, :holder_identifier, to: :class
 
     attr_reader :value #value to be serialized and matched to tags, may be array
     def initialize(value=nil)
@@ -84,6 +84,10 @@ module Gnoibox
 
       def main_axis
         axes.first
+      end
+
+      def holder_identifier
+        holder_name.split("::").last.underscore
       end
 
       def set_delegator(content_class)

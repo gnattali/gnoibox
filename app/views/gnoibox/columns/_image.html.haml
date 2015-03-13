@@ -1,6 +1,8 @@
-.gn-form-column-image
+-uploadurl = item.try(:async_upload_path)
+
+.gn-form-column-image(class="#{'gn-async-uploadable' if uploadurl}")
   =image_tag col.url, style: 'max-width: 100%;'
-  =f.file_field "#{col.name}"
+  =f.file_field col.name, data: {colname: col.name, uploadurl: uploadurl}
   削除する
   =f.check_box "remove_#{col.name}".to_sym
   =f.hidden_field "#{col.name}_cache" if f.object.send("#{col.name}_cache")

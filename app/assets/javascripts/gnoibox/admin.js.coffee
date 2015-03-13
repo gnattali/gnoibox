@@ -21,17 +21,33 @@ $ ->
       data: (term, page)-> {q: term}
       results: (data, page)-> {results: data}
 
-  $('.gn-form-column-image input[type=file]').on 'change', (evt)->
+  $('.gn-async-uploadable input[type=file]').on 'change', (evt)->
     file = evt.currentTarget.files[0]
     if file
+      file_input = $(evt.currentTarget)
       d = new Date()
       path = "tmp/"+d.toLocaleDateString("ja", {year: "numeric", month: "2-digit", day: "2-digit"}).split("/").join("-")+"/"+d.valueOf()+"-"+file.name
       params = {Key: path, ContentType: file.type, Body: file, ACL: "public-read"}
       Gnoibox.s3bucket.upload params, (err, data)->
         if data.Location
-          col = $(evt.currentTarget).parents('.gn-form-column-image')
-          $('img', col).attr('src', data.Location)
+          col = file_input.parents('.gn-form-column-image')
+          $('img', col).addClass("spinner")
           $('.gn-remote-image-url', col).val(data.Location)
-          $(evt.currentTarget).val(null)
+          file_input.val(null)
+          
+          prepareColumnImage(file_input, data.Location)
         else
           console.log err
+
+  prepareColumnImage = (file_input, source_url)->
+    return unless col_name = file_input.data('colname')
+    jqxhr = $.post(file_input.data('uploadurl'), {col_name: col_name, source_url: source_url})
+    jqxhr.fail (data)->
+      console.log data.errors
+    jqxhr.done (data)->
+      file_input.attr('type', 'hidden')
+      file_input.val(data.filename)
+
+      parent = file_input.parents('.gn-form-column-image')
+      $('img', parent).removeClass("spinner").attr('src', data.url)
+      $('.gn-remote-image-url', parent).val(null)
