@@ -25,13 +25,13 @@ $ ->
     file = evt.currentTarget.files[0]
     if file
       file_input = $(evt.currentTarget)
+      container = file_input.parents('.gn-form-column-image')
+      $('.spinner-div', container).addClass("spinner")
       d = new Date()
       path = "tmp/"+d.toLocaleDateString("ja", {year: "numeric", month: "2-digit", day: "2-digit"}).split("/").join("-")+"/"+d.valueOf()+"-"+file.name
       params = {Key: path, ContentType: file.type, Body: file, ACL: "public-read"}
       Gnoibox.s3bucket.upload params, (err, data)->
         if data.Location
-          container = file_input.parents('.gn-form-column-image')
-          $('.spinner-div', container).addClass("spinner")
           $('.gn-remote-image-url', container).val(data.Location)
           file_input.val(null)
           
@@ -49,6 +49,6 @@ $ ->
       file_input.val(data.filename)
 
       container = file_input.parents('.gn-form-column-image')
-      $('.spinner-div', container).addClass("spinner")
-      $('img', container).attr('src', data.url).show()
       $('.gn-remote-image-url', container).val(null)
+      $('img', container).attr('src', data.url).show()
+      $('.spinner-div', container).removeClass("spinner")
