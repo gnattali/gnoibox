@@ -30,9 +30,9 @@ $ ->
       params = {Key: path, ContentType: file.type, Body: file, ACL: "public-read"}
       Gnoibox.s3bucket.upload params, (err, data)->
         if data.Location
-          col = file_input.parents('.gn-form-column-image')
-          $('img', col).addClass("spinner")
-          $('.gn-remote-image-url', col).val(data.Location)
+          container = file_input.parents('.gn-form-column-image')
+          $('.loader-div', container).addClass("loader")
+          $('.gn-remote-image-url', container).val(data.Location)
           file_input.val(null)
           
           prepareColumnImage(file_input, data.Location)
@@ -48,6 +48,7 @@ $ ->
       file_input.attr('type', 'hidden')
       file_input.val(data.filename)
 
-      parent = file_input.parents('.gn-form-column-image')
-      $('img', parent).removeClass("spinner").attr('src', data.url)
-      $('.gn-remote-image-url', parent).val(null)
+      container = file_input.parents('.gn-form-column-image')
+      $('.loader-div', container).addClass("loader")
+      $('img', container).attr('src', data.url).show()
+      $('.gn-remote-image-url', container).val(null)
