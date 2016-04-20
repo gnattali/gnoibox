@@ -29,6 +29,10 @@ module Gnoibox
       def content
         substance.content
       end
+      
+      def content_hash
+        substance.content_hash
+      end
 
     end
   end
