@@ -16,6 +16,7 @@ module Gnoibox
     scope :published, ->{where(status: :published)}
     scope :strict_published, ->{ published.where("published_at < ?", DateTime.current) }
     scope :search_with, ->(q){ where("gnoibox_items.url LIKE :q OR gnoibox_items.title LIKE :q OR gnoibox_items.description LIKE :q OR gnoibox_items.content LIKE :q OR gnoibox_items.id IN (#{tagged_with(q).select(:id).to_sql})", q: "%#{q}%") }
+    scope :fresh, ->{order(published_at: :desc)}
 
     def set_content
       set_tags_from_content
