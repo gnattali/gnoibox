@@ -26,7 +26,7 @@ module Gnoibox
       def put_url(name, type)
         expires = DateTime.now.to_i + (60 * 5)
         amzHeaders = "x-amz-acl:public-read"
-        upload_path = "#{bucket}/#{upload_dir}/#{Date.current.strftime("%Y-%m")}/#{name}"
+        upload_path = "#{bucket}/#{upload_dir}/#{Date.current.strftime("%Y-%m")}/#{DateTime.current.strftime("%Y%m%d%H%M%S")}-#{name}"
         stringToSign = "PUT\n\n#{type}\n#{expires}\n#{amzHeaders}\n/#{upload_path}";
         digest = OpenSSL::Digest::Digest.new('sha1')
         hmac = OpenSSL::HMAC.digest(digest, secret_access_key, stringToSign)
