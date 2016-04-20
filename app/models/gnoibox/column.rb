@@ -35,6 +35,10 @@ module Gnoibox
     def value_to_serialize
       @value
     end
+    
+    def to_api_value
+      value_to_serialize
+    end
 
     def present?
       @value.to_s.present?
@@ -191,7 +195,7 @@ module Gnoibox
     end
     
     # class Suggest < Column
-    #   
+    #
     # end
 
     class FreeTag < Column
@@ -277,6 +281,10 @@ module Gnoibox
       def url
         image.url
       end
+      
+      def to_api_value
+        image.serializable_hash
+      end
 
       class << self
         def setup(settings)
@@ -325,7 +333,7 @@ module Gnoibox
             end
             define_method "#{name}_remote_source=" do |v|
               return unless v.present?
-              col_hash[name].remote_image_url=(v) 
+              col_hash[name].remote_image_url=(v)
               col_hash[name].set_value col_hash[name].image
             end
           end

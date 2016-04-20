@@ -30,8 +30,8 @@ module Gnoibox
         substance.content
       end
       
-      def content_hash
-        substance.content_hash
+      def to_api_hash
+        content.to_api_hash
       end
 
     end

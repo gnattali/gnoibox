@@ -21,12 +21,12 @@ module Gnoibox
       write_attribute :content, content.to_json
     end
 
-    def content_hash
-      content.to_h
+    def api_content_hash
+      content.to_api_hash
     end
     
-    def as_json_with_content
-      as_json(methods: [:content_hash])
+    def to_api_hash
+      as_json.merge("content"=>api_content_hash)
     end
 
     module ClassMethods
@@ -74,6 +74,10 @@ module Gnoibox
 
           def to_json
             to_h.to_json
+          end
+          
+          def to_api_hash
+            Hash[cols.map{|col| [col.name, col.to_api_value] }]
           end
 
           class << self
