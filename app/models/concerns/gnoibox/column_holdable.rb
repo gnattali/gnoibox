@@ -21,6 +21,13 @@ module Gnoibox
       write_attribute :content, content.to_json
     end
 
+    def content_hash
+      content.to_h
+    end
+    
+    def as_json_with_content
+      as_json(methods: [:content_hash])
+    end
 
     module ClassMethods
 
