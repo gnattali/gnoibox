@@ -4,7 +4,7 @@ require 'kaminari'
 require 'devise'
 require 'carrierwave'
 require 'simple_form'
-require 'google/api_client'
+# require 'google/api_client'
 
 require "gnoibox/engine"
 
