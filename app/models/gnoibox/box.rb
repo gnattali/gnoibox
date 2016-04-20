@@ -88,6 +88,10 @@ module Gnoibox
         items.published
       end
 
+      def strict_published_items
+        items.strict_published
+      end
+
       def tagged_with(tags)
         items.tagged_with(tags)
       end
