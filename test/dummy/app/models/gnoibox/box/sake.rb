@@ -1,6 +1,7 @@
 module Gnoibox
   class Box::Sake < Box
     set_key :sake, '日本酒'
+    set_comment "銘柄毎"
   end
   
   class Item::Sake < Item

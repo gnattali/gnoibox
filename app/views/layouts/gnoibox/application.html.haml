@@ -78,9 +78,14 @@
         -if gnb_admin?
           %li{class: ("active" if current_page?({controller: 'blocks'})) }
             =render partial: 'active_arrow', locals: {url: '/gnoibox/blocks'}
-            =link_to gnoibox_blocks_path, class: 'parentmenu' do
+            -# =link_to gnoibox_blocks_path, class: 'parentmenu' do
+            .parentmenu
               %i.icon-leaf
               %span サイトパーツ
+
+            %ul.submenu(style="display:block;")
+              -gnb.blocks.each do |block|
+                %li=link_to block.label, edit_gnoibox_block_path(block)
 
           %li{class: ("active" if current_page?({controller: 'authors'})) }
             =render partial: 'active_arrow', locals: {url: '/gnoibox/authors'}

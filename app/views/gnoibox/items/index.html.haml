@@ -3,6 +3,8 @@
     .row.head
       .col-md-9
         %h4 #{@box.label}一覧 #{"("+params[:q]+"で絞込中)" if params[:q]}
+        -if @box.comment
+          %h6=@box.comment
       .col-md-3
         = link_to "新規#{@box.label}作成", new_gnoibox_box_item_path(@box), class: "btn-flat"
 

@@ -14,7 +14,7 @@ module Gnoibox
     AxisLinks = Struct.new(:axis_key, :axis_label, :links, :cross_searchable_in_axis)
     
     class << self
-      attr_reader :key, :label, :layout
+      attr_reader :key, :label, :layout, :comment
 
       def set_key(key, label)
         Gnoibox::BoxCollection.add self
@@ -22,6 +22,7 @@ module Gnoibox
         @label = label
       end
 
+      def set_comment(v) @comment=v end
       def set_layout(v) @layout=v end
       def set_member_view(v) @member_view=v end
       def set_collection_view(v) @collection_view=v end

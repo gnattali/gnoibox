@@ -2,5 +2,7 @@
   .row.head
     .col-md-12
       %h4 #{@block.label}
+      -if @block.comment
+        %h6=@block.comment
 
   = render 'form'
