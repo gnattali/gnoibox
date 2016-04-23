@@ -61,8 +61,8 @@
       %ul#dashboard-menu
         %li{class: ("active" if current_page?('/gnoibox')) }
           =render partial: 'active_arrow', locals: {url: '/gnoibox'}
-          =link_to gnoibox_root_path do
-            %i.icon-homek
+          =link_to gnoibox_root_path, class: 'parentmenu' do
+            %i.icon-home
             %span Home
         %li.open{class: ("active" if current_page?({controller: 'boxes'})) }
           =render partial: 'active_arrow', locals: {url: {controller: 'boxes'}}
@@ -109,6 +109,8 @@
             =link_to edit_gnoibox_profile_path do
               %i.icon-group
               %span プロフィール
+    
+      =render "sidebar_addition"
     
     .content
       = yield
