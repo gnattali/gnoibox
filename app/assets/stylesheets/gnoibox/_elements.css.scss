@@ -7,7 +7,7 @@
 }
 
 @keyframes gn-scaleout {
-  0% { 
+  0% {
     transform: scale(0.0);
     -webkit-transform: scale(0.0);
   } 100% {
@@ -45,6 +45,10 @@ body.gnoibox{
     color: rgb(110, 130, 155);
   }
 
+  .navbar-icon{
+    float: left;
+    padding: 14px 0;
+  }
 
   .col-unit{
     position:absolute;
@@ -63,7 +67,7 @@ body.gnoibox{
     margin: auto;
     background-color: #333;
 
-    border-radius: 100%;  
+    border-radius: 100%;
     -webkit-animation: gn-scaleout 1.0s infinite ease-in-out;
     animation: gn-scaleout 1.0s infinite ease-in-out;
   }
